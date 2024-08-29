@@ -5,7 +5,7 @@ Curso: Eletrônica 4.0
 Local: INDT
 
 
-#nclude <stdio.h>
+#include <stdio.h>
 
 int main (void)
 
