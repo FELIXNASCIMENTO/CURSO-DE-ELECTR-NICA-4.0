@@ -13,3 +13,4 @@ GIT PUSH = PARA SUBIR O COMMIT PARA O REPOSITORIO NO GUITHUB
 -----------------------------------------------------------------------------
 
 AULA 28/08 - LINGUAGEM DE PROGRAMAÇÃO
+# AULA-5-MODULO-GIT
