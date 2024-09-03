@@ -1,0 +1,116 @@
+AULA DO DIA 02/09 - MODULO PROGRAMAÇÃO
+#include <stdio.h>
+
+int main(void)
+{
+ int numero;
+printf("INSIRA UM NUMERO INTEIRO:");
+scanf("%d%*c", &numero);
+
+if (numero%2==0)
+    {
+    printf("%d é par", numero);
+    }
+
+    else
+    {
+    printf("%d é impar", numero);
+    }
+
+return 0;
+
+}
+------------------------------------------
+#include <stdio.h>
+
+int main(void)
+{
+ int numero;
+printf("INSIRA UM NUMERO INTEIRO:");
+scanf("%d%*c", &numero);
+printf(numero%2==0 ? "%d é par\n":"%d é impar\n", numero );
+
+if (numero%2==0)
+    {
+    printf("%d é par", numero);
+    }
+
+    else
+    {
+    printf("%d é impar", numero);
+    }
+
+return 0;
+
+}
+------------------------------------------------
+
+#include <stdio.h>
+
+int main(void)
+{
+    int number;
+    printf("Enter integer number: ");
+    scanf("%d%*c ," &number);
+    
+    if (number > 70) 
+    {
+    if (number > 80)
+    {
+        printf("passed with great honor\n");
+    }  
+    else
+        printf("Ok.\n");
+    }
+    
+-------------------------------------------------------
+
+#include <stdio.h>
+#include <string.h>
+int main (void){
+    char str[2];
+
+    printf("Informe a string: ");
+    scanf("%c", &str);
+
+    switch (str){
+    case "A" :
+    printf("Argentina.");
+    break;
+    case "a" :
+    printf("Argentina.");
+    break;
+    case "B":
+    printf("Brasil.");
+    break;
+    case "b":
+    printf("Brasil.");
+    break;
+    case "H":
+    printf("Honduras");
+    break;
+    case "h":
+    printf("Honduras");
+    break;
+    case "M":
+    printf("Mexico");
+    break;
+    case "m":
+    printf("Mexico");
+    break;
+    case "P":
+    printf("Peru");
+    break;
+    case "p":
+    printf("Peru");
+    break;
+    default:
+    printf("Pais indisponivel");
+    break;
+
+    }
+
+
+return 0;
+}
+-----------------------------------------------
