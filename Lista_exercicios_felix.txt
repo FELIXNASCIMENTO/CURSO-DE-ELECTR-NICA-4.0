@@ -1,0 +1,137 @@
+4.1. Escreva um programa que peça ao usuário para inserir um número inteiro, armazene esse número em uma
+variável do tipo short (ou short int) e o imprima de volta na tela. Quais valores podem ser inseridos? Qual é o maior
+número que você pode inserir e imprimir corretamente?
+4.2. Repita o exercício anterior, mas desta vez use uma variável do tipo int ou long.
+4.3. Escreva um programa que:
+• peça ao usuário para inserir 2 números inteiros em uma linha
+• obtenha esses 2 números usando apenas uma chamada da função scanf
+• imprima ambos os números na linha seguinte
+O diálogo na tela deve ser:
+Copy code
+Digite 2 números inteiros: 17 7
+Os números inseridos são 17 e 7
+
+
+
+
+4.4. Escreva um programa que peça ao usuário para inserir 2 números reais e imprima a soma e o produto deles na
+tela.
+
+4.5. Escreva um programa que peça ao usuário para inserir 2 números inteiros e imprima o resultado e o resto da
+divisão inteira dos dois números e o quociente real.
+O diálogo na tela deve ser:
+Digite 2 números inteiros: 17 7
+quociente inteiro = 2
+resto = 3
+
+quociente = 2.43
+
+
+
+
+4.6. Escreva um programa que peça ao usuário para inserir 2 números reais, calcule o quociente e armazene-o em
+uma variável do tipo float. Imprima o quociente com 20 casas decimais.
+4.7. Escreva um programa que peça ao usuário para inserir horas, minutos e segundos separadamente e os imprima
+em uma frase como:
+
+O horário inserido é: hh horas mm minutos e ss segundos onde hh e mm podem ser apenas números inteiros. ss
+pode ter dígitos após o ponto decimal.
+4.8. Escreva um programa que peça ao usuário para inserir o nome e o sobrenome separadamente e imprima-os em
+uma linha. Teste seu programa com nomes que contêm espaços em branco (ex: Julia Rose Smith).
+4.9. Escreva um programa que peça ao usuário para inserir o raio de um círculo, calcule a área dessa circunferência
+e imprima o resultado na tela. (π pode ser aproximado como 3.141592653589793. Defina π como uma constante
+em seu programa).
+
+
+
+
+4.10. Escreva um programa que peça ao usuário para inserir um número de segundos e imprima o número
+correspondente de dias, horas (<24), minutos (<60) e segundos (<60).
+Ex: 90061 seg = 1 dia 1 hora 1 minuto e 1 segundo
+4.11. Escreva um programa que peça ao usuário para inserir 5 números inteiros um por um. Enquanto lê os
+números, o programa calcula a soma. No final, a média dos 5 números deve ser impressa com uma precisão de 2
+casas decimais. Tente limitar o número de variáveis no seu programa para 2 (ou no máximo 3), mas não introduza
+loops ainda.
+4.12. Escreva um programa que peça ao usuário para inserir um valor em euros (ex: 13578) e imprima o número
+correspondente de notas (500, 200, 100, 50, 20, 10, 5) e moedas (2, 1). Sempre use o número mínimo possível de
+notas e moedas.
+
+4.13. Reescreva o programa anterior de forma que centavos (50, 20, 10, 5, 2, 1) também sejam incluídos (ex:
+13578,78). Tenha em mente que o operador % só pode ser usado com operandos inteiros!
+
+
+
+
+4.14. Considere um circuito elétrico composto por dois resistores em série, R1 e R2. Se uma tensão U é aplicada a
+este circuito, a corrente que flui pelo circuito será I=UR1+R2I = \frac{U}{R1 + R2}I=R1+R2U de acordo com a lei de
+Ohm. A tensão V2V2V2 sobre o resistor R2 será então definida por V2=I×R2V2 = I \times R2V2=I×R2. Escreva um
+programa que peça ao usuário para inserir os valores de U, R1 e R2 e imprima os valores de I e V2 na tela.
+4.15. Escreva um programa que leia 6 números inteiros e os imprima em um formato de tabela com 3 linhas e 2
+colunas.
+
+O diálogo na tela deve ser:
+Digite 6 números inteiros: 1 22 33 4 5 6
+1 22
+
+33 4
+
+5 6
+
+
+
+
+4.16. Reescreva o exercício anterior de forma que linhas sejam colocadas ao redor da tabela e entre os números:
+Digite 6 números inteiros:
+1 22 33 4 5 6
+
+-------------
+
+| 1 | 22 |
+|-----------|
+| 33 | 4 |
+|-----------|
+| 5 | 6 |
+
+-------------
+
+
+
+
+4.17. Reescreva o exercício anterior com números reais. Certifique-se de que os pontos decimais estejam bem
+alinhados.
+
+4.18. Escreva um programa que peça ao usuário para inserir nome, sobrenome, rua, número, código postal e nome
+da cidade. Depois, o programa deve exibir esses dados no formato:
+sobrenome nome
+
+rua número
+
+código postal cidade
+4.19. Escreva um programa que peça ao usuário para inserir o número da fatura, o número de produtos pedidos e o
+preço por unidade. Calcule o valor total a ser pago e imprima-o na tela.
+
+
+
+
+O diálogo na tela deve ser:
+Digite o número da fatura: 12
+Digite o número de produtos pedidos: 50
+Digite o preço por unidade: 599
+NÚMERO DA FATURA PREÇO/UNIDADE TOTAL
+12 50 599 29950
+
+4.20.Escreva um programa que peça ao usuário para inserir um número inteiro com 3 dígitos e imprima o número ao
+contrário.
+
+Digite um número inteiro com 3 dígitos: 123 O número impresso ao contrário é: 321
+Dica: 321=3×100+2×10+1321 = 3 \times 100 + 2 \times 10 + 1321=3×100+2×10+1 com 1=1231001 =
+
+\frac{123}{100}1=100123, 2=23102 = \frac{23}{10}2=1023 e 3=restante3 = \text{restante}3=restante.
+
+
+
+
+4.21. Escreva um programa que imprima a data da Páscoa para um ano inserido pelo usuário.
+A Páscoa ocorre no primeiro domingo após a primeira lua cheia da primavera. A Páscoa é adiada por 1 semana se a
+lua cheia cair no domingo. De acordo com Jean Meeus, Spencer Jones e Butcher, a data da Páscoa no ano J pode
+ser calculada da seguinte forma (todas as divisões são divisões inteiras):
