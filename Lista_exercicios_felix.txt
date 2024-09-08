@@ -1,0 +1,405 @@
+4.1. Escreva um programa que peça ao usuário para inserir um número inteiro, armazene esse número em uma
+variável do tipo short (ou short int) e o imprima de volta na tela. Quais valores podem ser inseridos? Qual é o maior
+número que você pode inserir e imprimir corretamente?
+4.2. Repita o exercício anterior, mas desta vez use uma variável do tipo int ou long.
+4.3. Escreva um programa que:
+• peça ao usuário para inserir 2 números inteiros em uma linha
+• obtenha esses 2 números usando apenas uma chamada da função scanf
+• imprima ambos os números na linha seguinte
+O diálogo na tela deve ser:
+Copy code
+Digite 2 números inteiros: 17 7
+Os números inseridos são 17 e 7
+
+
+
+
+4.4. Escreva um programa que peça ao usuário para inserir 2 números reais e imprima a soma e o produto deles na
+tela.
+
+4.5. Escreva um programa que peça ao usuário para inserir 2 números inteiros e imprima o resultado e o resto da
+divisão inteira dos dois números e o quociente real.
+O diálogo na tela deve ser:
+Digite 2 números inteiros: 17 7
+quociente inteiro = 2
+resto = 3
+
+quociente = 2.43 
+
+
+
+
+4.6. Escreva um programa que peça ao usuário para inserir 2 números reais, calcule o quociente e armazene-o em
+uma variável do tipo float. Imprima o quociente com 20 casas decimais.
+4.7. Escreva um programa que peça ao usuário para inserir horas, minutos e segundos separadamente e os imprima
+em uma frase como:
+
+O horário inserido é: hh horas mm minutos e ss segundos onde hh e mm podem ser apenas números inteiros. ss
+pode ter dígitos após o ponto decimal.
+4.8. Escreva um programa que peça ao usuário para inserir o nome e o sobrenome separadamente e imprima-os em
+uma linha. Teste seu programa com nomes que contêm espaços em branco (ex: Julia Rose Smith).
+4.9. Escreva um programa que peça ao usuário para inserir o raio de um círculo, calcule a área dessa circunferência
+e imprima o resultado na tela. (π pode ser aproximado como 3.141592653589793. Defina π como uma constante
+em seu programa).
+
+
+
+
+4.10. Escreva um programa que peça ao usuário para inserir um número de segundos e imprima o número
+correspondente de dias, horas (<24), minutos (<60) e segundos (<60).
+Ex: 90061 seg = 1 dia 1 hora 1 minuto e 1 segundo
+4.11. Escreva um programa que peça ao usuário para inserir 5 números inteiros um por um. Enquanto lê os
+números, o programa calcula a soma. No final, a média dos 5 números deve ser impressa com uma precisão de 2
+casas decimais. Tente limitar o número de variáveis no seu programa para 2 (ou no máximo 3), mas não introduza
+loops ainda.
+4.12. Escreva um programa que peça ao usuário para inserir um valor em euros (ex: 13578) e imprima o número
+correspondente de notas (500, 200, 100, 50, 20, 10, 5) e moedas (2, 1). Sempre use o número mínimo possível de
+notas e moedas.
+
+4.13. Reescreva o programa anterior de forma que centavos (50, 20, 10, 5, 2, 1) também sejam incluídos (ex:
+13578,78). Tenha em mente que o operador % só pode ser usado com operandos inteiros!
+
+
+
+
+4.14. Considere um circuito elétrico composto por dois resistores em série, R1 e R2. Se uma tensão U é aplicada a
+este circuito, a corrente que flui pelo circuito será I=UR1+R2I = \frac{U}{R1 + R2}I=R1+R2U de acordo com a lei de
+Ohm. A tensão V2V2V2 sobre o resistor R2 será então definida por V2=I×R2V2 = I \times R2V2=I×R2. Escreva um
+programa que peça ao usuário para inserir os valores de U, R1 e R2 e imprima os valores de I e V2 na tela.
+4.15. Escreva um programa que leia 6 números inteiros e os imprima em um formato de tabela com 3 linhas e 2
+colunas.
+
+O diálogo na tela deve ser:
+Digite 6 números inteiros: 1 22 33 4 5 6
+1 22
+
+33 4
+
+5 6
+
+
+
+
+4.16. Reescreva o exercício anterior de forma que linhas sejam colocadas ao redor da tabela e entre os números:
+Digite 6 números inteiros:
+1 22 33 4 5 6
+
+-------------
+
+| 1 | 22 |
+|-----------|
+| 33 | 4 |
+|-----------|
+| 5 | 6 |
+
+-------------
+
+
+
+
+4.17. Reescreva o exercício anterior com números reais. Certifique-se de que os pontos decimais estejam bem
+alinhados.
+
+4.18. Escreva um programa que peça ao usuário para inserir nome, sobrenome, rua, número, código postal e nome
+da cidade. Depois, o programa deve exibir esses dados no formato:
+sobrenome nome
+
+rua número
+
+código postal cidade
+4.19. Escreva um programa que peça ao usuário para inserir o número da fatura, o número de produtos pedidos e o
+preço por unidade. Calcule o valor total a ser pago e imprima-o na tela.
+
+
+
+
+O diálogo na tela deve ser:
+Digite o número da fatura: 12
+Digite o número de produtos pedidos: 50
+Digite o preço por unidade: 599
+NÚMERO DA FATURA PREÇO/UNIDADE TOTAL
+12 50 599 29950
+
+4.20.Escreva um programa que peça ao usuário para inserir um número inteiro com 3 dígitos e imprima o número ao
+contrário.
+
+Digite um número inteiro com 3 dígitos: 123 O número impresso ao contrário é: 321
+Dica: 321=3×100+2×10+1321 = 3 \times 100 + 2 \times 10 + 1321=3×100+2×10+1 com 1=1231001 =
+
+\frac{123}{100}1=100123, 2=23102 = \frac{23}{10}2=1023 e 3=restante3 = \text{restante}3=restante.
+
+
+
+
+4.21. Escreva um programa que imprima a data da Páscoa para um ano inserido pelo usuário.
+A Páscoa ocorre no primeiro domingo após a primeira lua cheia da primavera. A Páscoa é adiada por 1 semana se a
+lua cheia cair no domingo. De acordo com Jean Meeus, Spencer Jones e Butcher, a data da Páscoa no ano J pode
+ser calculada da seguinte forma (todas as divisões são divisões inteiras):
+
+
+----------------------------------------------------------------------------------------------------------------------
+LISTA 2
+
+ 5.2.1 Escreva um programa que solicite ao usuário que insira um número inteiro e imprima se esse número é
+positivo ou não (ou seja, negativo ou zero!).
+
+ 5.2.2 Escreva um programa que solicite ao usuário que insira um número inteiro e imprima se esse número é par
+ou ímpar.
+
+ 5.2.3 Escreva um programa que solicite ao usuário que insira um número real e imprima se esse número está no
+intervalo [5,10[ ou não (o intervalo [5,10[ significa 5 ≤ x < 10)
+
+
+
+
+
+ 5.2.4 Escreva um programa que solicite ao usuário que insira um número real e imprima se, para esse número,
+cada uma das seguintes condições é atendida ou não:
+- Condição A: 3 ≤ x < 8.5
+- Condição B: x < 3 OU 5.4 < x ≤ 7.3 OU x > 13
+- Condição C: x ≠ 3 E x < 9.75
+Exemplos:
+- 0 corresponde às condições: não A, B, C
+- 3 corresponde às condições: A, não B, não C
+- 8 corresponde às condições: A, não B, C
+- 15 corresponde às condições: não A, B, não C
+
+
+
+
+
+ 5.2.5 Escreva um programa que solicite ao usuário que insira um número real e imprima se esse número é
+positivo, zero ou negativo.
+
+ 5.2.6 Escreva um programa que solicite ao usuário que insira 5 números inteiros um por um. Enquanto lê os
+números, o programa calcula o menor valor desses números. No final, o menor valor é impresso. Tente limitar o
+número de variáveis no seu programa a 2 (ou no máximo 3), mas não introduza laços ainda.
+
+
+
+
+
+ 5.2.7 Escreva um programa que compare sua velocidade com o limite de velocidade. Se você estiver acima do
+limite, o programa calculará sua multa. Caso contrário, nada acontece. A multa consiste em um valor fixo de € 100 e
+um valor variável de € 2,5 para cada km acima do limite de velocidade.
+A tela deve exibir:
+
+```
+
+Atenção! Exceder o limite de velocidade é severamente multado!
+Digite sua velocidade: 131
+Digite o limite de velocidade: 120
+Sua velocidade está 11 km/h acima do limite.
+
+Sua multa é de 127,5 euros.
+``
+
+
+
+
+
+ 5.2.8 Escreva um programa que calcule o IMC (Índice de Massa Corporal). O IMC é uma medida da gordura
+corporal baseada na altura e peso, aplicável a homens e mulheres adultos. Pode ser calculado com a fórmula:
+
+O IMC é dividido em diferentes categorias:
+- Abaixo do peso: < 18,5
+- Peso normal: 18,5 – 24,9
+- Sobrepeso: 25 – 29,9
+- Obesidade: ≥ 30
+
+Peça ao usuário a altura e o peso, calcule o IMC e imprima a categoria à qual o usuário pertence.
+
+
+
+
+
+ 5.2.9 Escreva um programa que primeiro leia 3 números inteiros que representam a data atual e depois leia
+novamente 3 números inteiros para serem interpretados como uma data de nascimento. Com base nessas
+informações, o programa imprime a idade dessa pessoa em anos e meses.
+Digite a data atual: 6 1 2015
+Digite sua data de nascimento: 25 1 1985
+Sua idade é: 29 anos e 11 meses
+
+ 5.2.10 Escreva um programa que leia um horário de início e um horário de término, calcule a diferença de tempo e
+a imprima no formato hh horas mm minutos ss segundos. Você pode ler horas, minutos e segundos separadamente.
+Se o horário de início parecer ser mais tarde do que o horário de término, você pode assumir que o horário de início é
+do dia anterior
+
+
+
+
+ 5.2.11 Escreva um programa que leia 3 números e os imprima classificados do menor para o maior.
+
+ 5.2.12 Escreva um programa que leia um dígito (0, 1, ..., 9) e imprima esse dígito por extenso. Se o número
+inserido não for um dígito, uma mensagem de aviso deve ser impressa.
+Digite um dígito: 3
+Você inseriu o dígito três.
+
+Digite um dígito: 23
+O número que você inseriu não é um dígito.
+
+
+
+
+
+ 5.2.13 Escreva um programa que solicite ao usuário que insira uma instrução no formato: número1 operador
+número2
+
+Para o operador, o usuário pode escolher +, -, * ou /. O programa calcula o resultado matemático e o imprime na tela.
+
+Dica: leia a instrução com
+scanf("%f%c%f%*c",&getal1,&operador,&getal2);
+
+e use
+
+switch(operador)
+
+Digite uma expressão (sem espaços!): 245/16
+245 / 16 = 15,31
+
+
+
+
+
+ 5.2.14 Uma companhia de gás calcula seus preços da seguinte forma:
+- Para um consumo ≤ 1m3: € 20,00
+- Para um consumo > 1m3: € 20 pelo primeiro m3 + € 3,5/m3 para a parte acima de 1m3
+
+O valor total precisa ser acrescido de um imposto de 21%.
+
+Escreva um programa que peça ao usuário para inserir seu consumo e imprima uma fatura na tela mostrando o
+consumo, o preço de custo, o valor do imposto e o valor total.
+
+
+
+
+
+ 5.2.15 A resistência equivalente (Req) para 2 resistores em paralelo, R1 e R2, pode ser calculada com:
+
+Escreva um programa que leia os valores de R1 e R2, calcule Req e o imprima na tela. Certifique-se de que o
+programa também funcione corretamente para R1 e/ou R2 igual a 0!
+ 5.2.16 Escreva um programa que calcule o comprimento do terceiro lado de um triângulo retângulo com base nos
+comprimentos dos outros 2 lados e o imprima na tela. Para isso, peça ao usuário para inserir o comprimento dos 3
+lados na ordem: lado1 lado2 hipotenusa. Um zero deve ser inserido para o lado do qual você deseja calcular o
+comprimento.
+
+
+
+
+ 5.2.17 Escreva um programa que leia 3 números inteiros que devem ser interpretados como uma data e imprima o
+dia da semana correspondente. O dia da semana pode ser calculado da seguinte forma:
+
+onde
+
+válido para Março até Dezembro
+
+
+
+
+
+ 5.2.18 Escreva um programa que peça ao usuário para inserir os coeficientes a, b e c de uma equação quadrática
+com a forma geral \(ax^2 + bx + c = 0\) e imprima todas as raízes reais dessa equação. Certifique-se de que o
+programa não trave para certos valores dos coeficientes!
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+LISTA 3
+ 5.3.1 Escreva um programa com apenas 1 variável que imprima os números -3, -1, 1, 3, 5, ..., 25, separados por
+vírgulas na tela. Nada precisa ser lido do teclado.
+
+ 5.3.2 Escreva um programa com apenas 1 variável que imprima os números -3, -1, 1, 3, 5, ..., 25, separados por
+vírgulas na tela. Nada precisa ser lido do teclado. A tela deve exibir:
+
+
+
+
+
+ 5.3.3 Escreva um programa que peça ao usuário para inserir um número inteiro nnn e imprima a soma
+1+2+3+4+...+n.
+
+ 5.3.4 Escreva um programa que imprima um quadrado preenchido na tela, imprimindo 22 linhas de 40 retângulos
+pretos (o código ASCII para um retângulo preto é 219).
+
+ 5.3.5 Escreva um programa que primeira peça ao usuário para inserir um número inteiro. Em seguida, mais
+números inteiros são solicitados até que a soma desses números seja igual ou exceda o primeiro número inserido.
+
+
+
+
+ 5.3.6 Escreva um programa que peça ao usuário para inserir um número inteiro no intervalo [-2, 4.5[ (ou seja, -2 ≤
+número < 4.5) e imprima-o na tela. Se um número incorreto for inserido, um novo número deve ser solicitado até que
+um número válido seja inserido.
+
+
+
+
+
+ 5.3.7 Escreva um programa que peça ao usuário para inserir um número inteiro no intervalo [-30, 30]. Certifique-se
+de que apenas números válidos possam ser inseridos! Esse número é então impresso como um gráfico de barras feito
+de símbolos *. Números negativos são desenhados da metade para a esquerda, números positivos são desenhados
+da metade para a direita. Pontos são usados para preencher os espaços vazios. O próprio número inserido é impresso
+no final. Repita o programa até que 0 seja inserido.
+
+
+
+
+
+ 5.3.8 Escreva um programa que some 10 números inseridos pelo usuário e calcule a média desses 10 números.
+Tente usar apenas 3 variáveis em seu programa. Calcule a soma enquanto lê os números.
+
+ 5.3.9 Escreva um programa que imprima a média de uma quantidade de números inteiros. O número exato de
+inteiros não é conhecido antecipadamente. Se o número 999 for lido, o programa para de ler novos números. 999 não
+pode ser levado em conta para o cálculo da média.
+
+ 5.3.10 Escreva um programa que leia um número natural n, calcule n! e imprima o resultado na tela.
+
+
+
+
+
+ 5.3.12 Repita o exercício 5.3.11, mas com nnn sendo um número inteiro (valores positivos e negativos são
+possíveis).
+
+ 5.3.13 Escreva um programa que imprima o valor mínimo e máximo de 10 números inseridos pelo usuário. Use
+apenas 4 variáveis em seu programa.
+
+ 5.3.14 Repita o exercício 5.3.13, mas desta vez também imprima quando o número mínimo e máximo foram
+inseridos
+
+
+
+
+ 5.3.15 Escreva um programa que calcule o maior divisor comum de 2 inteiros positivos. Use o algoritmo de
+Euclides para determinar o mdc. Neste algoritmo, o maior número é substituído pela diferença entre os dois números.
+Repita isso até que ambos os números sejam iguais. Esse número é o mdc. Imprima o mdc e todos os passos
+intermediários.
+
+
+
+
+ 5.3.16 Escreva um programa que desenhe uma torre invertida usando o caractere ASCII 219 ( ). A torre é
+composta por uma sequência de quadrados. O quadrado superior tem um lado definido pelo usuário. O próximo
+quadrado é 2 blocos menor, o próximo novamente é 2 blocos menor, ... Novas torres são desenhadas até que o
+usuário insira 'n'
+
+
+
+
+ 5.3.17 Escreva um programa que desenhe uma linha em zigue-zague até que o usuário insira 'n' para parar. A
+primeira parte da linha é composta por um número de blocos determinado pelo usuário. A próxima parte tem apenas
+metade dessa largura, ... Se o usuário quiser desenhar várias linhas em zigue-zague, certifique-se de que todas
+estejam bem posicionadas e desenhadas corretamente.
+
+
+
+
+
+ 5.3.18 Escreva um programa que determine o máximo entre 10 números inseridos pelo usuário. O programa
+também imprime o número de vezes que o valor máximo foi inserido.
+
+ 5.3.19 Escreva um programa que peça ao usuário para inserir um número inteiro positivo e imprima todas as linhas
+de inteiros positivos consecutivos com uma soma igual ao primeiro número inserido
+
+
+-------------------------------------------------------------------------------
