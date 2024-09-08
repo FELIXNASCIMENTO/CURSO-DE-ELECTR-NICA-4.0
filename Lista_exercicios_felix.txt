@@ -295,7 +295,90 @@ int main() {
 }
 4.13. Reescreva o programa anterior de forma que centavos (50, 20, 10, 5, 2, 1) também sejam incluídos (ex:
 13578,78). Tenha em mente que o operador % só pode ser usado com operandos inteiros!
+#include <stdio.h>
 
+int main() {
+    int euros, centavos;
+    int notas500, notas200, notas100, notas50, notas20, notas10, notas5;
+    int moedas2, moedas1;
+    int moedas50, moedas20, moedas10, moedas5, moedas2cent, moedas1cent;
+    float valor;
+    
+    // Solicita ao usuário o valor em euros e centavos
+    printf("Digite o valor em euros (exemplo: 135.78): ");
+    scanf("%f", &valor);
+    
+    // Separa a parte inteira (euros) e os centavos
+    euros = (int)valor;           // Parte inteira
+    centavos = (valor - euros) * 100;  // Parte decimal convertida em centavos
+    
+    // Calcula o número de notas
+    notas500 = euros / 500;
+    euros %= 500;
+    
+    notas200 = euros / 200;
+    euros %= 200;
+    
+    notas100 = euros / 100;
+    euros %= 100;
+    
+    notas50 = euros / 50;
+    euros %= 50;
+    
+    notas20 = euros / 20;
+    euros %= 20;
+    
+    notas10 = euros / 10;
+    euros %= 10;
+    
+    notas5 = euros / 5;
+    euros %= 5;
+    
+    // Calcula o número de moedas
+    moedas2 = euros / 2;
+    euros %= 2;
+    
+    moedas1 = euros;
+    
+    // Calcula o número de moedas em centavos
+    moedas50 = centavos / 50;
+    centavos %= 50;
+    
+    moedas20 = centavos / 20;
+    centavos %= 20;
+    
+    moedas10 = centavos / 10;
+    centavos %= 10;
+    
+    moedas5 = centavos / 5;
+    centavos %= 5;
+    
+    moedas2cent = centavos / 2;
+    centavos %= 2;
+    
+    moedas1cent = centavos;
+    
+    // Exibe o número de notas e moedas
+    printf("Notas de 500 euros: %d\n", notas500);
+    printf("Notas de 200 euros: %d\n", notas200);
+    printf("Notas de 100 euros: %d\n", notas100);
+    printf("Notas de 50 euros: %d\n", notas50);
+    printf("Notas de 20 euros: %d\n", notas20);
+    printf("Notas de 10 euros: %d\n", notas10);
+    printf("Notas de 5 euros: %d\n", notas5);
+    
+    printf("Moedas de 2 euros: %d\n", moedas2);
+    printf("Moedas de 1 euro: %d\n", moedas1);
+    
+    printf("Moedas de 50 centavos: %d\n", moedas50);
+    printf("Moedas de 20 centavos: %d\n", moedas20);
+    printf("Moedas de 10 centavos: %d\n", moedas10);
+    printf("Moedas de 5 centavos: %d\n", moedas5);
+    printf("Moedas de 2 centavos: %d\n", moedas2cent);
+    printf("Moedas de 1 centavo: %d\n", moedas1cent);
+    
+    return 0;
+}
 
 
 
@@ -303,10 +386,33 @@ int main() {
 este circuito, a corrente que flui pelo circuito será I=UR1+R2I = \frac{U}{R1 + R2}I=R1+R2U de acordo com a lei de
 Ohm. A tensão V2V2V2 sobre o resistor R2 será então definida por V2=I×R2V2 = I \times R2V2=I×R2. Escreva um
 programa que peça ao usuário para inserir os valores de U, R1 e R2 e imprima os valores de I e V2 na tela.
+#include <stdio.h>
 
-
-
-
+int main() {
+    float U, R1, R2, I, V2;
+    
+    // Solicita ao usuário os valores de U, R1 e R2
+    printf("Digite o valor da tensão (U) em volts: ");
+    scanf("%f", &U);
+    
+    printf("Digite o valor do resistor R1 em ohms: ");
+    scanf("%f", &R1);
+    
+    printf("Digite o valor do resistor R2 em ohms: ");
+    scanf("%f", &R2);
+    
+    // Calcula a corrente I usando a fórmula I = U / (R1 + R2)
+    I = U / (R1 + R2);
+    
+    // Calcula a tensão V2 sobre o resistor R2 usando a fórmula V2 = I * R2
+    V2 = I * R2;
+    
+    // Exibe os resultados
+    printf("A corrente I que flui pelo circuito é: %.2f A\n", I);
+    printf("A tensão sobre o resistor R2 é: %.2f V\n", V2);
+    
+    return 0;
+}
 
 
 4.15. Escreva um programa que leia 6 números inteiros e os imprima em um formato de tabela com 3 linhas e 2
@@ -321,7 +427,25 @@ Digite 6 números inteiros: 1 22 33 4 5 6
 5 6
 
 
+#include <stdio.h>
 
+int main() {
+    int numeros[6]; // Vetor para armazenar os 6 números inteiros
+    
+    // Solicita ao usuário para inserir os 6 números inteiros
+    printf("Digite 6 números inteiros: ");
+    for (int i = 0; i < 6; i++) {
+        scanf("%d", &numeros[i]);
+    }
+    
+    // Imprime os números em formato de tabela (3 linhas, 2 colunas)
+    printf("\n");
+    printf("%d %d\n", numeros[0], numeros[1]);
+    printf("%d %d\n", numeros[2], numeros[3]);
+    printf("%d %d\n", numeros[4], numeros[5]);
+
+    return 0;
+}
 
 4.16. Reescreva o exercício anterior de forma que linhas sejam colocadas ao redor da tabela e entre os números:
 Digite 6 números inteiros:
@@ -337,11 +461,52 @@ Digite 6 números inteiros:
 
 -------------
 
+#include <stdio.h>
 
+int main() {
+    int numeros[6]; 
+  
+    printf("Digite 6 números inteiros: ");
+    for (int i = 0; i < 6; i++) {
+        scanf("%d", &numeros[i]);
+    }
+    
+    printf("\n");
+    printf("-------------\n");
+    printf("|%d| |%d|\n", numeros[0], numeros[1]);
+    printf("------------\n");
+    printf("|%d| |%d|\n", numeros[2], numeros[3]);
+    printf("-------------\n");
+    printf("|%d| |%d|\n", numeros[4], numeros[5]);
+    printf("-------------");
+
+    return 0;
+}
 
 
 4.17. Reescreva o exercício anterior com números reais. Certifique-se de que os pontos decimais estejam bem
 alinhados.
+
+#include <stdio.h>
+
+int main() {
+    float numeros[6];
+    printf("Digite 6 números inteiros: ");
+    for (int i = 0; i < 6; i++) {
+        scanf("%f", &numeros[i]);
+    }
+    
+    printf("\n");
+    printf("-------------\n");
+    printf("|%.2f| |%.2f|\n", numeros[0], numeros[1]);
+    printf("------------\n");
+    printf("|%.2f| |%.2f|\n", numeros[2], numeros[3]);
+    printf("-------------\n");
+    printf("|%.2f| |%.2f|\n", numeros[4], numeros[5]);
+    printf("-------------");
+
+    return 0;
+}
 
 4.18. Escreva um programa que peça ao usuário para inserir nome, sobrenome, rua, número, código postal e nome
 da cidade. Depois, o programa deve exibir esses dados no formato:
@@ -351,6 +516,38 @@ rua número
 
 código postal cidade
 
+#include <stdio.h>
+
+int main() {
+    char nome[50], sobrenome[50], rua[100], cidade[50];
+    int numero;
+    char codigoPostal[10];
+
+ 
+    printf("Digite o nome: ");
+    scanf("%s", nome);
+
+    printf("Digite o sobrenome: ");
+    scanf("%s", sobrenome);
+
+    printf("Digite o nome da rua: ");
+    scanf(" %[^\n]s", rua); 
+
+    printf("Digite o número da casa: ");
+    scanf("%d", &numero);
+
+    printf("Digite o código postal: ");
+    scanf("%s", codigoPostal);
+
+    printf("Digite o nome da cidade: ");
+    scanf("%s", cidade);
+
+    printf("\n%s %s\n", sobrenome, nome);
+    printf("%s %d\n", rua, numero);
+    printf("%s %s\n", codigoPostal, cidade);
+
+    return 0;
+}
 
 4.19. Escreva um programa que peça ao usuário para inserir o número da fatura, o número de produtos pedidos e o
 preço por unidade. Calcule o valor total a ser pago e imprima-o na tela.
@@ -627,7 +824,61 @@ a imprima no formato hh horas mm minutos ss segundos. Você pode ler horas, minu
 Se o horário de início parecer ser mais tarde do que o horário de término, você pode assumir que o horário de início é
 do dia anterior
 
+#include <stdio.h>
 
+struct Tempo {
+    int horas;
+    int minutos;
+    int segundos;
+};
+
+// Função para calcular a diferença de tempo
+struct Tempo calcularDiferenca(struct Tempo inicio, struct Tempo fim) {
+    struct Tempo diferenca;
+
+    // Ajusta segundos
+    if (fim.segundos < inicio.segundos) {
+        fim.segundos += 60;
+        fim.minutos -= 1;
+    }
+    diferenca.segundos = fim.segundos - inicio.segundos;
+
+    // Ajusta minutos
+    if (fim.minutos < inicio.minutos) {
+        fim.minutos += 60;
+        fim.horas -= 1;
+    }
+    diferenca.minutos = fim.minutos - inicio.minutos;
+
+    // Ajusta horas (considerando que o início pode ser no dia anterior)
+    if (fim.horas < inicio.horas) {
+        fim.horas += 24;
+    }
+    diferenca.horas = fim.horas - inicio.horas;
+
+    return diferenca;
+}
+
+int main() {
+    struct Tempo inicio, fim, diferenca;
+
+    // Lê o horário de início
+    printf("Digite o horário de início (hh mm ss): ");
+    scanf("%d %d %d", &inicio.horas, &inicio.minutos, &inicio.segundos);
+
+    // Lê o horário de término
+    printf("Digite o horário de término (hh mm ss): ");
+    scanf("%d %d %d", &fim.horas, &fim.minutos, &fim.segundos);
+
+    // Calcula a diferença de tempo
+    diferenca = calcularDiferenca(inicio, fim);
+
+    // Exibe a diferença no formato hh horas mm minutos ss segundos
+    printf("Diferença de tempo: %d horas %d minutos %d segundos\n", 
+           diferenca.horas, diferenca.minutos, diferenca.segundos);
+
+    return 0;
+}
 
 
  5.2.11 Escreva um programa que leia 3 números e os imprima classificados do menor para o maior.
@@ -640,6 +891,53 @@ Você inseriu o dígito três.
 Digite um dígito: 23
 O número que você inseriu não é um dígito.
 
+#include <stdio.h>
+
+int main() {
+    int numero;
+
+    printf("Digite um dígito: ");
+    scanf("%d", &numero);
+
+    if (numero < 0 || numero > 9) {
+        printf("O número que você inseriu não é um dígito.\n");
+    } else {
+        switch (numero) {
+            case 0:
+                printf("Você inseriu o dígito zero.\n");
+                break;
+            case 1:
+                printf("Você inseriu o dígito um.\n");
+                break;
+            case 2:
+                printf("Você inseriu o dígito dois.\n");
+                break;
+            case 3:
+                printf("Você inseriu o dígito três.\n");
+                break;
+            case 4:
+                printf("Você inseriu o dígito quatro.\n");
+                break;
+            case 5:
+                printf("Você inseriu o dígito cinco.\n");
+                break;
+            case 6:
+                printf("Você inseriu o dígito seis.\n");
+                break;
+            case 7:
+                printf("Você inseriu o dígito sete.\n");
+                break;
+            case 8:
+                printf("Você inseriu o dígito oito.\n");
+                break;
+            case 9:
+                printf("Você inseriu o dígito nove.\n");
+                break;
+        }
+    }
+
+    return 0;
+}
 
 
 
@@ -660,6 +958,45 @@ Digite uma expressão (sem espaços!): 245/16
 245 / 16 = 15,31
 
 
+#include <stdio.h>
+
+int main() {
+    float numero1, numero2, resultado;
+    char operador;
+
+    // Solicita a expressão no formato número1 operador número2
+    printf("Digite uma expressão (sem espaços!): ");
+    scanf("%f%c%f", &numero1, &operador, &numero2);
+
+    // Usa switch para calcular o resultado com base no operador fornecido
+    switch (operador) {
+        case '+':
+            resultado = numero1 + numero2;
+            printf("%.2f %c %.2f = %.2f\n", numero1, operador, numero2, resultado);
+            break;
+        case '-':
+            resultado = numero1 - numero2;
+            printf("%.2f %c %.2f = %.2f\n", numero1, operador, numero2, resultado);
+            break;
+        case '*':
+            resultado = numero1 * numero2;
+            printf("%.2f %c %.2f = %.2f\n", numero1, operador, numero2, resultado);
+            break;
+        case '/':
+            if (numero2 != 0) {
+                resultado = numero1 / numero2;
+                printf("%.2f %c %.2f = %.2f\n", numero1, operador, numero2, resultado);
+            } else {
+                printf("Erro: Divisão por zero não permitida!\n");
+            }
+            break;
+        default:
+            printf("Erro: Operador inválido!\n");
+    }
+
+    return 0;
+}
+
 
 
 
@@ -672,7 +1009,37 @@ O valor total precisa ser acrescido de um imposto de 21%.
 Escreva um programa que peça ao usuário para inserir seu consumo e imprima uma fatura na tela mostrando o
 consumo, o preço de custo, o valor do imposto e o valor total.
 
+#include <stdio.h>
 
+int main() {
+    float consumo, preco_custo, imposto, valor_total;
+
+    // Solicita o consumo ao usuário
+    printf("Insira o consumo em m3: ");
+    scanf("%f", &consumo);
+
+    // Calcula o preço de custo com base no consumo
+    if (consumo <= 1) {
+        preco_custo = 20.0;  // Preço fixo para consumo ≤ 1m3
+    } else {
+        preco_custo = 20.0 + (consumo - 1) * 3.5;  // Preço para consumo > 1m3
+    }
+
+    // Calcula o imposto (21% sobre o preço de custo)
+    imposto = preco_custo * 0.21;
+
+    // Calcula o valor total (preço de custo + imposto)
+    valor_total = preco_custo + imposto;
+
+    // Exibe a fatura
+    printf("\n--- Fatura ---\n");
+    printf("Consumo: %.2f m3\n", consumo);
+    printf("Preço de custo: € %.2f\n", preco_custo);
+    printf("Imposto (21%%): € %.2f\n", imposto);
+    printf("Valor total: € %.2f\n", valor_total);
+
+    return 0;
+}
 
 
 
@@ -680,12 +1047,76 @@ consumo, o preço de custo, o valor do imposto e o valor total.
 
 Escreva um programa que leia os valores de R1 e R2, calcule Req e o imprima na tela. Certifique-se de que o
 programa também funcione corretamente para R1 e/ou R2 igual a 0!
+
+#include <stdio.h>
+
+int main() {
+    float R1, R2, Req;
+
+    
+    printf("Insira o valor de R1 : ");
+    scanf("%f", &R1);
+    printf("Insira o valor de R2 : ");
+    scanf("%f", &R2);
+
+    if (R1 == 0 && R2 == 0) {
+        Req = 0;  
+    } else if (R1 == 0) {
+        Req = R2;  
+    } else if (R2 == 0) {
+        Req = R1; 
+    } else {
+        
+        Req = (R1 * R2) / (R1 + R2);
+    }
+
+    printf("A resistência equivalente (Req) é: %.2f ohms\n", Req);
+
+    return 0;
+}
+
+
+
+
  5.2.16 Escreva um programa que calcule o comprimento do terceiro lado de um triângulo retângulo com base nos
 comprimentos dos outros 2 lados e o imprima na tela. Para isso, peça ao usuário para inserir o comprimento dos 3
 lados na ordem: lado1 lado2 hipotenusa. Um zero deve ser inserido para o lado do qual você deseja calcular o
 comprimento.
 
+#include <stdio.h>
+#include <math.h> // Para usar a função sqrt()
 
+int main() {
+    float lado1, lado2, hipotenusa;
+
+    // Solicita os comprimentos dos lados e da hipotenusa ao usuário
+    printf("Insira os comprimentos dos lados e da hipotenusa (use 0 para o lado desconhecido):\n");
+    printf("Lado 1: ");
+    scanf("%f", &lado1);
+    printf("Lado 2: ");
+    scanf("%f", &lado2);
+    printf("Hipotenusa: ");
+    scanf("%f", &hipotenusa);
+
+    // Verifica qual lado foi inserido como 0 e calcula seu valor
+    if (lado1 == 0) {
+        // Calcula o lado1 quando lado2 e hipotenusa são conhecidos
+        lado1 = sqrt(pow(hipotenusa, 2) - pow(lado2, 2));
+        printf("O comprimento do lado 1 é: %.2f\n", lado1);
+    } else if (lado2 == 0) {
+        // Calcula o lado2 quando lado1 e hipotenusa são conhecidos
+        lado2 = sqrt(pow(hipotenusa, 2) - pow(lado1, 2));
+        printf("O comprimento do lado 2 é: %.2f\n", lado2);
+    } else if (hipotenusa == 0) {
+        // Calcula a hipotenusa quando lado1 e lado2 são conhecidos
+        hipotenusa = sqrt(pow(lado1, 2) + pow(lado2, 2));
+        printf("O comprimento da hipotenusa é: %.2f\n", hipotenusa);
+    } else {
+        printf("Nenhum lado desconhecido foi inserido.\n");
+    }
+
+    return 0;
+}
 
 
  5.2.17 Escreva um programa que leia 3 números inteiros que devem ser interpretados como uma data e imprima o
