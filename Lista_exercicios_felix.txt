@@ -1,7 +1,37 @@
 4.1. Escreva um programa que peça ao usuário para inserir um número inteiro, armazene esse número em uma
-variável do tipo short (ou short int) e o imprima de volta na tela. Quais valores podem ser inseridos? Qual é o maior
-número que você pode inserir e imprimir corretamente?
+variável do tipo short (ou short int) e o imprima de volta na tela. 
+Quais valores podem ser inseridos?
+
+Podem se inseridos numeros de -32.767 a 32.767 pois o tipo short amazenas dados de ate 16 bits.
+
+Qual é o maior número que você pode inserir e imprimir corretamente?
+
+ 32.767 alem desse valor ocasionarar erro de leitura.
+
+#include <stdio.h>
+int main() {
+    short n;
+    
+    printf("Insira um número inteiro: ");
+    scanf("%hd", &n);
+    
+    printf("Você inseriu: %hd\n", n);
+    
+    return 0;
+}
+
 4.2. Repita o exercício anterior, mas desta vez use uma variável do tipo int ou long.
+#include <stdio.h>
+int main() {
+    int n;
+    
+    printf("Insira um número inteiro: ");
+    scanf("%d", &n);
+    
+    printf("Você inseriu: %d\n", n);
+    
+    return 0;
+}
 4.3. Escreva um programa que:
 • peça ao usuário para inserir 2 números inteiros em uma linha
 • obtenha esses 2 números usando apenas uma chamada da função scanf
@@ -11,11 +41,40 @@ Copy code
 Digite 2 números inteiros: 17 7
 Os números inseridos são 17 e 7
 
+#include <stdio.h>
+
+int main() {
+    int n, n1;
+    
+    printf("Insira dois número inteiro: ");
+    scanf("%d %d",&n, &n1 );
+  
+    printf("Você inseriu: %d e %d", n,n1);
+    
+    return 0;
+}
+
 
 
 
 4.4. Escreva um programa que peça ao usuário para inserir 2 números reais e imprima a soma e o produto deles na
 tela.
+#include<stdio.h>
+
+int main()
+
+{
+float n1, n2, soma, mult;
+printf("digite o primeiro numero :");
+scanf("%f %f", &n1, &n2);
+
+soma=n1+n2;
+mult=n1*n2;      
+printf("a soma entre %.2f e %.2f e: %.2f\n", n1, n2, soma);
+printf("a multiplicação entre %.2f e %.2f e: %.2f", n1, n2, mult);
+
+return 0;
+}
 
 4.5. Escreva um programa que peça ao usuário para inserir 2 números inteiros e imprima o resultado e o resto da
 divisão inteira dos dois números e o quociente real.
@@ -23,39 +82,217 @@ O diálogo na tela deve ser:
 Digite 2 números inteiros: 17 7
 quociente inteiro = 2
 resto = 3
-
 quociente = 2.43 
+#include <stdio.h>
 
-
+int main() {
+    int n1, n2;
+    int DivInt, resto;
+    float QR;
+    printf("Insira o 2 Números inteiros: ");
+    scanf("%d %d", &n1, &n2);
+        DivInt = n1 / n2;
+        resto = n1 % n2;
+        QR = (float) n1 / n2;
+        printf("Resultado da divisão: %d\n", DivInt);
+        printf("Resto da divisão: %d\n", resto);
+        printf("Quociente real: %.2f\n", QR);
+    return 0;
+}
 
 
 4.6. Escreva um programa que peça ao usuário para inserir 2 números reais, calcule o quociente e armazene-o em
 uma variável do tipo float. Imprima o quociente com 20 casas decimais.
+#include <stdio.h>
+
+int main() {
+    float n1, n2;
+    double QR;
+    
+    printf("Insira 2 numeros: ");
+    scanf("%f %f", &n1, &n2);
+        
+        QR = (double) n1 / n2;
+        printf("Calculo com 20 casas decimais: %.20f\n", QR);
+    return 0;
+}
+
+
+
+
 4.7. Escreva um programa que peça ao usuário para inserir horas, minutos e segundos separadamente e os imprima
 em uma frase como:
 
 O horário inserido é: hh horas mm minutos e ss segundos onde hh e mm podem ser apenas números inteiros. ss
 pode ter dígitos após o ponto decimal.
+#include <stdio.h>
+
+int main() {
+    int hh, mm;
+    float ss;
+    printf("Insira as horas (inteiro): ");
+    scanf("%d", &hh);
+    printf("Insira os minutos (inteiro): ");
+    scanf("%d", &mm);
+    printf("Insira os segundos (com ou sem dígitos após o ponto decimal): ");
+    scanf("%f", &ss);
+    printf("O horário inserido é: %d horas, %d minutos e %.2f segundos\n",
+    hh, mm, ss);
+    
+    return 0;
+}
+
 4.8. Escreva um programa que peça ao usuário para inserir o nome e o sobrenome separadamente e imprima-os em
 uma linha. Teste seu programa com nomes que contêm espaços em branco (ex: Julia Rose Smith).
+#include <stdio.h>
+int main ( )
+{   
+     char nome, sobrenome;
+
+     printf ("Digite seu nome\n");   
+     scanf ("%s", &nome);   
+
+     printf ("Digite seu sobrenome\n");   
+     scanf ("%s", &sobrenome);
+
+     printf ("Seu nome completo e %s %s", nome, sobrenome);
+
+return 0;
+}
+
 4.9. Escreva um programa que peça ao usuário para inserir o raio de um círculo, calcule a área dessa circunferência
 e imprima o resultado na tela. (π pode ser aproximado como 3.141592653589793. Defina π como uma constante
 em seu programa).
-
-
+#include <stdio.h>
+#include <math.h>
+int main ( )
+{   
+   double raio;
+   const double pi = 3.14159265358979;
+     printf( "Digite o raio da circuferencia:");
+     scanf("%lf", &raio);
+     double area = pi*(raio*raio);
+     printf("A area do circulo é:%lf",area);
+return 0;
+}
 
 
 4.10. Escreva um programa que peça ao usuário para inserir um número de segundos e imprima o número
 correspondente de dias, horas (<24), minutos (<60) e segundos (<60).
 Ex: 90061 seg = 1 dia 1 hora 1 minuto e 1 segundo
+
+#include <stdio.h>
+int main() {
+    // Declaração de variáveis
+    int  h, m, ss, s, d,rest, rest2;
+    
+    
+    printf("Digite uma quantidade de segundos: ");
+    scanf("%d", &s);
+   
+    d =  s / 86400;
+    rest = (s%86400);
+    h = rest/3600;
+    rest2= (rest%3600);
+    m = rest2/60;
+    ss = s % 60;
+    printf("Ja se passaram %d dias %.2d horas %.2d minutos e %.2d segundos. ",d,h,m,ss);
+     return 0;
+}
+
+
 4.11. Escreva um programa que peça ao usuário para inserir 5 números inteiros um por um. Enquanto lê os
 números, o programa calcula a soma. No final, a média dos 5 números deve ser impressa com uma precisão de 2
 casas decimais. Tente limitar o número de variáveis no seu programa para 2 (ou no máximo 3), mas não introduza
 loops ainda.
+
+#include <stdio.h>
+
+int main() {
+    int num, soma = 0;
+    float media;
+    
+  
+    printf("Insira o primeiro número: ");
+    scanf("%d", &num);
+    soma += num;
+    
+    printf("Insira o segundo número: ");
+    scanf("%d", &num);
+    soma += num;
+    
+    printf("Insira o terceiro número: ");
+    scanf("%d", &num);
+    soma += num;
+    
+    printf("Insira o quarto número: ");
+    scanf("%d", &num);
+    soma += num;
+    
+    printf("Insira o quinto número: ");
+    scanf("%d", &num);
+    soma += num;
+    
+    media = (float) soma / 5;
+    
+    printf("A média dos 5 números é: %.2f\n", media);
+    
+    return 0;
+}
+
+
+
 4.12. Escreva um programa que peça ao usuário para inserir um valor em euros (ex: 13578) e imprima o número
 correspondente de notas (500, 200, 100, 50, 20, 10, 5) e moedas (2, 1). Sempre use o número mínimo possível de
 notas e moedas.
+#include <stdio.h>
 
+int main() {
+    int valor, notas500, notas200, notas100, notas50, notas20, notas10, notas5;
+    int moedas2, moedas1;
+    
+    printf("Insira um valor em euros: ");
+    scanf("%d", &valor);
+    
+    notas500 = valor / 500;
+    valor = valor % 500;
+
+    notas200 = valor / 200;
+    valor = valor % 200;
+   
+    notas100 = valor / 100;
+    valor = valor % 100;
+  
+    notas50 = valor / 50;
+    valor = valor % 50;
+  
+    notas20 = valor / 20;
+    valor = valor % 20;
+    
+    notas10 = valor / 10;
+    valor = valor % 10;
+  
+    notas5 = valor / 5;
+    valor = valor % 5;
+   
+    moedas2 = valor / 2;
+    valor = valor % 2;
+   
+    moedas1 = valor;
+    
+    printf("Número mínimo de notas e moedas:\n");
+    printf("Notas de 500: %d\n", notas500);
+    printf("Notas de 200: %d\n", notas200);
+    printf("Notas de 100: %d\n", notas100);
+    printf("Notas de 50: %d\n", notas50);
+    printf("Notas de 20: %d\n", notas20);
+    printf("Notas de 10: %d\n", notas10);
+    printf("Notas de 5: %d\n", notas5);
+    printf("Moedas de 2 euros: %d\n", moedas2);
+    printf("Moedas de 1 euro: %d\n", moedas1);
+    
+    return 0;
+}
 4.13. Reescreva o programa anterior de forma que centavos (50, 20, 10, 5, 2, 1) também sejam incluídos (ex:
 13578,78). Tenha em mente que o operador % só pode ser usado com operandos inteiros!
 
@@ -66,6 +303,12 @@ notas e moedas.
 este circuito, a corrente que flui pelo circuito será I=UR1+R2I = \frac{U}{R1 + R2}I=R1+R2U de acordo com a lei de
 Ohm. A tensão V2V2V2 sobre o resistor R2 será então definida por V2=I×R2V2 = I \times R2V2=I×R2. Escreva um
 programa que peça ao usuário para inserir os valores de U, R1 e R2 e imprima os valores de I e V2 na tela.
+
+
+
+
+
+
 4.15. Escreva um programa que leia 6 números inteiros e os imprima em um formato de tabela com 3 linhas e 2
 colunas.
 
@@ -107,6 +350,8 @@ sobrenome nome
 rua número
 
 código postal cidade
+
+
 4.19. Escreva um programa que peça ao usuário para inserir o número da fatura, o número de produtos pedidos e o
 preço por unidade. Calcule o valor total a ser pago e imprima-o na tela.
 
@@ -120,6 +365,34 @@ Digite o preço por unidade: 599
 NÚMERO DA FATURA PREÇO/UNIDADE TOTAL
 12 50 599 29950
 
+#include <stdio.h>
+
+int main() {
+    int numeroFatura, quantidadeProdutos;
+    float precoUnidade, total;
+    
+    // Solicita o número da fatura
+    printf("Digite o número da fatura: ");
+    scanf("%d", &numeroFatura);
+    
+    // Solicita o número de produtos pedidos
+    printf("Digite o número de produtos pedidos: ");
+    scanf("%d", &quantidadeProdutos);
+    
+    // Solicita o preço por unidade
+    printf("Digite o preço por unidade: ");
+    scanf("%f", &precoUnidade);
+    
+    // Calcula o valor total
+    total = quantidadeProdutos * precoUnidade;
+    
+    // Imprime o resultado no formato solicitado
+    printf("NÚMERO DA FATURA\tPRODUTOS\tPREÇO/UNIDADE\tTOTAL\n");
+    printf("%d\t\t\t%d\t\t%.2f\t\t%.2f\n", numeroFatura, quantidadeProdutos, precoUnidade, total);
+    
+    return 0;
+}
+
 4.20.Escreva um programa que peça ao usuário para inserir um número inteiro com 3 dígitos e imprima o número ao
 contrário.
 
@@ -127,7 +400,26 @@ Digite um número inteiro com 3 dígitos: 123 O número impresso ao contrário �
 Dica: 321=3×100+2×10+1321 = 3 \times 100 + 2 \times 10 + 1321=3×100+2×10+1 com 1=1231001 =
 
 \frac{123}{100}1=100123, 2=23102 = \frac{23}{10}2=1023 e 3=restante3 = \text{restante}3=restante.
+#include <stdio.h>
 
+int main() {
+    int num, centena, dezena, unidade, inverso;
+    
+    
+    printf("Digite um número inteiro com 3 dígitos: ");
+    scanf("%d", &num);
+    
+    
+    centena = num / 100;          
+    dezena = (num % 100) / 10;    
+    unidade = num % 10;          
+   
+    inverso = unidade * 100 + dezena * 10 + centena;
+   
+    printf("O número impresso ao contrário é: %d\n", inverso);
+    
+    return 0;
+}
 
 
 
@@ -136,6 +428,34 @@ A Páscoa ocorre no primeiro domingo após a primeira lua cheia da primavera. A 
 lua cheia cair no domingo. De acordo com Jean Meeus, Spencer Jones e Butcher, a data da Páscoa no ano J pode
 ser calculada da seguinte forma (todas as divisões são divisões inteiras):
 
+
+#include <stdio.h>
+
+int main() {
+    int J, a, b, c, d, e, f, g, h, i, k, l, m, n, p;
+    
+    printf("Insira o ano: ");
+    scanf("%d", &J);
+    
+    a = J % 19;
+    b = J / 100;
+    c = J % 100;
+    d = b / 4;
+    e = b % 4;
+    f = (b + 8) / 25;
+    g = (b - f + 1) / 3;
+    h = (19 * a + b - d - g + 15) % 30;
+    i = c / 4;
+    k = c % 4;
+    l = (32 + 2 * e + 2 * i - h - k) % 7;
+    m = (a + 11 * h + 22 * l) / 451;
+    n = (h + l - 7 * m + 114) / 31;  // Mês da Páscoa
+    p = (h + l - 7 * m + 114) % 31;  // Dia da Páscoa
+    
+    printf("A Páscoa no ano %d será em: %d/%d\n", J, p + 1, n);
+    
+    return 0;
+}
 
 ----------------------------------------------------------------------------------------------------------------------
 LISTA 2
@@ -193,7 +513,32 @@ Sua velocidade está 11 km/h acima do limite.
 
 Sua multa é de 127,5 euros.
 ``
+#include <stdio.h>
 
+int main() {
+    float velocidade, limite, multa;
+    float excesso;
+    
+    printf("Atenção! Exceder o limite de velocidade é severamente multado!\n");
+    
+    printf("Digite sua velocidade (km/h): ");
+    scanf("%f", &velocidade);
+    
+    printf("Digite o limite de velocidade (km/h): ");
+    scanf("%f", &limite);
+    
+    if (velocidade > limite) {
+        excesso = velocidade - limite; 
+        multa = 100 + (excesso * 2.5);  
+        
+        printf("Sua velocidade está %.0f km/h acima do limite.\n", excesso);
+        printf("Sua multa é de %.2f euros.\n", multa);
+    } else {
+        printf("Você está dentro do limite de velocidade. Sem multa.\n");
+    }
+    
+    return 0;
+}
 
 
 
@@ -210,7 +555,33 @@ O IMC é dividido em diferentes categorias:
 Peça ao usuário a altura e o peso, calcule o IMC e imprima a categoria à qual o usuário pertence.
 
 
+#include <stdio.h>
 
+int main() {
+    float peso, altura, imc;
+
+    printf("Digite seu peso em kg: ");
+    scanf("%f", &peso);
+
+    printf("Digite sua altura em metros: ");
+    scanf("%f", &altura);
+
+    imc = peso / (altura * altura);
+
+    printf("Seu IMC é: %.2f\n", imc);
+
+    if (imc < 18.5) {
+        printf("Categoria: Abaixo do peso\n");
+    } else if (imc >= 18.5 && imc <= 24.9) {
+        printf("Categoria: Peso normal\n");
+    } else if (imc >= 25 && imc <= 29.9) {
+        printf("Categoria: Sobrepeso\n");
+    } else {
+        printf("Categoria: Obesidade\n");
+    }
+
+    return 0;
+}
 
 
  5.2.9 Escreva um programa que primeiro leia 3 números inteiros que representam a data atual e depois leia
@@ -219,6 +590,37 @@ informações, o programa imprime a idade dessa pessoa em anos e meses.
 Digite a data atual: 6 1 2015
 Digite sua data de nascimento: 25 1 1985
 Sua idade é: 29 anos e 11 meses
+
+#include <stdio.h>
+
+int main() {
+    int diaAtual, mesAtual, anoAtual;
+    int diaNasc, mesNasc, anoNasc;
+    int anos, meses;
+    
+    printf("Digite a data atual (dia mês ano): ");
+    scanf("%d %d %d", &diaAtual, &mesAtual, &anoAtual);
+    
+    printf("Digite sua data de nascimento (dia mês ano): ");
+    scanf("%d %d %d", &diaNasc, &mesNasc, &anoNasc);
+    
+    anos = anoAtual - anoNasc;
+    meses = mesAtual - mesNasc;
+    
+    if (meses < 0 || (meses == 0 && diaAtual < diaNasc)) {
+        anos--;  // A pessoa ainda não fez aniversário este ano
+        meses += 12;  // Ajusta os meses
+    }
+    
+    if (diaAtual < diaNasc) {
+        meses--;
+    }
+    
+    printf("Sua idade é: %d anos e %d meses\n", anos, meses);
+
+    return 0;
+}
+
 
  5.2.10 Escreva um programa que leia um horário de início e um horário de término, calcule a diferença de tempo e
 a imprima no formato hh horas mm minutos ss segundos. Você pode ler horas, minutos e segundos separadamente.
