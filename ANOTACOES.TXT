@@ -1,1 +1,4 @@
-
+static>> mantem a posicao de memoria para usala posteriomente, qualificador. alocar variavel local.
+cosnt>> valor que nao varia.Mas fixa
+#define >> 
+tipydef
