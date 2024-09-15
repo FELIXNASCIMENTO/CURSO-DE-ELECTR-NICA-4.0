@@ -1856,3 +1856,841 @@ int main() {
 }
 
 -------------------------------------------------------------------------------
+
+LISTA 4
+
+
+6.1. Escreva um programa que leia um ângulo em graus e imprima o seno correspondente. Você pode usar funções padrão.
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double angulo_graus, angulo_radianos, seno;
+
+    // Ler o ângulo em graus
+    printf("Digite o ângulo em graus: ");
+    scanf("%lf", &angulo_graus);
+
+    // Converter de graus para radianos
+    angulo_radianos = angulo_graus * (M_PI / 180.0);
+
+    // Calcular o seno
+    seno = sin(angulo_radianos);
+
+    // Imprimir o resultado
+    printf("O seno de %.2f graus é: %.5f\n", angulo_graus, seno);
+
+    return 0;
+}
+
+
+6.2. Escreva um programa que imprima uma tabela com 2 colunas. A primeira coluna contém todos os ângulos de 0 a 360 graus com
+passos de 30 graus. A segunda coluna contém os valores de seno correspondentes.
+
+#include <stdio.h>
+#include <math.h>
+
+#define PI 3.14159
+
+int main() {
+    double angulo, seno;
+
+    printf("Ângulo\tSeno\n");
+    printf("------\t-----\n");
+
+    for (angulo = 0; angulo <= 360; angulo += 30) {
+        // Convertendo o ângulo para radianos, pois a função sin() em C trabalha com radianos
+        seno = sin(angulo * PI / 180);
+        printf("%.2lf\t%.4lf\n", angulo, seno);
+    }
+
+    return 0;
+}
+
+6.3. Escreva um programa que calcule a raiz quadrada de um número inserido pelo usuário.
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double numero, raiz;
+
+    printf("Digite um número: ");
+    scanf("%lf", &numero);
+
+    // Verifica se o número é negativo
+    if (numero < 0) {
+        printf("Não é possível calcular a raiz quadrada de um número negativo.\n");
+    } else {
+        raiz = sqrt(numero);
+        printf("A raiz quadrada de %.2lf é %.2lf\n", numero, raiz);
+    }
+
+    return 0;
+}
+
+6.4. Escreva um programa que leia os comprimentos dos lados a e b de um triângulo retângulo e imprima o comprimento da
+hipotenusa c e um dos ângulos agudos. Exemplos:
+
+Entrada: 2 1
+Saída: 2.24 63°
+
+Entrada: 1 1.732
+Saída: 2.00 60°
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double a, b, c, angulo;
+
+    printf("Digite os comprimentos dos catetos a e b: ");
+    scanf("%lf %lf", &a, &b);
+
+    // Calculando a hipotenusa usando o Teorema de Pitágoras
+    c = sqrt(a*a + b*b);
+
+    // Calculando o ângulo em radianos usando arctan(b/a)
+    angulo = atan(b/a);
+
+    // Convertendo o ângulo de radianos para graus
+    angulo = angulo * 180 / M_PI;
+
+    printf("Hipotenusa: %.2lf\n", c);
+    printf("Ângulo agudo: %.0lf graus\n", angulo);
+
+    return 0;
+}
+
+
+6.5. Escreva um programa para um jogo de adivinhação. Primeiro, um número aleatório entre 1 e 100 é escolhido pelo programa.
+Depois, o usuário pode começar a adivinhar. Se o palpite for muito alto ou muito baixo, o programa precisa imprimir “muito alto” ou
+“muito baixo”. Isso é repetido até que o número seja encontrado. No final, o programa imprime quantas tentativas o usuário precisou
+para encontrar o número secreto.
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int numero_secreto, palpite, tentativas = 0;
+
+    // Inicializa a semente para gerar números aleatórios
+    srand(time(NULL));
+
+    // Gera um número aleatório entre 1 e 100
+    numero_secreto = rand() % 100 + 1;
+
+    printf("Adivinhe o número entre 1 e 100!\n");
+
+    do {
+        printf("Digite seu palpite: ");
+        scanf("%d", &palpite);
+        tentativas++;
+
+        if (palpite < numero_secreto) {
+            printf("Muito baixo!\n");
+        } else if (palpite > numero_secreto) {
+            printf("Muito alto!\n");
+        }
+    } while (palpite != numero_secreto);
+
+    printf("Parabéns! Você acertou em %d tentativas.\n", tentativas);
+
+    return 0;
+}
+
+
+
+
+
+6.6. Escreva um programa que imprima uma tabela com 2 colunas. A primeira coluna contém valores de x de -5 a +5 com um passo de
+0,5. A segunda coluna contém os valores correspondentes de y de acordo com a equação y = 2x2 + 2x − 3. Certifique-se de que o cálculo
+dos valores de y seja feito em uma função separada.
+
+
+#include <stdio.h>
+
+// Função para calcular o valor de y
+double calcular_y(double x) {
+    return 2 * x * x + 2 * x - 3;
+}
+
+int main() {
+    double x, y;
+
+    printf("   x   |    y    \n");
+    printf("-------|---------\n");
+
+    for (x = -5; x <= 5; x += 0.5) {
+        y = calcular_y(x);
+        printf("%6.2lf | %8.2lf\n", x, y);
+    }
+
+    return 0;
+}
+
+
+6.7. Escreva uma função com o cabeçalho:
+
+void printline(int number, char c)
+Exemplo:
+Entrada
+printline(40, ‘*’);
+Saida
+****************************************
+
+
+#include <stdio.h>
+
+void printline(int number, char c) {
+    int i;
+    for (i = 0; i < number; i++) {
+        printf("%c", c);
+    }
+    printf("\n"); // Adiciona uma nova linha ao final
+}
+int main() {
+    printline(40, '*'); // Imprime 40 asteriscos
+   
+    return 0;
+}
+
+
+
+
+
+6.8 Escreva uma função que leia um número inteiro no intervalo [0, 10] e retorne esse número como valor de retorno da função. Se o
+número não estiver no intervalo correto, a função deve pedir um novo número até que um valor correto seja inserido. O programa
+principal é algo como:
+
+int main(void)
+{
+int number;
+number = readnumber();
+printf("O número lido é %d\n", number);
+return 0;
+}
+Certifique-se de escrever a declaração da função readnumber() antes da função principal e a definição da função após a função
+principal.
+
+#include <stdio.h>
+
+// Declaração da função readnumber
+int readnumber(void);
+
+int main(void) {
+    int number;
+    
+    // Chama a função readnumber para ler um número válido
+    number = readnumber();
+    
+    // Imprime o número lido
+    printf("O número lido é %d\n", number);
+    
+    return 0;
+}
+
+// Definição da função readnumber
+int readnumber(void) {
+    int number;
+    
+    while (1) {
+        // Solicita ao usuário que insira um número
+        printf("Digite um número entre 0 e 10: ");
+        scanf("%d", &number);
+        
+        // Verifica se o número está no intervalo [0, 10]
+        if (number >= 0 && number <= 10) {
+            return number; // Retorna o número se estiver dentro do intervalo
+        } else {
+            printf("Número fora do intervalo. Tente novamente.\n");
+        }
+    }
+}
+
+
+
+6.9. Escreva uma função com o cabeçalho:
+int readnumber(int lower_boundary, int upper_boundary)
+
+que lê um número inteiro no intervalo [lower_boundary, upper_boundary] e retorna esse número como valor de retorno da função.
+Também neste caso, a função só pode parar de pedir um número inteiro se um valor correto for inserido. Escreva uma função principal
+que chame essa função e imprima o número resultante.
+
+
+
+#include <stdio.h>
+
+// Função para ler um número inteiro dentro do intervalo [lower_boundary, upper_boundary]
+int readnumber(int lower_boundary, int upper_boundary) {
+    int number;
+
+    while (1) {
+        // Solicita ao usuário que insira um número
+        printf("Digite um número entre %d e %d: ", lower_boundary, upper_boundary);
+        scanf("%d", &number);
+
+        // Verifica se o número está dentro do intervalo
+        if (number >= lower_boundary && number <= upper_boundary) {
+            return number; // Retorna o número se estiver dentro do intervalo
+        } else {
+            printf("Número fora do intervalo. Tente novamente.\n");
+        }
+    }
+}
+
+int main() {
+    int lower_boundary, upper_boundary;
+
+    // Ler os limites do intervalo do usuário
+    printf("Digite o limite inferior do intervalo: ");
+    scanf("%d", &lower_boundary);
+    printf("Digite o limite superior do intervalo: ");
+    scanf("%d", &upper_boundary);
+
+    // Garantir que o limite inferior não seja maior que o limite superior
+    if (lower_boundary > upper_boundary) {
+        printf("O limite inferior deve ser menor ou igual ao limite superior.\n");
+        return 1; // Encerrar o programa com um código de erro
+    }
+
+    // Chamar a função readnumber e obter um número válido dentro do intervalo
+    int valid_number = readnumber(lower_boundary, upper_boundary);
+
+    // Imprimir o número resultante
+    printf("Número válido dentro do intervalo: %d\n", valid_number);
+
+    return 0;
+}
+
+
+
+6.10. Escreva uma função com o cabeçalho:
+
+double exponentiation(double base, int exponent)
+
+que retorna base^exponent como valor de retorno da função. Escreva uma função principal que leia uma base e um expoente, chame a
+função exponentiation e imprima o resultado. Não use a função padrão pow!
+
+
+#include <stdio.h>
+
+// Função para calcular a exponenciação
+double exponentiation(double base, int exponent) {
+    double result = 1.0;
+
+    // Se o expoente é zero, qualquer número elevado a zero é 1
+    if (exponent == 0) {
+        return 1.0;
+    }
+
+    // Se o expoente é negativo, calcular a exponenciação para o expoente positivo e inverter o resultado
+    if (exponent < 0) {
+        base = 1 / base;
+        exponent = -exponent;
+    }
+
+    // Multiplica a base por si mesma expoente vezes
+    for (int i = 0; i < exponent; i++) {
+        result *= base;
+    }
+
+    return result;
+}
+
+int main() {
+    double base;
+    int exponent;
+
+    // Ler a base e o expoente do usuário
+    printf("Digite a base: ");
+    scanf("%lf", &base);
+    printf("Digite o expoente: ");
+    scanf("%d", &exponent);
+
+    // Calcular a exponenciação
+    double resultado = exponentiation(base, exponent);
+
+    // Imprimir o resultado
+    printf("%.2lf elevado a %d é %.2lf\n", base, exponent, resultado);
+
+    return 0;
+}
+
+
+
+6.11. Escreva uma função com o cabeçalho:
+
+int gcd(int number1, int number2)
+
+que retorna o maior divisor comum dos números number1 e number2 como valor de retorno da função. Escreva um programa principal
+que leia 3 números inteiros, calcule o MDC (máximo divisor comum) desses 3 números e imprima o resultado. Dica: gcd(a, b, c) = gcd(a,
+gcd(b, c))
+
+
+
+#include <stdio.h>
+
+// Função para calcular o Máximo Divisor Comum (MDC) de dois números usando o Algoritmo de Euclides
+int gcd(int number1, int number2) {
+    int temp;
+
+    while (number2 != 0) {
+        temp = number2;
+        number2 = number1 % number2;
+        number1 = temp;
+    }
+
+    return number1;
+}
+
+int main() {
+    int num1, num2, num3;
+
+    // Ler três números inteiros do usuário
+    printf("Digite o primeiro número: ");
+    scanf("%d", &num1);
+    printf("Digite o segundo número: ");
+    scanf("%d", &num2);
+    printf("Digite o terceiro número: ");
+    scanf("%d", &num3);
+
+    // Calcular o MDC dos três números
+    int mdc12 = gcd(num1, num2); // MDC dos dois primeiros números
+    int mdc123 = gcd(mdc12, num3); // MDC do resultado anterior com o terceiro número
+
+    // Imprimir o resultado
+    printf("O Máximo Divisor Comum dos números %d, %d e %d é %d.\n", num1, num2, num3, mdc123);
+
+    return 0;
+}
+
+
+
+6.12. Escreva um programa que leia uma quantidade de pontuações. As pontuações são todos números inteiros positivos. Um número
+negativo é inserido para indicar que todas as pontuações foram inseridas. Para cada pontuação, uma barra com um comprimento igual
+à pontuação é desenhada. Para isso, um símbolo pré-definido precisa ser impresso tantas vezes quanto a pontuação. (uso de laço for).
+
+Escreva uma função draw_bar que recebe uma pontuação como entrada e desenha uma barra com o comprimento correspondente.
+
+As pontuações e o símbolo desejado são lidos na função principal.
+
+O diálogo na tela deve ser como:
+
+Digite as pontuações: 2 12 18 3 -5
+Que símbolo você gostaria de usar? =
+
+pontuação = 2 ==
+pontuação = 12 ============
+pontuação = 18 ==================
+pontuação = 3 ===
+
+
+#include <stdio.h>
+
+// Função para desenhar uma barra com o comprimento correspondente à pontuação
+void draw_bar(int score, char symbol) {
+    for (int i = 0; i < score; i++) {
+        printf("%c", symbol);
+    }
+    printf("\n");
+}
+
+int main() {
+    int score;
+    char symbol;
+    
+    // Solicita ao usuário as pontuações e lê o símbolo desejado
+    printf("Digite as pontuações (digite um número negativo para terminar): ");
+    while (scanf("%d", &score) && score >= 0) {
+        // Aqui estamos processando cada pontuação enquanto não é negativa
+        // O código assume que os números são inseridos um por um e segue até o negativo ser encontrado
+
+        // Solicita o símbolo desejado
+        printf("Que símbolo você gostaria de usar? ");
+        scanf(" %c", &symbol); // O espaço antes de %c é para consumir o caractere de nova linha deixado no buffer
+
+        // Desenha a barra para a pontuação atual
+        printf("pontuação = %d ", score);
+        draw_bar(score, symbol);
+    }
+
+    return 0;
+}
+
+
+6.13. Escreva um programa com as funções:
+
+•hello: que dá as boas-vindas ao usuário e explica o que é esperado
+
+•main: que pede ao usuário para inserir 5 vezes 2 números
+
+•sum: que pede ao usuário para inserir a soma dos números anteriormente inseridos e dá um feedback ao usuário
+
+•goodbye: que agradece ao usuário pela cooperação Bem-vindo, este programa pedirá que você resolva 5 somas. digite 2 números <
+100: 15 16 qual é a soma de 15 e 16? 31 segundo você, a soma de 15 e 16 é 31. Isso está correto digite 2 números < 100: 26 32 qual é a
+soma de 26 e 32? 50 segundo você, a soma de 26 e 32 é 50. Isso está incorreto ... Obrigado pela sua cooperação
+
+#include <stdio.h>
+
+// Função para dar as boas-vindas ao usuário e explicar o que é esperado
+void hello() {
+    printf("Bem-vindo, este programa pedirá que você resolva 5 somas.\n");
+    printf("Digite dois números menores que 100. Em seguida, você será solicitado a fornecer a soma desses números.\n");
+}
+
+// Função para pedir ao usuário para inserir a soma dos números e dar feedback
+void sum(int num1, int num2) {
+    int resposta;
+    int soma = num1 + num2;
+    
+    printf("Qual é a soma de %d e %d? ", num1, num2);
+    scanf("%d", &resposta);
+
+    if (resposta == soma) {
+        printf("Segundo você, a soma de %d e %d é %d. Isso está correto.\n", num1, num2, resposta);
+    } else {
+        printf("Segundo você, a soma de %d e %d é %d. Isso está incorreto. A resposta correta é %d.\n", num1, num2, resposta, soma);
+    }
+}
+
+// Função para agradecer ao usuário pela cooperação
+void goodbye() {
+    printf("Obrigado pela sua cooperação.\n");
+}
+
+int main() {
+    int num1, num2;
+    
+    // Chama a função hello para dar boas-vindas
+    hello();
+
+    // Loop para pedir 5 vezes que o usuário insira dois números e verifique a soma
+    for (int i = 0; i < 5; i++) {
+        printf("Digite 2 números < 100: ");
+        scanf("%d %d", &num1, &num2);
+
+        // Verifica se os números estão dentro do intervalo esperado
+        if (num1 >= 100 || num2 >= 100) {
+            printf("Números fora do intervalo permitido. Tente novamente.\n");
+            i--; // Decrementa o contador para repetir a iteração
+            continue;
+        }
+
+        // Chama a função sum para verificar a soma
+        sum(num1, num2);
+    }
+
+    // Chama a função goodbye para agradecer ao usuário
+    goodbye();
+
+    return 0;
+}
+
+
+
+6.14. Como um ano não tem exatamente 365 dias, temos um ano bissexto a cada 4 anos, exceto se o ano for divisível por 100. Se o ano for divisível por 400, o ano é
+considerado bissexto mesmo assim. Escreva uma função com o cabeçalho:
+int isLeapYear(int year)
+que determina se um ano é bissexto ou não e dá um valor de retorno diferente para ambos os casos. Escreva também uma função com o cabeçalho:
+int numberOfDays(int month, int year)
+
+#include <stdio.h>
+
+// Função para verificar se um ano é bissexto
+int isLeapYear(int year) {
+    if (year % 400 == 0) {
+        return 1; // Ano bissexto
+    } else if (year % 100 == 0) {
+        return 0; // Não é bissexto
+    } else if (year % 4 == 0) {
+        return 1; // Ano bissexto
+    } else {
+        return 0; // Não é bissexto
+    }
+}
+
+// Função para obter o número de dias em um mês
+int numberOfDays(int month, int year) {
+    switch (month) {
+        case 1:  // Janeiro
+        case 3:  // Março
+        case 5:  // Maio
+        case 7:  // Julho
+        case 8:  // Agosto
+        case 10: // Outubro
+        case 12: // Dezembro
+            return 31;
+        case 4:  // Abril
+        case 6:  // Junho
+        case 9:  // Setembro
+        case 11: // Novembro
+            return 30;
+        case 2:  // Fevereiro
+            if (isLeapYear(year)) {
+                return 29; // Fevereiro em ano bissexto
+            } else {
+                return 28; // Fevereiro em ano não bissexto
+            }
+        default:
+            return 0; // Mês inválido
+    }
+}
+
+int main() {
+    int ano, mes;
+
+    // Ler o ano e o mês
+    printf("Digite o ano: ");
+    scanf("%d", &ano);
+    printf("Digite o mês: ");
+    scanf("%d", &mes);
+
+    // Verificar se o ano é bissexto
+    if (isLeapYear(ano)) {
+        printf("%d é um ano bissexto.\n", ano);
+    } else {
+        printf("%d não é um ano bissexto.\n", ano);
+    }
+
+    // Obter o número de dias no mês
+    int dias = numberOfDays(mes, ano);
+    if (dias == 0) {
+        printf("Mês inválido.\n");
+    } else {
+        printf"O mês %d de %d tem %d dias.\n", mes, ano, dias);
+    }
+
+    return 0;
+}
+
+
+
+6.15. Escreva uma função com 3 números inteiros que representam um dia, mês e ano. Essa função calcula e retorna um fator de acordo com a seguinte fórmula:
+Para os meses de Janeiro e Fevereiro:
+fator = 365 * year + day + 31 * (month - 1) + [year - 1 / 4] - [[year - 1 / 100 + 1] * 3 / 4]
+Para os meses de Março a Dezembro:
+fator = 365 * year + day + 31 * (month - 1) - [0.4 * month + 2.3] + [year / 4] - [[year / 100 + 1] * 3 / 4]
+
+#include <stdio.h>
+#include <math.h> // Para a função floor
+
+// Função para calcular o fator
+int calcular_fator(int dia, int mes, int ano) {
+    int fator;
+
+    if (mes == 1 || mes == 2) {
+        // Fórmula para Janeiro e Fevereiro
+        fator = 365 * ano + dia + 31 * (mes - 1) + floor((ano - 1) / 4.0) - floor((ano - 1) / 100.0 + 1) * 3 / 4;
+    } else {
+        // Fórmula para Março a Dezembro
+        fator = 365 * ano + dia + 31 * (mes - 1) - floor(0.4 * mes + 2.3) + floor(ano / 4.0) - floor(ano / 100.0 + 1) * 3 / 4;
+    }
+
+    return fator;
+}
+
+int main() {
+    int dia, mes, ano;
+
+    // Ler o dia, mês e ano
+    printf("Digite o dia: ");
+    scanf("%d", &dia);
+    printf("Digite o mês: ");
+    scanf("%d", &mes);
+    printf("Digite o ano: ");
+    scanf("%d", &ano);
+
+    // Calcular o fator
+    int fator = calcular_fator(dia, mes, ano);
+
+    // Imprimir o resultado
+    printf("O fator calculado é: %d\n", fator);
+
+    return 0;
+}
+
+
+Escreva uma função principal que leia 2 datas, calcule o número de dias entre essas 2 datas calculando a diferença entre os 2 fatores das datas correspondentes.
+
+#include <stdio.h>
+#include <math.h> // Para a função floor
+
+// Função para calcular o fator
+int calcular_fator(int dia, int mes, int ano) {
+    int fator;
+
+    if (mes == 1 || mes == 2) {
+        // Fórmula para Janeiro e Fevereiro
+        fator = 365 * ano + dia + 31 * (mes - 1) + floor((ano - 1) / 4.0) - floor((ano - 1) / 100.0 + 1) * 3 / 4;
+    } else {
+        // Fórmula para Março a Dezembro
+        fator = 365 * ano + dia + 31 * (mes - 1) - floor(0.4 * mes + 2.3) + floor(ano / 4.0) - floor(ano / 100.0 + 1) * 3 / 4;
+    }
+
+    return fator;
+}
+
+int main() {
+    int dia1, mes1, ano1;
+    int dia2, mes2, ano2;
+
+    // Ler a primeira data
+    printf("Digite o dia da primeira data: ");
+    scanf("%d", &dia1);
+    printf("Digite o mês da primeira data: ");
+    scanf("%d", &mes1);
+    printf("Digite o ano da primeira data: ");
+    scanf("%d", &ano1);
+
+    // Ler a segunda data
+    printf("Digite o dia da segunda data: ");
+    scanf("%d", &dia2);
+    printf("Digite o mês da segunda data: ");
+    scanf("%d", &mes2);
+    printf("Digite o ano da segunda data: ");
+    scanf("%d", &ano2);
+
+    // Calcular os fatores para cada data
+    int fator1 = calcular_fator(dia1, mes1, ano1);
+    int fator2 = calcular_fator(dia2, mes2, ano2);
+
+    // Calcular a diferença em dias
+    int dias_entre = abs(fator1 - fator2);
+
+    // Imprimir o resultado
+    printf("Número de dias entre as duas datas: %d\n", dias_entre);
+
+    return 0;
+}
+
+
+
+
+6.16. Considere o primeiro quadrante de um círculo em um quadrado com lado 1. Se você gerar uma grande quantidade de coordenadas (x, y) com x e y pertencendo ao
+intervalo [0, 1], você terá uma coleção de pontos pertencentes ao quadrado. Se você contar todos os pontos que pertencem ao quadrante do círculo com equação x2 + y2 <
+1 e dividir essa quantidade pelo número total de pontos gerados, você encontrará aproximadamente o número π/4.
+• Escreva um programa que gera 100.000 pontos e usa isso para calcular o número π aproximadamente.
+• Execute o programa várias vezes e compare os resultados.
+• E se você aumentar o número de pontos?
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+#define NUM_PONTOS 100000
+
+int main() {
+    int pontos_dentro_circulo = 0;
+    double x, y;
+
+    // Inicializa o gerador de números aleatórios
+    srand(time(NULL));
+
+    // Gera os pontos e conta quantos estão dentro do círculo
+    for (int i = 0; i < NUM_PONTOS; i++) {
+        x = (double)rand() / RAND_MAX; // Gera um número aleatório entre 0 e 1
+        y = (double)rand() / RAND_MAX; // Gera um número aleatório entre 0 e 1
+
+        if (x * x + y * y < 1) {
+            pontos_dentro_circulo++;
+        }
+    }
+
+    // Estima o valor de pi
+    double pi_estimado = 4.0 * pontos_dentro_circulo / NUM_PONTOS;
+
+    // Imprime o resultado
+    printf("Número estimado de pi: %f\n", pi_estimado);
+
+    return 0;
+}
+
+
+
+6.17. Escreva um programa que peça ao usuário para escolher entre 3 opções:
+1.Desenhar um quadrado vazio
+2.Desenhar um quadrado preenchido
+3.Parar O programa se repete até que o usuário escolha a opção 3 (Parar). Use as funções empty_square e filled_square.
+
+#include <stdio.h>
+
+// Função para desenhar um quadrado vazio
+void empty_square(int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        for (int j = 0; j < tamanho; j++) {
+            // Se for a primeira ou última linha ou primeira ou última coluna
+            if (i == 0 || i == tamanho - 1 || j == 0 || j == tamanho - 1) {
+                printf("*");
+            } else {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+}
+
+// Função para desenhar um quadrado preenchido
+void filled_square(int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        for (int j = 0; j < tamanho; j++) {
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int opcao;
+    int tamanho;
+
+    do {
+        // Menu de opções
+        printf("\nEscolha uma opção:\n");
+        printf("1. Desenhar um quadrado vazio\n");
+        printf("2. Desenhar um quadrado preenchido\n");
+        printf("3. Parar\n");
+        printf("Opção: ");
+        scanf("%d", &opcao);
+
+        // Verifica a opção escolhida
+        switch (opcao) {
+            case 1:
+                // Desenhar quadrado vazio
+                printf("Digite o tamanho do quadrado: ");
+                scanf("%d", &tamanho);
+                empty_square(tamanho);
+                break;
+            case 2:
+                // Desenhar quadrado preenchido
+                printf("Digite o tamanho do quadrado: ");
+                scanf("%d", &tamanho);
+                filled_square(tamanho);
+                break;
+            case 3:
+                // Parar o programa
+                printf("Encerrando o programa...\n");
+                break;
+            default:
+                // Opção inválida
+                printf("Opção inválida! Tente novamente.\n");
+                break;
+        }
+
+    } while (opcao != 3);
+
+    return 0;
+}
+
+
+
+
+----------------------------------------------------------------------------------------------
+LISTA 
