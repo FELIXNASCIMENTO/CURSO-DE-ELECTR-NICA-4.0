@@ -1,0 +1,7 @@
+static>> mantem a posicao de memoria para usala posteriomente, qualificador. alocar variavel local.
+cosnt>> valor que nao varia.Mas fixa
+#define >> 
+tipydef
+
+pre porcessadores em c>> direciona as estruturas do codigo para acelar o processo de codar.
+macros >> estruturas que podem ser definidas ao longo do codigo.

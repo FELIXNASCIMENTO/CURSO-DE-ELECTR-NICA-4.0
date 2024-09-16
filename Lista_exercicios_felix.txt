@@ -660,14 +660,67 @@ LISTA 2
  5.2.1 Escreva um programa que solicite ao usuário que insira um número inteiro e imprima se esse número é
 positivo ou não (ou seja, negativo ou zero!).
 
+#include <stdio.h>
+
+int main() {
+    int numero;
+
+    // Pede ao usuário para inserir um número
+    printf("Insira um número inteiro: ");
+   
+    scanf("%d", &numero);
+
+    if (numero > 0) {
+        printf("O número %d é positivo.\n", numero);
+    } else {
+        printf("O número %d não é positivo.\n", numero);
+    }
+    return 0;
+}
+
+
  5.2.2 Escreva um programa que solicite ao usuário que insira um número inteiro e imprima se esse número é par
 ou ímpar.
+
+#include <stdio.h>
+
+int main() {
+    
+    int numero;
+
+    printf("Insira um número inteiro: ");
+  
+    scanf("%d", &numero);
+
+    if (numero % 2 == 0) {
+        printf("O número %d é par.\n", numero);
+    } else {
+        printf("O número %d é ímpar.\n", numero);
+    }
+    return 0;
+}
 
  5.2.3 Escreva um programa que solicite ao usuário que insira um número real e imprima se esse número está no
 intervalo [5,10[ ou não (o intervalo [5,10[ significa 5 ≤ x < 10)
 
 
+#include <stdio.h>
 
+int main() {
+  
+    float numero;
+
+    printf("Insira um número real: ");
+    
+    scanf("%f", &numero);
+
+    if (numero >= 5.0 && numero < 10.0) {
+        printf("O número %.2f está no intervalo [5,10[.\n", numero);
+    } else {
+        printf("O número %.2f não está no intervalo [5,10[.\n", numero);
+    }
+    return 0;
+}
 
 
  5.2.4 Escreva um programa que solicite ao usuário que insira um número real e imprima se, para esse número,
@@ -682,18 +735,105 @@ Exemplos:
 - 15 corresponde às condições: não A, B, não C
 
 
+#include <stdio.h>
 
+int main() {
+    // Declara uma variável para armazenar o número real
+    float numero;
+
+    // Pede ao usuário para inserir um número
+    printf("Insira um número real: ");
+    scanf("%f", &numero);
+
+    // Verifica a Condição A
+    if (numero >= 3.0 && numero < 8.5) {
+        printf("Condição A: Atendida\n");
+    } else {
+        printf("Condição A: Não atendida\n");
+    }
+
+    // Verifica a Condição B
+    if (numero < 3.0 || (5.4 < numero && numero <= 7.3) || numero > 13.0) {
+        printf("Condição B: Atendida\n");
+    } else {
+        printf("Condição B: Não atendida\n");
+    }
+
+    // Verifica a Condição C
+    if (numero != 3.0 && numero < 9.75) {
+        printf("Condição C: Atendida\n");
+    } else {
+        printf("Condição C: Não atendida\n");
+    }
+
+    return 0;
+}
 
 
  5.2.5 Escreva um programa que solicite ao usuário que insira um número real e imprima se esse número é
 positivo, zero ou negativo.
+
+#include <stdio.h>
+
+int main() {
+    
+    float numero;
+
+    printf("Insira um número real: ");
+
+    scanf("%f", &numero);
+
+    if (numero > 0) {
+        printf("O número %.2f é positivo.\n", numero);
+    } else if (numero == 0) {
+        printf("O número é zero.\n");
+    } else {
+        printf("O número %.2f é negativo.\n", numero);
+    }
+
+    return 0;
+}
 
  5.2.6 Escreva um programa que solicite ao usuário que insira 5 números inteiros um por um. Enquanto lê os
 números, o programa calcula o menor valor desses números. No final, o menor valor é impresso. Tente limitar o
 número de variáveis no seu programa a 2 (ou no máximo 3), mas não introduza laços ainda.
 
 
+#include <stdio.h>
 
+int main() {
+    // Declaração das variáveis
+    int numero, menor;
+    
+    // Pede ao usuário para inserir o primeiro número
+    printf("Insira o primeiro número: ");
+    scanf("%d", &numero);
+    
+    // Inicializa o menor valor com o primeiro número
+    menor = numero;
+
+    // Pede e lê os próximos quatro números e compara com o menor valor
+    printf("Insira o segundo número: ");
+    scanf("%d", &numero);
+    if (numero < menor) menor = numero;
+
+    printf("Insira o terceiro número: ");
+    scanf("%d", &numero);
+    if (numero < menor) menor = numero;
+
+    printf("Insira o quarto número: ");
+    scanf("%d", &numero);
+    if (numero < menor) menor = numero;
+
+    printf("Insira o quinto número: ");
+    scanf("%d", &numero);
+    if (numero < menor) menor = numero;
+
+    // Imprime o menor valor
+    printf("O menor valor inserido é: %d\n", menor);
+
+    return 0;
+}
 
 
  5.2.7 Escreva um programa que compare sua velocidade com o limite de velocidade. Se você estiver acima do
