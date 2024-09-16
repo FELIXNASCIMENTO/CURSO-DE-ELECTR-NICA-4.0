@@ -2693,4 +2693,3158 @@ int main() {
 
 
 ----------------------------------------------------------------------------------------------
-LISTA 
+LISTA 5 
+
+
+7.1. Escreva um programa que leia as temperaturas de uma semana inteira em um array temperature[] e imprima a
+temperatura média dessa semana.
+Digite a temperatura para o dia 0: 5
+Digite a temperatura para o dia 1: 5
+Digite a temperatura para o dia 2: 5
+Digite a temperatura para o dia 3: 5
+Digite a temperatura para o dia 4: 6
+Digite a temperatura para o dia 5: 6
+Digite a temperatura para o dia 6: 6
+A temperatura média para esta semana é 5.43
+
+
+#include <stdio.h>
+
+int main() {
+    const int NUM_DIAS = 7;
+    double temperatura[NUM_DIAS], soma = 0;
+
+    // Lendo as temperaturas
+    for (int i = 0; i < NUM_DIAS; i++) {
+        printf("Digite a temperatura para o dia %d: ", i);
+        scanf("%lf", &temperatura[i]);
+        soma += temperatura[i];
+    }
+
+    // Calculando a média
+    double media = soma / NUM_DIAS;
+
+    // Imprimindo o resultado
+    printf("A temperatura média para esta semana é %.2lf\n", media);
+
+    return 0;
+}
+
+7.2. Altere o exercício anterior de forma que todos os dias com uma temperatura superior a 10°C sejam impressos.
+Digite a temperatura para o dia 0: 1
+Digite a temperatura para o dia 1: 8
+Digite a temperatura para o dia 2: 10
+Digite a temperatura para o dia 3: 12 Todos os dias com temperatura > 10°C: dia 03
+Digite a temperatura para o dia 4: 15 dia 04
+Digite a temperatura para o dia 5: 14 dia 05
+Digite a temperatura para o dia 6: 9
+
+
+#include <stdio.h>
+
+int main() {
+    const int NUM_DIAS = 7;
+    double temperatura[NUM_DIAS];
+
+    printf("Digite as temperaturas para cada dia da semana:\n");
+    for (int i = 0; i < NUM_DIAS; i++) {
+        printf("Dia %d: ", i);
+        scanf("%lf", &temperatura[i]);
+    }
+
+    printf("\nTodos os dias com temperatura > 10°C:\n");
+    for (int i = 0; i < NUM_DIAS; i++) {
+        if (temperatura[i] > 10) {
+            printf("Dia %d\n", i);
+        }
+    }
+
+    return 0;
+}
+
+7.3. Repita o exercício 7.1 usando 2 funções. Crie uma função para ler as temperaturas e uma função separada para calcular a
+temperatura média. A impressão da média deve ser feita no programa principal.
+
+#include <stdio.h>
+
+void lerTemperaturas(double temperaturas[], int numDias) {
+    for (int i = 0; i < numDias; i++) {
+        printf("Digite a temperatura para o dia %d: ", i);
+        scanf("%lf", &temperaturas[i]);
+    }
+}
+
+double calcularMedia(double temperaturas[], int numDias) {
+    double soma = 0;
+    for (int i = 0; i < numDias; i++) {
+        soma += temperaturas[i];
+    }
+    return soma / numDias;
+}
+
+int main() {
+    const int NUM_DIAS = 7;
+    double temperaturas[NUM_DIAS];
+
+    lerTemperaturas(temperaturas, NUM_DIAS);
+
+    double media = calcularMedia(temperaturas, NUM_DIAS);
+
+    printf("A temperatura média para esta semana é %.2lf\n", media);
+
+    return 0;
+}
+
+7.4. Repita o exercício 7.2, mas desta vez, use 3 funções separadas para ler as temperaturas (ReadTemp), determinar quais dias estão
+mais quentes que 10°C (Calculate) e imprimir os dias encontrados (PrintDays). Extra: peça ao usuário para inserir um limite de
+temperatura.
+
+
+#include <stdio.h>
+
+void ReadTemp(double temperaturas[], int numDias) {
+    for (int i = 0; i < numDias; i++) {
+        printf("Digite a temperatura para o dia %d: ", i + 1); // Dias começando de 1
+        scanf("%lf", &temperaturas[i]);
+    }
+}
+
+void Calculate(double temperaturas[], int numDias, double limite, int diasQuentes[]) {
+    int count = 0;
+    for (int i = 0; i < numDias; i++) {
+        if (temperaturas[i] > limite) {
+            diasQuentes[count++] = i + 1; // Salva o dia com temperatura acima do limite (1 baseado)
+        }
+    }
+    diasQuentes[count] = -1; // Marca o fim da lista com -1
+}
+
+void PrintDays(int diasQuentes[], double limite) {
+    printf("\nDias com temperatura acima de %.1lf°C:\n", limite);
+    for (int i = 0; diasQuentes[i] != -1; i++) {
+        printf("Dia %d\n", diasQuentes[i]);
+    }
+}
+
+int main() {
+    const int NUM_DIAS = 7;
+    double temperaturas[NUM_DIAS];
+    int diasQuentes[NUM_DIAS + 1]; // +1 para acomodar o marcador de fim
+    double limite;
+
+    // Solicita o limite de temperatura ao usuário
+    printf("Digite o limite de temperatura: ");
+    scanf("%lf", &limite);
+
+    // Funções chamadas para ler, calcular e imprimir
+    ReadTemp(temperaturas, NUM_DIAS);
+    Calculate(temperaturas, NUM_DIAS, limite, diasQuentes);
+    PrintDays(diasQuentes, limite);
+
+    return 0;
+}
+
+
+
+7.5. Escreva um programa com a função principal:
+
+#include <stdio.h>
+#define SIZE 12
+#define COLUMNS 3
+void ReadArray(int [], int);
+void PrintMatrix(int [], int, int);
+int main(void)
+{ int a[SIZE];
+ReadArray(a, SIZE);
+PrintMatrix(a, SIZE, COLUMNS);
+return 0;
+}
+
+
+
+• A função ReadArray lê 12 (SIZE) números e os armazena no array unidimensional a.
+
+• A função PrintMatrix imprime os 12 números em 4 linhas de 3 (COLUMNS) números cada. Adaptando apenas SIZE e COLUMNS, o
+programa deve também ser capaz de imprimir, por exemplo, 20 números em uma matriz 5 x 4.
+
+#include <stdio.h>
+#define SIZE 12
+#define COLUMNS 3
+
+// Função para ler números inteiros no array
+void ReadArray(int array[], int size) {
+    printf("Digite %d números inteiros:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &array[i]);
+    }
+}
+
+// Função para imprimir o array como uma matriz
+void PrintMatrix(int array[], int size, int columns) {
+    printf("Matriz formatada:\n");
+    for (int i = 0; i < size; i++) {
+        if (i % columns == 0 && i != 0) {
+            printf("\n"); // Quebra de linha após cada número de colunas
+        }
+        printf("%4d", array[i]); // Imprime o número com largura de 4 para alinhamento
+    }
+    printf("\n"); // Adiciona uma linha em branco após a matriz
+}
+
+int main(void) {
+    int a[SIZE];
+    ReadArray(a, SIZE);
+    PrintMatrix(a, SIZE, COLUMNS);
+    return 0;
+}
+
+
+7.6. Altere o exercício 7.5 para que, após cada linha, a soma de todos os elementos daquela linha seja impressa.
+
+#include <stdio.h>
+#define SIZE 12
+#define COLUMNS 3
+
+// Função para ler números inteiros no array
+void ReadArray(int array[], int size) {
+    printf("Digite %d números inteiros:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &array[i]);
+    }
+}
+
+// Função para imprimir o array como uma matriz e a soma de cada linha
+void PrintMatrix(int array[], int size, int columns) {
+    printf("Matriz formatada:\n");
+    int rowSum = 0;
+    
+    for (int i = 0; i < size; i++) {
+        if (i % columns == 0 && i != 0) {
+            // Imprime a soma da linha anterior e quebra de linha
+            printf(" | Soma da linha: %d\n", rowSum);
+            rowSum = 0; // Reseta a soma para a próxima linha
+        }
+        printf("%4d", array[i]); // Imprime o número com largura de 4 para alinhamento
+        rowSum += array[i]; // Adiciona o número à soma da linha
+    }
+    
+    // Imprime a soma da última linha
+    printf(" | Soma da linha: %d\n", rowSum);
+    printf("\n"); // Adiciona uma linha em branco após a matriz
+}
+
+int main(void) {
+    int a[SIZE];
+    ReadArray(a, SIZE);
+    PrintMatrix(a, SIZE, COLUMNS);
+    return 0;
+}
+
+
+7.7. Altere o exercício 7.6 para que, sob cada coluna, a soma de todos os elementos daquela coluna seja impressa.
+
+#include <stdio.h>
+#define SIZE 12
+#define COLUMNS 3
+
+// Função para ler números inteiros no array
+void ReadArray(int array[], int size) {
+    printf("Digite %d números inteiros:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &array[i]);
+    }
+}
+
+// Função para imprimir o array como uma matriz e calcular as somas das linhas e colunas
+void PrintMatrix(int array[], int size, int columns) {
+    int rows = size / columns; // Calcula o número de linhas
+    int rowSum = 0;
+    int columnSum[columns]; // Array para armazenar a soma de cada coluna
+    
+    // Inicializa o array de soma das colunas
+    for (int i = 0; i < columns; i++) {
+        columnSum[i] = 0;
+    }
+    
+    printf("Matriz formatada:\n");
+    
+    for (int i = 0; i < size; i++) {
+        if (i % columns == 0 && i != 0) {
+            // Imprime a soma da linha anterior e quebra de linha
+            printf(" | Soma da linha: %d\n", rowSum);
+            rowSum = 0; // Reseta a soma para a próxima linha
+        }
+        printf("%4d", array[i]); // Imprime o número com largura de 4 para alinhamento
+        rowSum += array[i]; // Adiciona o número à soma da linha
+        
+        // Adiciona o número à soma da coluna correspondente
+        columnSum[i % columns] += array[i];
+    }
+    
+    // Imprime a soma da última linha
+    printf(" | Soma da linha: %d\n", rowSum);
+    
+    // Imprime a soma das colunas
+    printf("\nSoma das colunas:\n");
+    for (int i = 0; i < columns; i++) {
+        printf("Coluna %d: %d\n", i + 1, columnSum[i]);
+    }
+    
+    printf("\n"); // Adiciona uma linha em branco após a matriz
+}
+
+int main(void) {
+    int a[SIZE];
+    ReadArray(a, SIZE);
+    PrintMatrix(a, SIZE, COLUMNS);
+    return 0;
+}
+
+
+
+7.8. Escreva um programa com uma função principal e 3 funções adicionais.
+•Na função principal, um array de 100 inteiros é declarado e as 3 funções adicionais são chamadas.
+•A primeira função lê 1 inteiro no intervalo [0, 100]. Este inteiro representa o número efetivo de elementos que o array conterá. Esse
+inteiro precisa ser retornado ao programa principal.
+•A segunda função lê o número correto de inteiros e os armazena no array.
+•A terceira função imprime os inteiros lidos anteriormente. A função principal é parecida com:
+
+int main(void)
+{
+int row[MAX];
+int size;
+size = ReadSize(0, MAX);
+ReadArray(row, size);
+PrintArray(row, size);
+return 0;
+}
+
+
+
+#include <stdio.h>
+
+#define MAX 100
+
+// Função para ler o tamanho do array
+int ReadSize(int lower_bound, int upper_bound) {
+    int size;
+    do {
+        printf("Digite o número de elementos no intervalo [%d, %d]: ", lower_bound, upper_bound);
+        scanf("%d", &size);
+    } while (size < lower_bound || size > upper_bound);
+    return size;
+}
+
+// Função para ler os elementos do array
+void ReadArray(int array[], int size) {
+    printf("Digite %d números inteiros:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &array[i]);
+    }
+}
+
+// Função para imprimir os elementos do array
+void PrintArray(int array[], int size) {
+    printf("Os números lidos são:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+int main(void) {
+    int row[MAX];
+    int size;
+
+    size = ReadSize(0, MAX); // Lê o tamanho do array
+    ReadArray(row, size);    // Lê os elementos do array
+    PrintArray(row, size);   // Imprime os elementos do array
+
+    return 0;
+}
+
+
+7.9. O mesmo que o exercício 7.8, mas sem pedir ao usuário para inserir o número efetivo de inteiros. O usuário insere os inteiros e
+termina com 999 para indicar o fim do processo de leitura. 999 NÃO pode ser armazenado no array! A função principal é parecida com:
+
+int main(void)
+{
+int row[MAX];
+int size;
+size = ReadArray(row);
+PrintArray(row, size);
+return 0;
+}
+
+
+#include <stdio.h>
+
+#define MAX 100
+
+// Função para ler os elementos do array até que o usuário insira 999
+int ReadArray(int array[]) {
+    int num;
+    int count = 0;
+    
+    printf("Digite os números inteiros (999 para parar):\n");
+    
+    while (count < MAX) {
+        scanf("%d", &num);
+        
+        if (num == 999) {
+            break; // Termina a leitura quando o usuário insere 999
+        }
+        
+        array[count] = num; // Armazena o número no array
+        count++; // Incrementa o contador de elementos
+    }
+    
+    return count; // Retorna o número de elementos lidos
+}
+
+// Função para imprimir os elementos do array
+void PrintArray(int array[], int size) {
+    printf("Os números lidos são:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+int main(void) {
+    int row[MAX];
+    int size;
+
+    size = ReadArray(row); // Lê os elementos do array
+    PrintArray(row, size); // Imprime os elementos do array
+
+    return 0;
+}
+
+
+7.10. Adicione uma função extra ao exercício 7.9 que calcula o valor médio de todos os inteiros inseridos e retorna esse valor médio
+para a função principal. A média deve ser impressa na função principal. O cabeçalho dessa função extra pode ser assim:
+
+double CalcMean(int row[], int size)
+
+
+#include <stdio.h>
+
+#define MAX 100
+
+// Função para ler os elementos do array até que o usuário insira 999
+int ReadArray(int array[]) {
+    int num;
+    int count = 0;
+    
+    printf("Digite os números inteiros (999 para parar):\n");
+    
+    while (count < MAX) {
+        scanf("%d", &num);
+        
+        if (num == 999) {
+            break; // Termina a leitura quando o usuário insere 999
+        }
+        
+        array[count] = num; // Armazena o número no array
+        count++; // Incrementa o contador de elementos
+    }
+    
+    return count; // Retorna o número de elementos lidos
+}
+
+// Função para imprimir os elementos do array
+void PrintArray(int array[], int size) {
+    printf("Os números lidos são:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+// Função para calcular o valor médio dos inteiros no array
+double CalcMean(int row[], int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += row[i];
+    }
+    return (size > 0) ? (double)sum / size : 0.0; // Evita divisão por zero
+}
+
+int main(void) {
+    int row[MAX];
+    int size;
+    double mean;
+
+    size = ReadArray(row); // Lê os elementos do array
+    PrintArray(row, size); // Imprime os elementos do array
+    
+    mean = CalcMean(row, size); // Calcula a média
+    printf("A média dos números lidos é: %.2f\n", mean); // Imprime a média
+
+    return 0;
+}
+
+
+
+7.11. Repita o exercício 7.10, mas desta vez, escreva uma função que procura o valor máximo de todos os inteiros inseridos e retorna
+esse valor máximo para a função principal.
+
+
+#include <stdio.h>
+
+#define MAX 100
+
+// Função para ler os elementos do array até que o usuário insira 999
+int ReadArray(int array[]) {
+    int num;
+    int count = 0;
+    
+    printf("Digite os números inteiros (999 para parar):\n");
+    
+    while (count < MAX) {
+        scanf("%d", &num);
+        
+        if (num == 999) {
+            break; // Termina a leitura quando o usuário insere 999
+        }
+        
+        array[count] = num; // Armazena o número no array
+        count++; // Incrementa o contador de elementos
+    }
+    
+    return count; // Retorna o número de elementos lidos
+}
+
+// Função para imprimir os elementos do array
+void PrintArray(int array[], int size) {
+    printf("Os números lidos são:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+// Função para calcular o valor médio dos inteiros no array
+double CalcMean(int row[], int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += row[i];
+    }
+    return (size > 0) ? (double)sum / size : 0.0; // Evita divisão por zero
+}
+
+// Função para encontrar o valor máximo dos inteiros no array
+int FindMax(int row[], int size) {
+    if (size == 0) {
+        return -1; // Retorna -1 se o array estiver vazio
+    }
+    
+    int max = row[0]; // Assume que o primeiro elemento é o maior
+    
+    for (int i = 1; i < size; i++) {
+        if (row[i] > max) {
+            max = row[i]; // Atualiza o valor máximo
+        }
+    }
+    
+    return max;
+}
+
+int main(void) {
+    int row[MAX];
+    int size;
+    double mean;
+    int max;
+
+    size = ReadArray(row); // Lê os elementos do array
+    PrintArray(row, size); // Imprime os elementos do array
+    
+    mean = CalcMean(row, size); // Calcula a média
+    printf("A média dos números lidos é: %.2f\n", mean); // Imprime a média
+    
+    max = FindMax(row, size); // Encontra o valor máximo
+    printf("O valor máximo dos números lidos é: %d\n", max); // Imprime o valor máximo
+
+    return 0;
+}
+
+
+7.12. Escreva um programa com funções que mescla 2 listas ordenadas (ordenadas do menor para o maior) em 1 lista ordenada.
+
+Digite a lista ordenada: 5 9 12 54 78
+Digite a lista ordenada: 2 3 34 45 102
+A lista mesclada é: 2 3 5 9 12 34 45 54 78 102
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+// Função para ler uma lista ordenada
+void ReadSortedList(int list[], int *size) {
+    printf("Digite a lista ordenada (Digite -1 para parar):\n");
+    int num;
+    *size = 0;
+    
+    while (*size < MAX_SIZE) {
+        scanf("%d", &num);
+        if (num == -1) {
+            break;
+        }
+        list[*size] = num;
+        (*size)++;
+    }
+}
+
+// Função para mesclar duas listas ordenadas em uma lista ordenada
+void MergeLists(int list1[], int size1, int list2[], int size2, int mergedList[], int *mergedSize) {
+    int i = 0, j = 0, k = 0;
+    
+    while (i < size1 && j < size2) {
+        if (list1[i] <= list2[j]) {
+            mergedList[k++] = list1[i++];
+        } else {
+            mergedList[k++] = list2[j++];
+        }
+    }
+    
+    while (i < size1) {
+        mergedList[k++] = list1[i++];
+    }
+    
+    while (j < size2) {
+        mergedList[k++] = list2[j++];
+    }
+    
+    *mergedSize = k;
+}
+
+// Função para imprimir uma lista
+void PrintList(int list[], int size) {
+    printf("A lista mesclada é:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", list[i]);
+    }
+    printf("\n");
+}
+
+int main(void) {
+    int list1[MAX_SIZE], list2[MAX_SIZE], mergedList[MAX_SIZE * 2];
+    int size1, size2, mergedSize;
+    
+    // Leitura das duas listas ordenadas
+    printf("Digite a primeira lista ordenada:\n");
+    ReadSortedList(list1, &size1);
+    
+    printf("Digite a segunda lista ordenada:\n");
+    ReadSortedList(list2, &size2);
+    
+    // Mescla as duas listas
+    MergeLists(list1, size1, list2, size2, mergedList, &mergedSize);
+    
+    // Imprime a lista mesclada
+    PrintList(mergedList, mergedSize);
+    
+    return 0;
+}
+
+
+7.13. Adicione uma função extra ao exercício 7.9 ou 7.10 para que, antes da impressão, os maiores e menores inteiros sejam trocados
+de lugar. A troca deve acontecer dentro do array, não use um segundo array. O uso de uma variável auxiliar é permitido.
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+// Função para ler uma lista ordenada
+void ReadSortedList(int list[], int *size) {
+    printf("Digite a lista ordenada (Digite -1 para parar):\n");
+    int num;
+    *size = 0;
+    
+    while (*size < MAX_SIZE) {
+        scanf("%d", &num);
+        if (num == -1) {
+            break;
+        }
+        list[*size] = num;
+        (*size)++;
+    }
+}
+
+// Função para mesclar duas listas ordenadas em uma lista ordenada
+void MergeLists(int list1[], int size1, int list2[], int size2, int mergedList[], int *mergedSize) {
+    int i = 0, j = 0, k = 0;
+    
+    while (i < size1 && j < size2) {
+        if (list1[i] <= list2[j]) {
+            mergedList[k++] = list1[i++];
+        } else {
+            mergedList[k++] = list2[j++];
+        }
+    }
+    
+    while (i < size1) {
+        mergedList[k++] = list1[i++];
+    }
+    
+    while (j < size2) {
+        mergedList[k++] = list2[j++];
+    }
+    
+    *mergedSize = k;
+}
+
+// Função para imprimir uma lista
+void PrintList(int list[], int size) {
+    printf("A lista mesclada é:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", list[i]);
+    }
+    printf("\n");
+}
+
+// Função para trocar o menor e o maior valor no array
+void SwapMinMax(int list[], int size) {
+    if (size <= 1) return; // Não faz sentido trocar em arrays com 0 ou 1 elemento
+    
+    int minIndex = 0;
+    int maxIndex = 0;
+    
+    // Encontrar os índices do menor e do maior valor
+    for (int i = 1; i < size; i++) {
+        if (list[i] < list[minIndex]) {
+            minIndex = i;
+        }
+        if (list[i] > list[maxIndex]) {
+            maxIndex = i;
+        }
+    }
+    
+    // Trocar os valores
+    if (minIndex != maxIndex) {
+        int temp = list[minIndex];
+        list[minIndex] = list[maxIndex];
+        list[maxIndex] = temp;
+    }
+}
+
+int main(void) {
+    int list1[MAX_SIZE], list2[MAX_SIZE], mergedList[MAX_SIZE * 2];
+    int size1, size2, mergedSize;
+    
+    // Leitura das duas listas ordenadas
+    printf("Digite a primeira lista ordenada:\n");
+    ReadSortedList(list1, &size1);
+    
+    printf("Digite a segunda lista ordenada:\n");
+    ReadSortedList(list2, &size2);
+    
+    // Mescla as duas listas
+    MergeLists(list1, size1, list2, size2, mergedList, &mergedSize);
+    
+    // Troca o menor e o maior valor na lista mesclada
+    SwapMinMax(mergedList, mergedSize);
+    
+    // Imprime a lista mesclada
+    PrintList(mergedList, mergedSize);
+    
+    return 0;
+}
+
+
+7.14. Escreva um programa com funções:
+•A primeira função lê 20 números e os armazena em um array.
+•A segunda função garante que nenhum dos números no array ocorra mais de uma vez. Para isso, a segunda, terceira, ... ocorrência de
+um número é removida do array e todos os outros elementos do array são deslocados para a esquerda.
+
+Digite uma lista de 20 números:
+2 5 3 4 6 5 3 4 6 7 2 4 4 5 3 2 1 6 1 7
+Os números armazenados no array limpo são:
+2 5 3 4 6 7 1
+
+
+#include <stdio.h>
+
+#define SIZE 20
+
+// Função para ler 20 números e armazená-los em um array
+void ReadNumbers(int array[], int size) {
+    printf("Digite uma lista de %d números:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &array[i]);
+    }
+}
+
+// Função para remover duplicatas e ajustar o array
+int RemoveDuplicates(int array[], int size) {
+    int newSize = 0; // Novo tamanho do array após remoção de duplicatas
+    
+    for (int i = 0; i < size; i++) {
+        int isDuplicate = 0;
+        
+        // Verificar se o número já foi encontrado anteriormente
+        for (int j = 0; j < newSize; j++) {
+            if (array[i] == array[j]) {
+                isDuplicate = 1;
+                break;
+            }
+        }
+        
+        // Se não for duplicado, adicionar ao array de resultados
+        if (!isDuplicate) {
+            array[newSize++] = array[i];
+        }
+    }
+    
+    return newSize; // Retorna o novo tamanho do array sem duplicatas
+}
+
+// Função para imprimir o array
+void PrintArray(int array[], int size) {
+    printf("Os números armazenados no array limpo são:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+int main(void) {
+    int numbers[SIZE];
+    int cleanedSize;
+    
+    // Ler os números
+    ReadNumbers(numbers, SIZE);
+    
+    // Remover duplicatas e obter o tamanho do array limpo
+    cleanedSize = RemoveDuplicates(numbers, SIZE);
+    
+    // Imprimir o array limpo
+    PrintArray(numbers, cleanedSize);
+    
+    return 0;
+}
+
+
+7.15. Escreva um programa que gera 6 números aleatórios diferentes no intervalo [1, 42]. Use um array para armazenar os números e
+garantir que todos os 6 números sejam diferentes.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define SIZE 6
+#define MIN 1
+#define MAX 42
+
+void GenerateUniqueRandomNumbers(int array[], int size) {
+    int num;
+    int isDuplicate;
+    int count = 0;
+    
+    while (count < size) {
+        num = rand() % (MAX - MIN + 1) + MIN;
+        isDuplicate = 0;
+        
+        for (int i = 0; i < count; i++) {
+            if (array[i] == num) {
+                isDuplicate = 1;
+                break;
+            }
+        }
+        
+        if (!isDuplicate) {
+            array[count++] = num;
+        }
+    }
+}
+
+void PrintArray(int array[], int size) {
+    printf("Números gerados:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+int main(void) {
+    int numbers[SIZE];
+    
+    srand(time(NULL));
+    
+    GenerateUniqueRandomNumbers(numbers, SIZE);
+    PrintArray(numbers, SIZE);
+    
+    return 0;
+}
+
+
+7.16. Escreva um programa com funções. Uma primeira função lê 2 listas de no máximo 10 inteiros positivos. O processo de leitura para
+quando um 0 é inserido ou quando 10 inteiros são inseridos. (não armazene o número 0!) Uma segunda função verifica se ambas as
+listas contêm números iguais.
+
+Digite uma lista de no máximo 10 inteiros (pare com 0):
+4 4 12 9 5 0
+Digite uma lista de no máximo 10 inteiros (pare com 0):
+9 9 4 12 4 5 9 12 4 4
+As listas:
+4 4 12 9 5 0
+e
+9 9 4 12 4 5 9 12 4 4
+contêm números iguais.
+
+
+#include <stdio.h>
+
+#define MAX_SIZE 10
+
+void ReadList(int list[], int *size) {
+    int num;
+    *size = 0;
+    printf("Digite uma lista de no máximo %d inteiros (pare com 0):\n", MAX_SIZE);
+    
+    while (*size < MAX_SIZE) {
+        scanf("%d", &num);
+        if (num == 0) {
+            break;
+        }
+        list[*size] = num;
+        (*size)++;
+    }
+}
+
+int ContainsCommonElements(int list1[], int size1, int list2[], int size2) {
+    for (int i = 0; i < size1; i++) {
+        for (int j = 0; j < size2; j++) {
+            if (list1[i] == list2[j]) {
+                return 1; // Retorna 1 se encontrar um número comum
+            }
+        }
+    }
+    return 0; // Retorna 0 se não encontrar números comuns
+}
+
+int main(void) {
+    int list1[MAX_SIZE], list2[MAX_SIZE];
+    int size1, size2;
+    
+    ReadList(list1, &size1);
+    ReadList(list2, &size2);
+    
+    if (ContainsCommonElements(list1, size1, list2, size2)) {
+        printf("As listas contêm números iguais.\n");
+    } else {
+        printf("As listas não contêm números iguais.\n");
+    }
+    
+    return 0;
+}
+
+
+
+7.17. Escreva um programa que simula o lançamento de 2 dados. Lançar 2 dados sempre resulta em um valor entre 2 e 12.
+Quantas vezes cada valor possível ocorrerá se os dados forem lançados 400 vezes?
+
+• Declare um array na função principal para manter as ocorrências de cada valor possível.
+• Uma primeira função simula 400 lançamentos com 2 dados e calcula os valores. (dica: rand()%6+1 resulta em um número
+aleatório de 1 a 6, simulando o lançamento de 1 dado).
+• Uma segunda função imprime as ocorrências.
+• Extra: imprima um gráfico de barras horizontal com as ocorrências. Use o símbolo # para desenhar as barras. Use uma função
+DrawLine para realizar esta parte do programa.
+
+Espero que essas traduções sejam úteis! Se precisar de mais alguma coisa, estou à disposição.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define NUM_LANCAMENTOS 400
+#define MIN_VALOR 2
+#define MAX_VALOR 12
+#define TAMANHO (MAX_VALOR - MIN_VALOR + 1)
+
+// Função para simular o lançamento de dois dados
+void SimularLancamentos(int ocorrencias[]) {
+    for (int i = 0; i < NUM_LANCAMENTOS; i++) {
+        int dado1 = rand() % 6 + 1; // Gera um número de 1 a 6
+        int dado2 = rand() % 6 + 1; // Gera um número de 1 a 6
+        int resultado = dado1 + dado2; // Soma dos resultados dos dois dados
+        ocorrencias[resultado - MIN_VALOR]++; // Incrementa a contagem para o resultado
+    }
+}
+
+// Função para imprimir as ocorrências
+void ImprimirOcorrencias(int ocorrencias[]) {
+    printf("Ocorrências dos lançamentos:\n");
+    for (int i = 0; i < TAMANHO; i++) {
+        printf("%2d: %d\n", i + MIN_VALOR, ocorrencias[i]);
+    }
+}
+
+// Função para desenhar um gráfico de barras horizontal
+void DrawLine(int comprimento) {
+    for (int i = 0; i < comprimento; i++) {
+        printf("#");
+    }
+    printf("\n");
+}
+
+// Função para imprimir o gráfico de barras horizontal
+void ImprimirGrafico(int ocorrencias[]) {
+    printf("\nGráfico de barras das ocorrências:\n");
+    for (int i = 0; i < TAMANHO; i++) {
+        printf("%2d: ", i + MIN_VALOR);
+        DrawLine(ocorrencias[i] / 10); // Ajuste a escala do gráfico conforme necessário
+    }
+}
+
+int main(void) {
+    int ocorrencias[TAMANHO] = {0}; // Inicializa o array de ocorrências com zeros
+
+    srand(time(NULL)); // Inicializa a semente do gerador de números aleatórios
+
+    SimularLancamentos(ocorrencias);
+    ImprimirOcorrencias(ocorrencias);
+    ImprimirGrafico(ocorrencias);
+
+    return 0;
+}
+
+------------------------------------------------------------------------------------------
+
+
+
+lista 6
+
+
+8.1. Escreva um programa com funções.
+• A primeira função lê um nome.
+• A segunda função imprime o nome.
+
+#include <stdio.h>
+
+#define MAX_LENGTH 100
+
+void ReadName(char name[]) {
+    printf("Digite um nome: ");
+    fgets(name, MAX_LENGTH, stdin);
+}
+
+void PrintName(const char name[]) {
+    printf("Nome digitado: %s", name);
+}
+
+int main(void) {
+    char name[MAX_LENGTH];
+    
+    ReadName(name);
+    PrintName(name);
+    
+    return 0;
+}
+
+
+
+8.2. Leia 3 palavras separadamente em 3 strings diferentes. Crie uma 4a string que contenha as 3 palavras separadas por um
+espaço e imprima o conteúdo da 4a string.
+Digite a primeira palavra: Isto
+Digite a segunda palavra: é
+Digite a terceira palavra: isso
+Isto é isso
+
+
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LENGTH 100
+
+void ReadWord(char word[], const char *prompt) {
+    printf("%s", prompt);
+    fgets(word, MAX_LENGTH, stdin);
+    // Remove newline character if present
+    size_t length = strlen(word);
+    if (length > 0 && word[length - 1] == '\n') {
+        word[length - 1] = '\0';
+    }
+}
+
+int main(void) {
+    char word1[MAX_LENGTH];
+    char word2[MAX_LENGTH];
+    char word3[MAX_LENGTH];
+    char result[3 * MAX_LENGTH + 2]; // Enough space for all words and spaces
+
+    ReadWord(word1, "Digite a primeira palavra: ");
+    ReadWord(word2, "Digite a segunda palavra: ");
+    ReadWord(word3, "Digite a terceira palavra: ");
+
+    snprintf(result, sizeof(result), "%s %s %s", word1, word2, word3);
+
+    printf("%s\n", result);
+
+    return 0;
+}
+
+
+
+
+8.3. Escreva uma função com uma string como parâmetro e um inteiro 1 (verdadeiro) ou 0 (falso) como valor de retorno. A
+função deve testar se a string inserida é um palíndromo ou não. Um palíndromo é uma palavra que lê-se da mesma forma de
+trás para frente. (ex: noon, radar, rotor, racecar, ...) Escreva também uma função principal para testá-la.
+
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 100
+
+// Função que verifica se a string é um palíndromo
+int isPalindrome(const char str[]) {
+    int left = 0;
+    int right = strlen(str) - 1;
+    
+    // Verifica se os caracteres da esquerda e da direita são iguais
+    while (left < right) {
+        // Ignora caracteres não alfabéticos e converte para minúsculas
+        while (!isalpha(str[left]) && left < right) {
+            left++;
+        }
+        while (!isalpha(str[right]) && left < right) {
+            right--;
+        }
+
+        // Compara os caracteres
+        if (tolower(str[left]) != tolower(str[right])) {
+            return 0; // Não é um palíndromo
+        }
+
+        left++;
+        right--;
+    }
+    
+    return 1; // É um palíndromo
+}
+
+int main(void) {
+    char str[MAX_LENGTH];
+    
+    printf("Digite uma string: ");
+    fgets(str, MAX_LENGTH, stdin);
+    
+    // Remove o caractere de nova linha se presente
+    size_t length = strlen(str);
+    if (length > 0 && str[length - 1] == '\n') {
+        str[length - 1] = '\0';
+    }
+    
+    // Verifica se a string é um palíndromo
+    if (isPalindrome(str)) {
+        printf("A string é um palíndromo.\n");
+    } else {
+        printf("A string não é um palíndromo.\n");
+    }
+    
+    return 0;
+}
+
+
+8.4. Repita o exercício 8.3, mas desta vez para frases que sejam palíndromos. Exemplos: “Foi um carro ou um gato que eu vi?”
+ou “Eva, posso esfaquear morcegos em uma caverna?” (note que pontuação, capitalização e espaços são ignorados)
+
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 1000
+
+// Função que verifica se a frase é um palíndromo
+int isPalindrome(const char str[]) {
+    char filtered[MAX_LENGTH];
+    int left = 0, right = 0;
+    
+    // Filtra e normaliza a string, removendo caracteres não alfabéticos e convertendo para minúsculas
+    for (int i = 0; str[i]; i++) {
+        if (isalpha(str[i])) {
+            filtered[right++] = tolower(str[i]);
+        }
+    }
+    filtered[right] = '\0'; // Termina a string filtrada
+
+    right--; // Ajusta o índice para o último caractere
+    
+    // Verifica se os caracteres da esquerda e da direita são iguais
+    while (left < right) {
+        if (filtered[left] != filtered[right]) {
+            return 0; // Não é um palíndromo
+        }
+        left++;
+        right--;
+    }
+    
+    return 1; // É um palíndromo
+}
+
+int main(void) {
+    char str[MAX_LENGTH];
+    
+    printf("Digite uma frase: ");
+    fgets(str, MAX_LENGTH, stdin);
+    
+    // Remove o caractere de nova linha se presente
+    size_t length = strlen(str);
+    if (length > 0 && str[length - 1] == '\n') {
+        str[length - 1] = '\0';
+    }
+    
+    // Verifica se a frase é um palíndromo
+    if (isPalindrome(str)) {
+        printf("A frase é um palíndromo.\n");
+    } else {
+        printf("A frase não é um palíndromo.\n");
+    }
+    
+    return 0;
+}
+
+
+8.5. Repita o exercício 8.3, mas desta vez para frases que formem um palíndromo baseado em palavras. Exemplos: “Ele diz: é
+verdade, verdade é, diz ele”
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 1000
+#define MAX_WORDS 100
+
+// Função para remover caracteres não alfabéticos e separar palavras
+int parseWords(const char str[], char words[][MAX_LENGTH], int maxWords) {
+    int wordCount = 0;
+    int index = 0;
+
+    // Percorre cada caractere da string
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (isalpha(str[i])) {
+            // Adiciona caracteres alfabéticos às palavras
+            words[wordCount][index++] = tolower(str[i]);
+        } else if (str[i] == ' ' || str[i] == '\0') {
+            // Se encontrou um espaço, termina a palavra
+            if (index > 0) {
+                words[wordCount][index] = '\0';
+                wordCount++;
+                if (wordCount >= maxWords) break;
+                index = 0;
+            }
+        }
+    }
+    if (index > 0 && wordCount < maxWords) {
+        // Adiciona a última palavra
+        words[wordCount][index] = '\0';
+        wordCount++;
+    }
+
+    return wordCount;
+}
+
+// Função para verificar se a lista de palavras é um palíndromo
+int isPalindromeWords(char words[][MAX_LENGTH], int wordCount) {
+    int left = 0;
+    int right = wordCount - 1;
+
+    while (left < right) {
+        if (strcmp(words[left], words[right]) != 0) {
+            return 0; // Não é um palíndromo
+        }
+        left++;
+        right--;
+    }
+
+    return 1; // É um palíndromo
+}
+
+int main(void) {
+    char str[MAX_LENGTH];
+    char words[MAX_WORDS][MAX_LENGTH];
+    int wordCount;
+
+    printf("Digite uma frase: ");
+    fgets(str, MAX_LENGTH, stdin);
+
+    // Remove o caractere de nova linha se presente
+    size_t length = strlen(str);
+    if (length > 0 && str[length - 1] == '\n') {
+        str[length - 1] = '\0';
+    }
+
+    // Analisa a string para separar palavras
+    wordCount = parseWords(str, words, MAX_WORDS);
+
+    // Verifica se as palavras formam um palíndromo
+    if (isPalindromeWords(words, wordCount)) {
+        printf("A frase é um palíndromo baseado em palavras.\n");
+    } else {
+        printf("A frase não é um palíndromo baseado em palavras.\n");
+    }
+
+    return 0;
+}
+
+
+
+8.6. Escreva um programa que leia uma string e imprima cada palavra dessa string separadamente em uma nova linha.
+
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 1000
+
+int main(void) {
+    char str[MAX_LENGTH];
+    char *word;
+
+    printf("Digite uma string: ");
+    fgets(str, MAX_LENGTH, stdin);
+
+    size_t length = strlen(str);
+    if (length > 0 && str[length - 1] == '\n') {
+        str[length - 1] = '\0';
+    }
+
+    word = strtok(str, " ");
+    while (word != NULL) {
+        printf("%s\n", word);
+        word = strtok(NULL, " ");
+    }
+
+    return 0;
+}
+
+
+
+8.7. Escreva um programa que leia 2 nomes e os imprima em ordem alfabética.
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LENGTH 100
+
+int main(void) {
+    char name1[MAX_LENGTH];
+    char name2[MAX_LENGTH];
+    char temp[MAX_LENGTH];
+
+    printf("Digite o primeiro nome: ");
+    fgets(name1, MAX_LENGTH, stdin);
+
+    printf("Digite o segundo nome: ");
+    fgets(name2, MAX_LENGTH, stdin);
+
+    // Remove o caractere de nova linha se presente
+    size_t length1 = strlen(name1);
+    if (length1 > 0 && name1[length1 - 1] == '\n') {
+        name1[length1 - 1] = '\0';
+    }
+
+    size_t length2 = strlen(name2);
+    if (length2 > 0 && name2[length2 - 1] == '\n') {
+        name2[length2 - 1] = '\0';
+    }
+
+    // Ordena os nomes em ordem alfabética
+    if (strcmp(name1, name2) > 0) {
+        // Troca os nomes
+        strcpy(temp, name1);
+        strcpy(name1, name2);
+        strcpy(name2, temp);
+    }
+
+    // Imprime os nomes em ordem alfabética
+    printf("Nomes em ordem alfabética:\n");
+    printf("%s\n", name1);
+    printf("%s\n", name2);
+
+    return 0;
+}
+
+
+8.8. Repita o exercício 8.7, mas agora com 3 nomes.
+
+
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LENGTH 100
+#define NUM_NAMES 3
+
+void sortNames(char names[][MAX_LENGTH], int numNames) {
+    char temp[MAX_LENGTH];
+    for (int i = 0; i < numNames - 1; i++) {
+        for (int j = i + 1; j < numNames; j++) {
+            if (strcmp(names[i], names[j]) > 0) {
+                // Troca os nomes
+                strcpy(temp, names[i]);
+                strcpy(names[i], names[j]);
+                strcpy(names[j], temp);
+            }
+        }
+    }
+}
+
+int main(void) {
+    char names[NUM_NAMES][MAX_LENGTH];
+
+    // Leitura dos nomes
+    for (int i = 0; i < NUM_NAMES; i++) {
+        printf("Digite o nome %d: ", i + 1);
+        fgets(names[i], MAX_LENGTH, stdin);
+        
+        // Remove o caractere de nova linha se presente
+        size_t length = strlen(names[i]);
+        if (length > 0 && names[i][length - 1] == '\n') {
+            names[i][length - 1] = '\0';
+        }
+    }
+
+    // Ordena os nomes em ordem alfabética
+    sortNames(names, NUM_NAMES);
+
+    // Impressão dos nomes em ordem alfabética
+    printf("Nomes em ordem alfabética:\n");
+    for (int i = 0; i < NUM_NAMES; i++) {
+        printf("%s\n", names[i]);
+    }
+
+    return 0;
+}
+
+
+
+8.9. Repita o exercício 8.8, mas certifique-se de que também os seguintes nomes sejam classificados corretamente: O’Neil, Mac
+Alastair, Macbride, mac Caba, O Neal, Orman. Dica: use sua própria função de comparação de strings que primeiro copie as
+strings em maiúsculas e sem pontuação e espaços, e use strcmp nas cópias.
+
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 100
+#define NUM_NAMES 6
+
+void normalizeString(char *str, char *normalized) {
+    int j = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (isalpha(str[i])) {  // Verifica se o caractere é uma letra
+            normalized[j++] = toupper(str[i]);  // Converte para maiúscula
+        }
+    }
+    normalized[j] = '\0';  // Finaliza a string normalizada
+}
+
+void sortNames(char names[][MAX_LENGTH], int numNames) {
+    char temp[MAX_LENGTH];
+    char norm1[MAX_LENGTH], norm2[MAX_LENGTH];
+
+    for (int i = 0; i < numNames - 1; i++) {
+        for (int j = i + 1; j < numNames; j++) {
+            // Normaliza as strings para comparação
+            normalizeString(names[i], norm1);
+            normalizeString(names[j], norm2);
+
+            if (strcmp(norm1, norm2) > 0) {
+                // Troca os nomes
+                strcpy(temp, names[i]);
+                strcpy(names[i], names[j]);
+                strcpy(names[j], temp);
+            }
+        }
+    }
+}
+
+int main(void) {
+    char names[NUM_NAMES][MAX_LENGTH];
+
+    // Leitura dos nomes
+    for (int i = 0; i < NUM_NAMES; i++) {
+        printf("Digite o nome %d: ", i + 1);
+        fgets(names[i], MAX_LENGTH, stdin);
+        
+        // Remove o caractere de nova linha se presente
+        size_t length = strlen(names[i]);
+        if (length > 0 && names[i][length - 1] == '\n') {
+            names[i][length - 1] = '\0';
+        }
+    }
+
+    // Ordena os nomes em ordem alfabética
+    sortNames(names, NUM_NAMES);
+
+    // Impressão dos nomes em ordem alfabética
+    printf("Nomes em ordem alfabética:\n");
+    for (int i = 0; i < NUM_NAMES; i++) {
+        printf("%s\n", names[i]);
+    }
+
+    return 0;
+}
+
+
+
+----------------------------------------------------------------------------------------------
+
+LISTA 7 
+
+9.1. Escreva um programa com funções.
+
+• Na função principal, uma matriz 10 x 10 é definida.
+• A primeira função (FillMatrix) preenche a matriz conforme mostrado abaixo.
+• A segunda função (PrintMatrix) imprime o conteúdo da matriz.
+
+1 2 3 4 5 6 7 8 9 10
+2 4 6 8 10 12 14 16 18 20
+3 6 9 12 15 18 21 24 27 30
+4 8 12 16 20 24 28 32 36 40
+5 10 15 20 25 30 35 40 45 50
+6 12 18 24 30 36 42 48 54 60
+7 14 21 28 35 42 49 56 63 70
+8 16 24 32 40 48 56 64 72 80
+9 18 27 36 45 54 63 72 81 90
+10 20 30 40 50 60 70 80 90 100
+
+
+
+#include <stdio.h>
+
+#define SIZE 10
+
+void FillMatrix(int matrix[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            matrix[i][j] = (i + 1) * (j + 1);
+        }
+    }
+}
+
+void PrintMatrix(int matrix[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("%4d", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main(void) {
+    int matrix[SIZE][SIZE];
+
+    FillMatrix(matrix);
+    PrintMatrix(matrix);
+
+    return 0;
+}
+
+
+
+9.2. Escreva um programa com funções que leia 2 x 10 inteiros e os armazene nas duas primeiras linhas de uma matriz. Na
+terceira linha, deve ser armazenada a soma dos números correspondentes das duas primeiras linhas. Finalmente, a matriz
+completa é impressa. Use as funções ReadRow, Calculate e PrintMatrix.
+
+
+Entre 2 x 10 inteiros:
+
+1 2 3 4 5 6 7 8 9 10
+1 2 2 1 3 4 1 1 2 1
+
+Tabela:
+
+1 2 3 4 5 6 7 8 9 10
+1 2 2 1 3 4 1 1 2 1
+2 4 5 5 8 10 8 9 11 11
+
+#include <stdio.h>
+
+#define ROWS 3
+#define COLS 10
+
+void ReadRow(int row[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("Digite o número %d: ", i + 1);
+        scanf("%d", &row[i]);
+    }
+}
+
+void Calculate(int matrix[ROWS][COLS]) {
+    for (int j = 0; j < COLS; j++) {
+        matrix[2][j] = matrix[0][j] + matrix[1][j];
+    }
+}
+
+void PrintMatrix(int matrix[ROWS][COLS]) {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            printf("%4d", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main(void) {
+    int matrix[ROWS][COLS];
+
+    printf("Digite 10 números para a primeira linha:\n");
+    ReadRow(matrix[0], COLS);
+
+    printf("Digite 10 números para a segunda linha:\n");
+    ReadRow(matrix[1], COLS);
+
+    Calculate(matrix);
+
+    printf("Matriz completa:\n");
+    PrintMatrix(matrix);
+
+    return 0;
+}
+
+
+9.3. Escreva um programa com funções que lê uma lista de inteiros e imprime todos os inteiros dessa lista seguidos pelo
+número de ocorrências. A lista é terminada com o número 999, que não deve ser levado em consideração. A lista contém no
+máximo 10 números diferentes.
+
+Entre uma lista de inteiros (terminar com 999):
+-10 9 25 -10 100 25 25 3 0 25 100 3 999
+
+Os números diferentes nesta lista são:
+-10 2
+9 1
+25 4
+100 2
+3 2
+0 1
+
+
+
+
+Dica: use uma matriz 10 x 2. A primeira coluna contém os inteiros diferentes e a segunda coluna o número de ocorrências para
+o inteiro correspondente. Cada vez que um inteiro é lido, o programa verifica se esse número já está presente. Se já estiver
+presente, o número de ocorrências é incrementado; caso contrário, o número é adicionado à primeira linha livre com o número
+de ocorrências igual a 1 na segunda coluna.
+
+#include <stdio.h>
+
+#define MAX_UNIQUE 10
+
+void ReadList(int list[], int *size) {
+    int num;
+    *size = 0;
+    printf("Entre uma lista de inteiros (terminar com 999):\n");
+    while (1) {
+        scanf("%d", &num);
+        if (num == 999) break;
+        if (*size < MAX_UNIQUE) {
+            list[*size] = num;
+            (*size)++;
+        } else {
+            printf("Número máximo de elementos atingido.\n");
+            break;
+        }
+    }
+}
+
+void CountOccurrences(int list[], int size, int matrix[][2], int *uniqueCount) {
+    *uniqueCount = 0;
+    for (int i = 0; i < size; i++) {
+        int found = 0;
+        for (int j = 0; j < *uniqueCount; j++) {
+            if (matrix[j][0] == list[i]) {
+                matrix[j][1]++;
+                found = 1;
+                break;
+            }
+        }
+        if (!found) {
+            matrix[*uniqueCount][0] = list[i];
+            matrix[*uniqueCount][1] = 1;
+            (*uniqueCount)++;
+        }
+    }
+}
+
+void PrintOccurrences(int matrix[][2], int uniqueCount) {
+    printf("Os números diferentes nesta lista são:\n");
+    for (int i = 0; i < uniqueCount; i++) {
+        printf("%d %d\n", matrix[i][0], matrix[i][1]);
+    }
+}
+
+int main(void) {
+    int list[MAX_UNIQUE];
+    int matrix[MAX_UNIQUE][2];
+    int size, uniqueCount;
+
+    ReadList(list, &size);
+    CountOccurrences(list, size, matrix, &uniqueCount);
+    PrintOccurrences(matrix, uniqueCount);
+
+    return 0;
+}
+
+
+9.4. Escreva um programa que lê uma matriz quadrada, calcula sua transposta e imprime tanto a matriz original quanto a
+matriz transposta. A matriz não pode ser maior que 10 x 10. A dimensão desejada é lida no início do programa. A leitura da
+dimensão, leitura dos elementos da matriz, transposição da matriz e impressão da matriz são feitas em 4 funções diferentes.
+
+[a0,0 a0,1 a0,2 a1,0 a1,1 a1,2 a2,0 a2,1 a2,2]T = [a0,0 a1,0 a2,0 a0,1 a1,1 a2,1 a0,2 a1,2 a2,2]
+
+#include <stdio.h>
+
+#define MAX_SIZE 10
+
+void ReadDimension(int *dimension) {
+    printf("Digite a dimensão da matriz (máximo %d): ", MAX_SIZE);
+    scanf("%d", dimension);
+    while (*dimension <= 0 || *dimension > MAX_SIZE) {
+        printf("Dimensão inválida. Digite novamente (máximo %d): ", MAX_SIZE);
+        scanf("%d", dimension);
+    }
+}
+
+void ReadMatrix(int matrix[MAX_SIZE][MAX_SIZE], int dimension) {
+    printf("Digite os elementos da matriz %dx%d:\n", dimension, dimension);
+    for (int i = 0; i < dimension; i++) {
+        for (int j = 0; j < dimension; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+void TransposeMatrix(int matrix[MAX_SIZE][MAX_SIZE], int transposed[MAX_SIZE][MAX_SIZE], int dimension) {
+    for (int i = 0; i < dimension; i++) {
+        for (int j = 0; j < dimension; j++) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+}
+
+void PrintMatrix(int matrix[MAX_SIZE][MAX_SIZE], int dimension, const char *label) {
+    printf("%s:\n", label);
+    for (int i = 0; i < dimension; i++) {
+        for (int j = 0; j < dimension; j++) {
+            printf("%4d", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main(void) {
+    int dimension;
+    int matrix[MAX_SIZE][MAX_SIZE];
+    int transposed[MAX_SIZE][MAX_SIZE];
+
+    ReadDimension(&dimension);
+    ReadMatrix(matrix, dimension);
+    TransposeMatrix(matrix, transposed, dimension);
+    PrintMatrix(matrix, dimension, "Matriz original");
+    PrintMatrix(transposed, dimension, "Matriz transposta");
+
+    return 0;
+}
+
+
+
+9.5. Escreva um programa com funções que:
+•Declara uma matriz com dimensões 10 x 10 na função principal.
+•Usa uma função para ler os elementos da matriz.
+•Usa uma função para encontrar o elemento mínimo e máximo na matriz e trocá-los (dentro da matriz, usando uma variável
+auxiliar é permitido).
+•Usa uma função para imprimir a matriz após a troca.
+
+
+#include <stdio.h>
+
+#define SIZE 10
+
+// Função para ler os elementos da matriz
+void ReadMatrix(int matrix[SIZE][SIZE]) {
+    printf("Digite os elementos da matriz %dx%d:\n", SIZE, SIZE);
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+// Função para encontrar o elemento mínimo e máximo e trocá-los
+void SwapMinMax(int matrix[SIZE][SIZE]) {
+    int min = matrix[0][0];
+    int max = matrix[0][0];
+    int minPos[2] = {0, 0};
+    int maxPos[2] = {0, 0};
+
+    // Encontrar o valor mínimo e máximo e suas posições
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (matrix[i][j] < min) {
+                min = matrix[i][j];
+                minPos[0] = i;
+                minPos[1] = j;
+            }
+            if (matrix[i][j] > max) {
+                max = matrix[i][j];
+                maxPos[0] = i;
+                maxPos[1] = j;
+            }
+        }
+    }
+
+    // Trocar os valores mínimo e máximo
+    int temp = matrix[minPos[0]][minPos[1]];
+    matrix[minPos[0]][minPos[1]] = matrix[maxPos[0]][maxPos[1]];
+    matrix[maxPos[0]][maxPos[1]] = temp;
+}
+
+// Função para imprimir a matriz
+void PrintMatrix(int matrix[SIZE][SIZE]) {
+    printf("Matriz após a troca dos elementos mínimo e máximo:\n");
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("%4d", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main(void) {
+    int matrix[SIZE][SIZE];
+
+    ReadMatrix(matrix);
+    SwapMinMax(matrix);
+    PrintMatrix(matrix);
+
+    return 0;
+}
+
+
+
+9.6. Escreva um programa com uma função principal e 2 funções adicionais:
+•Declare um array de 10 strings na função principal.
+•A primeira função lê os 10 nomes e os armazena no array.
+•A segunda função imprime os nomes no array na tela.
+
+#include <stdio.h>
+
+#define MAX_NAMES 10
+#define MAX_LENGTH 100
+
+// Função para ler os 10 nomes
+void ReadNames(char names[MAX_NAMES][MAX_LENGTH]) {
+    printf("Digite 10 nomes:\n");
+    for (int i = 0; i < MAX_NAMES; i++) {
+        printf("Nome %d: ", i + 1);
+        fgets(names[i], MAX_LENGTH, stdin);
+
+        // Remove o caractere de nova linha se presente
+        size_t length = strlen(names[i]);
+        if (length > 0 && names[i][length - 1] == '\n') {
+            names[i][length - 1] = '\0';
+        }
+    }
+}
+
+// Função para imprimir os nomes
+void PrintNames(char names[MAX_NAMES][MAX_LENGTH]) {
+    printf("\nNomes digitados:\n");
+    for (int i = 0; i < MAX_NAMES; i++) {
+        printf("%s\n", names[i]);
+    }
+}
+
+int main(void) {
+    char names[MAX_NAMES][MAX_LENGTH];
+
+    // Chama as funções para ler e imprimir os nomes
+    ReadNames(names);
+    PrintNames(names);
+
+    return 0;
+}
+
+
+9.7. Escreva um programa com uma função principal e 2 funções adicionais:
+• Declare um array de 10 strings na função principal.
+• A primeira função lê os nomes até que a palavra “fim” ou o máximo de 10 nomes seja digitado e armazena-os no array.
+• A segunda função imprime os nomes no array na tela.
+
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_NAMES 10
+#define MAX_LENGTH 100
+
+// Função para ler os nomes até que "fim" ou o máximo de 10 nomes seja digitado
+void ReadNames(char names[MAX_NAMES][MAX_LENGTH], int *count) {
+    char input[MAX_LENGTH];
+    *count = 0;
+
+    printf("Digite até 10 nomes (digite 'fim' para parar):\n");
+    while (*count < MAX_NAMES) {
+        printf("Nome %d: ", *count + 1);
+        fgets(input, MAX_LENGTH, stdin);
+
+        // Remove o caractere de nova linha se presente
+        size_t length = strlen(input);
+        if (length > 0 && input[length - 1] == '\n') {
+            input[length - 1] = '\0';
+        }
+
+        // Verifica se o usuário digitou "fim"
+        if (strcmp(input, "fim") == 0) {
+            break;
+        }
+
+        // Armazena o nome no array
+        strcpy(names[*count], input);
+        (*count)++;
+    }
+}
+
+// Função para imprimir os nomes no array
+void PrintNames(char names[MAX_NAMES][MAX_LENGTH], int count) {
+    printf("\nNomes digitados:\n");
+    for (int i = 0; i < count; i++) {
+        printf("%s\n", names[i]);
+    }
+}
+
+int main(void) {
+    char names[MAX_NAMES][MAX_LENGTH];
+    int count;
+
+    // Chama a função para ler os nomes e armazena a quantidade de nomes lidos
+    ReadNames(names, &count);
+
+    // Chama a função para imprimir os nomes
+    PrintNames(names, count);
+
+    return 0;
+}
+
+
+
+9.8. Escreva um programa que lê uma letra, a converte para código Morse e imprime o resultado na tela. Você pode usar o
+seguinte array que contém os códigos Morse para as letras A, B, C, ... consecutivamente:
+const char *morse[] = {".-", "-...", "-.-.", "-..", ".", "..-.",
+"--.", "....", "..", ".---", "-.-", ".-..", "--",
+"-.", "---", ".--.", "--.-", ".-.", "...", "-",
+"..-", "...-", ".--", "-..-", "-.--", "--..", NULL};
+
+Entre uma letra: c Código Morse correspondente: -.-.
+
+#include <stdio.h>
+#include <ctype.h>
+
+const char *morse[] = {".-", "-...", "-.-.", "-..", ".", "..-.",
+"--.", "....", "..", ".---", "-.-", ".-..", "--",
+"-.", "---", ".--.", "--.-", ".-.", "...", "-",
+"..-", "...-", ".--", "-..-", "-.--", "--..", NULL};
+
+int main(void) {
+    char letter;
+    int index;
+
+    printf("Entre uma letra: ");
+    scanf(" %c", &letter);  // O espaço antes de %c é para ignorar qualquer caractere de nova linha remanescente
+
+    // Converte a letra para maiúscula
+    letter = toupper(letter);
+
+    // Verifica se a letra está no intervalo de A-Z
+    if (letter >= 'A' && letter <= 'Z') {
+        index = letter - 'A';  // Calcula o índice na tabela Morse
+
+        printf("Código Morse correspondente: %s\n", morse[index]);
+    } else {
+        printf("Entrada inválida. Por favor, entre uma letra de A a Z.\n");
+    }
+
+    return 0;
+}
+
+
+9.9. Escreva um programa que lê uma palavra e a imprime em código Morse na tela. Você pode usar a função do exercício
+anterior para escrever o código Morse letra por letra na tela.
+
+Entre uma palavra: bread Código Morse: -... .-. . .- -..
+
+#include <stdio.h>
+#include <ctype.h>
+
+const char *morse[] = {".-", "-...", "-.-.", "-..", ".", "..-.",
+"--.", "....", "..", ".---", "-.-", ".-..", "--",
+"-.", "---", ".--.", "--.-", ".-.", "...", "-",
+"..-", "...-", ".--", "-..-", "-.--", "--..", NULL};
+
+// Função para obter o código Morse de uma letra
+const char* getMorseCode(char letter) {
+    if (letter >= 'A' && letter <= 'Z') {
+        int index = letter - 'A';
+        return morse[index];
+    } else if (letter >= 'a' && letter <= 'z') {
+        int index = letter - 'a';
+        return morse[index];
+    } else {
+        return NULL; // Retorna NULL para caracteres não alfabéticos
+    }
+}
+
+int main(void) {
+    char word[100];
+    int i = 0;
+
+    printf("Entre uma palavra: ");
+    fgets(word, sizeof(word), stdin);
+
+    // Remove o caractere de nova linha se presente
+    size_t length = strlen(word);
+    if (length > 0 && word[length - 1] == '\n') {
+        word[length - 1] = '\0';
+    }
+
+    printf("Código Morse: ");
+    while (word[i] != '\0') {
+        char letter = toupper(word[i]);  // Converte a letra para maiúscula
+        const char* morseCode = getMorseCode(letter);
+        
+        if (morseCode != NULL) {
+            printf("%s ", morseCode);  // Imprime o código Morse
+        } else {
+            printf("? ");  // Imprime um caractere de interrogação para caracteres não alfabéticos
+        }
+        i++;
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+
+
+9.10. Escreva um programa para processar resultados de testes. Para garantir a qualidade do produto, uma empresa faz uma
+amostra de N peças acabadas (0 < N ≤ 20) e as submete a uma série de M testes (0 < M ≤ 10). Se uma peça falha em um ou
+mais testes, os dados são enviados ao computador no formato:
+
+PartNumber TestNumber Result
+
+onde 1 ≤ PartNumber ≤ N e 1 ≤ TestNumber ≤ M e Result = 1 para um erro pequeno = 3 para um erro fatal
+
+Uma peça é rejeitada se ocorrer pelo menos 1 erro fatal ou pelo menos 3 erros pequenos.
+
+O programa primeiro lê a quantidade de peças testadas (N) e o número de testes executados por peça (M). Então, os
+resultados dos testes para todas as peças que falharam são lidos até que 0 0 0 seja digitado.
+
+
+
+O programa imprime:
+• Uma tabela com uma linha para cada peça testada (inclusive as que não falharam em nenhum teste) contendo informações
+sobre os resultados dos testes e uma avaliação final.
+• Uma segunda tabela com uma linha por teste contendo o número de peças que não falharam, o número de peças que
+mostraram um erro pequeno e o número de peças que mostraram um erro fatal.
+
+O programa usa funções:Uma função ReadNumber que é usada duas vezes.
+• Uma para ler o número de peças testadas (N) e outra para ler o número de testes (M). Certifique-se de aceitar apenas
+números válidos.
+• Uma função para ler todos os dados dos testes.
+• Uma função para imprimir os resultados por peça.
+• Uma função para imprimir os resultados por teste.
+• Opcional: uma função para contar o número de ocorrências de um determinado valor em uma determinada coluna.
+
+Dica: Use uma matriz de 20 x 10 onde o canto superior esquerdo de N linhas e M colunas é utilizado. Coloque cada entrada no
+lugar certo nessa matriz. A primeira tabela a ser impressa é então apenas uma impressão da seção utilizada da matriz
+acompanhada de algum texto. A segunda tabela pode ser construída contando as ocorrências dos números 0, 1 e 3 em cada
+coluna da matriz.
+
+
+O diálogo na tela deve ser:
+
+Quantas peças você testou? 5
+Quantos testes você executou? 3
+Digite os resultados dos testes (termine com 0 0 0):
+4 1 1
+5 3 3
+3 2 3
+2 3 1
+3 3 1
+4 3 1
+4 2 1
+0 0 0
+Resultados por peça:
+número da peça testes avaliação
+
+
+
+------------------------------------
+1 0 0 0 aceito
+2 0 0 1 aceito
+3 0 3 1 rejeitado
+4 1 1 1 rejeitado
+5 0 0 3 rejeitado
+Resultados por teste:
+teste falhas
+nenhuma pequena fatal
+---------------------------
+1 4 1 0
+2 3 1 1
+3 1 3 1
+
+
+
+#include <stdio.h>
+
+#define MAX_PARTS 20
+#define MAX_TESTS 10
+
+void ReadNumber(const char* prompt, int* number, int min, int max) {
+    do {
+        printf("%s", prompt);
+        scanf("%d", number);
+    } while (*number < min || *number > max);
+}
+
+void ReadTestResults(int results[MAX_PARTS][MAX_TESTS], int numParts, int numTests) {
+    int partNumber, testNumber, result;
+    
+    printf("Digite os resultados dos testes (termine com 0 0 0):\n");
+    while (1) {
+        scanf("%d %d %d", &partNumber, &testNumber, &result);
+        if (partNumber == 0 && testNumber == 0 && result == 0) {
+            break;
+        }
+        if (partNumber >= 1 && partNumber <= numParts && testNumber >= 1 && testNumber <= numTests) {
+            results[partNumber - 1][testNumber - 1] = result;
+        }
+    }
+}
+
+void PrintResultsByPart(int results[MAX_PARTS][MAX_TESTS], int numParts, int numTests) {
+    printf("Resultados por peça:\n");
+    printf("número da peça testes avaliação\n");
+    printf("------------------------------------\n");
+
+    for (int i = 0; i < numParts; i++) {
+        int smallErrors = 0, fatalErrors = 0;
+        for (int j = 0; j < numTests; j++) {
+            if (results[i][j] == 1) {
+                smallErrors++;
+            } else if (results[i][j] == 3) {
+                fatalErrors++;
+            }
+        }
+        printf("%2d", i + 1);
+        for (int j = 0; j < numTests; j++) {
+            printf(" %d", results[i][j]);
+        }
+        if (fatalErrors > 0) {
+            printf(" rejeitado\n");
+        } else if (smallErrors >= 3) {
+            printf(" rejeitado\n");
+        } else {
+            printf(" aceito\n");
+        }
+    }
+}
+
+void PrintResultsByTest(int results[MAX_PARTS][MAX_TESTS], int numParts, int numTests) {
+    printf("Resultados por teste:\n");
+    printf("teste falhas\n");
+    printf("nenhuma pequena fatal\n");
+    printf("---------------------------\n");
+
+    for (int j = 0; j < numTests; j++) {
+        int noErrors = 0, smallErrors = 0, fatalErrors = 0;
+        for (int i = 0; i < numParts; i++) {
+            if (results[i][j] == 0) {
+                noErrors++;
+            } else if (results[i][j] == 1) {
+                smallErrors++;
+            } else if (results[i][j] == 3) {
+                fatalErrors++;
+            }
+        }
+        printf("%2d %2d %2d %2d\n", j + 1, noErrors, smallErrors, fatalErrors);
+    }
+}
+
+int main(void) {
+    int numParts, numTests;
+    int results[MAX_PARTS][MAX_TESTS] = {0};  // Inicializa a matriz com zeros
+
+    ReadNumber("Quantas peças você testou? ", &numParts, 1, MAX_PARTS);
+    ReadNumber("Quantos testes você executou? ", &numTests, 1, MAX_TESTS);
+    
+    ReadTestResults(results, numParts, numTests);
+    
+    PrintResultsByPart(results, numParts, numTests);
+    PrintResultsByTest(results, numParts, numTests);
+
+    return 0;
+}
+
+
+
+
+9.11. Escreva um programa que simule reservas de assentos em um teatro. Considere uma sala com 3 filas de 4 assentos cada.
+Defina uma matriz de 3 x 4 que represente a sala. Cada elemento da matriz deve ser grande o suficiente para conter uma string
+de no máximo 10 símbolos, resultando em uma matriz 2D de strings, que é uma matriz 3D de caracteres! O programa deve
+repetir-se até que o usuário insira 0 0 0 ou até que todos os assentos estejam ocupados.
+
+Em cada execução do programa, um nome, o número da fila e o número do assento devem ser lidos. Se o assento ainda estiver
+disponível, o nome é armazenado na linha e coluna correspondentes da matriz. Se o assento já estiver ocupado, o programa
+imprime “ocupado”. Após cada reserva de assento, todas as reservas devem ser impressas na tela.
+
+Use funções para escrever o programa:
+• declare a sala no programa principal
+• escreva uma função para imprimir as reservas atuais
+• escreva uma função para inicializar as reservas
+• escreva uma função para ler as entradas e verificar a disponibilidade do assento desejado
+
+
+Bem-vindo. O teatro tem 3 filas de 4 assentos cada. As reservas atuais são:
+. . . .
+. . . .
+. . . .
+
+Digite uma nova reserva de assento: Mary 1 2
+As reservas atuais são:
+. Mary . .
+. . . .
+. . . .
+
+Digite uma nova reserva de assento: Carl 3 3
+As reservas atuais são:
+. Mary . .
+. . . .
+. . Carl .
+
+
+Digite uma nova reserva de assento: fim
+As reservas finais de assentos são:
+. Mary . .
+. . . .
+. . Carl .
+
+
+------------------------------------------------------------------------------------------------------
+
+LISTA 8
+
+
+11.1. Escreva um programa sem usar arrays que:Declare 3 variáveis do tipo double na função principal.Leia todas as 3
+variáveis com uma chamada de função para a função ReadValues.Imprima os valores das 3 variáveis na função principal.
+
+
+#include <stdio.h>
+
+// Função para ler os valores das variáveis
+void ReadValues(double *a, double *b, double *c) {
+    printf("Digite o valor para a primeira variável: ");
+    scanf("%lf", a);
+
+    printf("Digite o valor para a segunda variável: ");
+    scanf("%lf", b);
+
+    printf("Digite o valor para a terceira variável: ");
+    scanf("%lf", c);
+}
+
+int main(void) {
+    double var1, var2, var3;
+
+    // Chama a função para ler os valores
+    ReadValues(&var1, &var2, &var3);
+
+    // Imprime os valores das variáveis
+    printf("Os valores digitados são:\n");
+    printf("Primeira variável: %.2f\n", var1);
+    printf("Segunda variável: %.2f\n", var2);
+    printf("Terceira variável: %.2f\n", var3);
+
+    return 0;
+}
+
+
+
+11.2Escreva um programa para trocar dois números. O primeiro número está armazenado na variável number1 e o segundo
+na variável number2. Após a troca, a variável number1 contém o segundo número e number2 contém o primeiro número.
+Use funções: Read, Swap, Print. Não use arrays!
+
+Digite 2 números: 5 10O
+valor da primeira variável é 5, o valor da segunda variável é 10.
+Após a troca, a variável 1 contém 10 e a variável 2 contém 5.
+
+
+#include <stdio.h>
+
+// Função para ler dois números
+void Read(double *num1, double *num2) {
+    printf("Digite 2 números: ");
+    scanf("%lf %lf", num1, num2);
+}
+
+// Função para trocar os valores de duas variáveis
+void Swap(double *num1, double *num2) {
+    double temp = *num1;
+    *num1 = *num2;
+    *num2 = temp;
+}
+
+// Função para imprimir os valores das variáveis
+void Print(double num1, double num2) {
+    printf("Valor da primeira variável é %.2f, o valor da segunda variável é %.2f.\n", num1, num2);
+    printf("Após a troca, a variável 1 contém %.2f e a variável 2 contém %.2f.\n", num1, num2);
+}
+
+int main(void) {
+    double number1, number2;
+
+    // Lê os números
+    Read(&number1, &number2);
+
+    // Imprime os números antes da troca
+    Print(number1, number2);
+
+    // Troca os números
+    Swap(&number1, &number2);
+
+    // Imprime os números após a troca
+    Print(number1, number2);
+
+    return 0;
+}
+
+
+
+11.3
+Escreva um programa que converte um número de segundos em horas, minutos e segundos. A leitura do número de
+segundos e a impressão do resultado é feita na função principal. Os cálculos são feitos em uma função separada. Não use
+arrays!
+Digite um tempo em segundos: 10000
+O tempo de 10000 segundos equivale a 2 horas, 46 minutos e 40 segundos.
+
+#include <stdio.h>
+
+// Função para converter segundos em horas, minutos e segundos
+void ConvertTime(int total_seconds, int *hours, int *minutes, int *seconds) {
+    *hours = total_seconds / 3600;            // Calcula as horas
+    total_seconds %= 3600;                    // Resto dos segundos após calcular as horas
+    *minutes = total_seconds / 60;            // Calcula os minutos
+    *seconds = total_seconds % 60;            // Calcula os segundos restantes
+}
+
+int main(void) {
+    int total_seconds;
+    int hours, minutes, seconds;
+
+    // Leitura do número de segundos
+    printf("Digite um tempo em segundos: ");
+    scanf("%d", &total_seconds);
+
+    // Converte o tempo em horas, minutos e segundos
+    ConvertTime(total_seconds, &hours, &minutes, &seconds);
+
+    // Imprime o resultado
+    printf("O tempo de %d segundos equivale a %d horas, %d minutos e %d segundos.\n",
+           total_seconds, hours, minutes, seconds);
+
+    return 0;
+}
+
+
+
+
+11.4
+Escreva um programa que lê um valor em dinheiro (≤ € 200) e determina o número mínimo de notas e moedas necessárias
+para obter esse valor. Escreva uma função para os cálculos e uma função para imprimir na tela. Não use arrays!
+
+Digite um valor de dinheiro: 195
+195 euros podem ser obtidos com:
+1 nota de cem
+1 nota de cinquenta
+2 notas de vinte
+1 nota de cinco
+0 moedas de um
+
+#include <stdio.h>
+
+// Função para calcular o número de notas e moedas necessárias
+void CalculateDenominations(int value, int *num_hundred, int *num_fifty, int *num_twenty, int *num_ten, int *num_five, int *num_one) {
+    *num_hundred = value / 100;
+    value %= 100;
+
+    *num_fifty = value / 50;
+    value %= 50;
+
+    *num_twenty = value / 20;
+    value %= 20;
+
+    *num_ten = value / 10;
+    value %= 10;
+
+    *num_five = value / 5;
+    value %= 5;
+
+    *num_one = value / 1;
+}
+
+// Função para imprimir o número de notas e moedas
+void PrintDenominations(int num_hundred, int num_fifty, int num_twenty, int num_ten, int num_five, int num_one) {
+    printf("Pode ser obtido com:\n");
+    if (num_hundred > 0) printf("%d nota(s) de cem\n", num_hundred);
+    if (num_fifty > 0) printf("%d nota(s) de cinquenta\n", num_fifty);
+    if (num_twenty > 0) printf("%d nota(s) de vinte\n", num_twenty);
+    if (num_ten > 0) printf("%d nota(s) de dez\n", num_ten);
+    if (num_five > 0) printf("%d nota(s) de cinco\n", num_five);
+    if (num_one > 0) printf("%d moeda(s) de um\n", num_one);
+}
+
+int main(void) {
+    int value;
+    int num_hundred, num_fifty, num_twenty, num_ten, num_five, num_one;
+
+    // Leitura do valor em dinheiro
+    printf("Digite um valor de dinheiro: ");
+    scanf("%d", &value);
+
+    // Calcula o número de notas e moedas necessárias
+    CalculateDenominations(value, &num_hundred, &num_fifty, &num_twenty, &num_ten, &num_five, &num_one);
+
+    // Imprime o resultado
+    PrintDenominations(num_hundred, num_fifty, num_twenty, num_ten, num_five, num_one);
+
+    return 0;
+}
+
+
+
+11.5Escreva um programa que lê as temperaturas de uma semana inteira, encontra as temperaturas mínimas e máximas e as
+imprime junto com todas as temperaturas inseridas.
+
+Imprima as temperaturas da seguinte forma:
+
+Seg Ter Qua Qui Sex Sab Dom
+Dia 5.0 5.5 7.0 6.0 7.5 8.0 8.5
+Noite -1.5 -0.5 0.0 -1.0 0.0 1.0 1.5
+Imprima também as temperaturas mínimas e máximas do dia e da noite junto com o dia em que a temperatura foi medida:
+Mín: Noite: Seg = -1.5
+Dia: Seg = 5.0
+Máx: Noite: Dom = 1.5
+Dia: Dom = 8.5
+
+As temperaturas são armazenadas em uma matriz 2D com a linha 0 para as temperaturas medidas durante o dia e a linha 1
+para as temperaturas medidas durante a noite. Os nomes dos dias são armazenados em uma matriz separada (você não pode
+armazenar números e texto na mesma matriz).
+
+Use 3 funções: Read, Print e Calculate. Passe os índices das temperaturas mínimas e máximas para o dia e para a noite por
+referência.
+
+#include <stdio.h>
+
+#define DAYS 7
+
+// Função para ler as temperaturas
+void ReadTemperatures(double temperatures[2][DAYS]) {
+    const char *days[DAYS] = {"Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"};
+    
+    printf("Digite as temperaturas para os seguintes dias:\n");
+    for (int i = 0; i < DAYS; i++) {
+        printf("Dia %s - Temperatura do dia: ", days[i]);
+        scanf("%lf", &temperatures[0][i]);
+        printf("Dia %s - Temperatura da noite: ", days[i]);
+        scanf("%lf", &temperatures[1][i]);
+    }
+}
+
+// Função para imprimir as temperaturas
+void PrintTemperatures(double temperatures[2][DAYS]) {
+    const char *days[DAYS] = {"Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"};
+    
+    // Imprimir os cabeçalhos
+    printf("         ");
+    for (int i = 0; i < DAYS; i++) {
+        printf("%s ", days[i]);
+    }
+    printf("\n");
+
+    // Imprimir as temperaturas do dia
+    printf("Dia      ");
+    for (int i = 0; i < DAYS; i++) {
+        printf("%.1f ", temperatures[0][i]);
+    }
+    printf("\n");
+
+    // Imprimir as temperaturas da noite
+    printf("Noite    ");
+    for (int i = 0; i < DAYS; i++) {
+        printf("%.1f ", temperatures[1][i]);
+    }
+    printf("\n");
+}
+
+// Função para calcular as temperaturas mínimas e máximas
+void CalculateMinMax(double temperatures[2][DAYS], int *minDayIndex, int *maxDayIndex, int *minNightIndex, int *maxNightIndex) {
+    double minDay = temperatures[0][0];
+    double maxDay = temperatures[0][0];
+    double minNight = temperatures[1][0];
+    double maxNight = temperatures[1][0];
+
+    *minDayIndex = 0;
+    *maxDayIndex = 0;
+    *minNightIndex = 0;
+    *maxNightIndex = 0;
+
+    for (int i = 1; i < DAYS; i++) {
+        if (temperatures[0][i] < minDay) {
+            minDay = temperatures[0][i];
+            *minDayIndex = i;
+        }
+        if (temperatures[0][i] > maxDay) {
+            maxDay = temperatures[0][i];
+            *maxDayIndex = i;
+        }
+        if (temperatures[1][i] < minNight) {
+            minNight = temperatures[1][i];
+            *minNightIndex = i;
+        }
+        if (temperatures[1][i] > maxNight) {
+            maxNight = temperatures[1][i];
+            *maxNightIndex = i;
+        }
+    }
+
+    // Imprimir os valores mínimos e máximos
+    const char *days[DAYS] = {"Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"};
+    printf("Mín: Noite: %s = %.1f\n", days[*minNightIndex], temperatures[1][*minNightIndex]);
+    printf("Dia: %s = %.1f\n", days[*minDayIndex], temperatures[0][*minDayIndex]);
+    printf("Máx: Noite: %s = %.1f\n", days[*maxNightIndex], temperatures[1][*maxNightIndex]);
+    printf("Dia: %s = %.1f\n", days[*maxDayIndex], temperatures[0][*maxDayIndex]);
+}
+
+int main(void) {
+    double temperatures[2][DAYS];
+    int minDayIndex, maxDayIndex, minNightIndex, maxNightIndex;
+
+    ReadTemperatures(temperatures);
+    PrintTemperatures(temperatures);
+    CalculateMinMax(temperatures, &minDayIndex, &maxDayIndex, &minNightIndex, &maxNightIndex);
+
+    return 0;
+}
+
+
+
+
+9.4. Escreva um programa que lê uma matriz quadrada, calcula sua transposta e imprime tanto a matriz original quanto a
+matriz transposta. A matriz não pode ser maior que 10 x 10. A dimensão desejada é lida no início do programa. A leitura da
+dimensão, leitura dos elementos da matriz, transposição da matriz e impressão da matriz são feitas em 4 funções diferentes.
+
+[a0,0 a0,1 a0,2 a1,0 a1,1 a1,2 a2,0 a2,1 a2,2]T = [a0,0 a1,0 a2,0 a0,1 a1,1 a2,1 a0,2 a1,2 a2,2]
+
+#include <stdio.h>
+
+#define MAX_SIZE 10
+
+// Função para ler a dimensão da matriz
+void ReadDimension(int *dimension) {
+    printf("Digite a dimensão da matriz (máx 10): ");
+    scanf("%d", dimension);
+
+    if (*dimension <= 0 || *dimension > MAX_SIZE) {
+        printf("Dimensão inválida. Usando a dimensão padrão de 3.\n");
+        *dimension = 3;
+    }
+}
+
+// Função para ler os elementos da matriz
+void ReadMatrix(int matrix[MAX_SIZE][MAX_SIZE], int dimension) {
+    printf("Digite os elementos da matriz (%d x %d):\n", dimension, dimension);
+    for (int i = 0; i < dimension; i++) {
+        for (int j = 0; j < dimension; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+// Função para calcular a matriz transposta
+void TransposeMatrix(int matrix[MAX_SIZE][MAX_SIZE], int transposed[MAX_SIZE][MAX_SIZE], int dimension) {
+    for (int i = 0; i < dimension; i++) {
+        for (int j = 0; j < dimension; j++) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+}
+
+// Função para imprimir uma matriz
+void PrintMatrix(int matrix[MAX_SIZE][MAX_SIZE], int dimension, const char *title) {
+    printf("%s:\n", title);
+    for (int i = 0; i < dimension; i++) {
+        for (int j = 0; j < dimension; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main(void) {
+    int dimension;
+    int matrix[MAX_SIZE][MAX_SIZE];
+    int transposed[MAX_SIZE][MAX_SIZE];
+
+    ReadDimension(&dimension);
+    ReadMatrix(matrix, dimension);
+    TransposeMatrix(matrix, transposed, dimension);
+    PrintMatrix(matrix, dimension, "Matriz Original");
+    PrintMatrix(transposed, dimension, "Matriz Transposta");
+
+    return 0;
+}
+
+
+9.5. Escreva um programa com funções que:
+•Declara uma matriz com dimensões 10 x 10 na função principal.
+•Usa uma função para ler os elementos da matriz.
+•Usa uma função para encontrar o elemento mínimo e máximo na matriz e trocá-los (dentro da matriz, usando uma variável
+auxiliar é permitido).
+•Usa uma função para imprimir a matriz após a troca.
+
+#include <stdio.h>
+
+#define MAX_SIZE 10
+
+// Função para ler os elementos da matriz
+void ReadMatrix(int matrix[MAX_SIZE][MAX_SIZE], int size) {
+    printf("Digite os elementos da matriz (%d x %d):\n", size, size);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+// Função para encontrar e trocar o elemento mínimo e máximo na matriz
+void SwapMinMax(int matrix[MAX_SIZE][MAX_SIZE], int size) {
+    int min = matrix[0][0], max = matrix[0][0];
+    int minRow = 0, minCol = 0, maxRow = 0, maxCol = 0;
+    
+    // Encontrar o mínimo e máximo e suas posições
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (matrix[i][j] < min) {
+                min = matrix[i][j];
+                minRow = i;
+                minCol = j;
+            }
+            if (matrix[i][j] > max) {
+                max = matrix[i][j];
+                maxRow = i;
+                maxCol = j;
+            }
+        }
+    }
+    
+    // Trocar os elementos mínimo e máximo
+    int temp = matrix[minRow][minCol];
+    matrix[minRow][minCol] = matrix[maxRow][maxCol];
+    matrix[maxRow][maxCol] = temp;
+}
+
+// Função para imprimir a matriz
+void PrintMatrix(int matrix[MAX_SIZE][MAX_SIZE], int size) {
+    printf("Matriz:\n");
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main(void) {
+    int size;
+    int matrix[MAX_SIZE][MAX_SIZE];
+
+    // Lê a dimensão da matriz
+    printf("Digite a dimensão da matriz (máx 10): ");
+    scanf("%d", &size);
+
+    if (size <= 0 || size > MAX_SIZE) {
+        printf("Dimensão inválida. Usando a dimensão padrão de 3.\n");
+        size = 3;
+    }
+
+    ReadMatrix(matrix, size);
+    SwapMinMax(matrix, size);
+    PrintMatrix(matrix, size);
+
+    return 0;
+}
+
+
+
+9.6. Escreva um programa com uma função principal e 2 funções adicionais:
+•Declare um array de 10 strings na função principal.
+•A primeira função lê os 10 nomes e os armazena no array.
+•A segunda função imprime os nomes no array na tela.
+
+
+Escreva a função print_string para finalizar o próximo programa. A função print_string imprime uma string, recebida como
+argumento, caractere por caractere usando a função putchar().
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAXSTRING 100
+void print_string(char *c) {
+while (*c) {
+putchar(*c++); } }
+
+int main(void) {
+char s1[MAXSTRING], s2[MAXSTRING];
+strcpy(s1, "Mary, Mary, quite contrary.\n");
+strcpy(s2, "How does your garden grow?\n");
+print_string(s1);
+print_string(s2);
+strcat(s1, s2);
+print_string(s1);
+return 0; }
+
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAXSTRING 100
+
+// Função que imprime uma string caractere por caractere usando putchar()
+void print_string(char *c) {
+    while (*c) {
+        putchar(*c++); 
+    }
+}
+
+int main(void) {
+    char s1[MAXSTRING], s2[MAXSTRING];
+
+    // Copia as strings para s1 e s2
+    strcpy(s1, "Mary, Mary, quite contrary.\n");
+    strcpy(s2, "How does your garden grow?\n");
+
+    // Imprime as strings s1 e s2
+    print_string(s1);
+    print_string(s2);
+
+    // Concatena s2 em s1
+    strcat(s1, s2);
+
+    // Imprime a string concatenada s1
+    print_string(s1);
+
+    return 0;
+}
+
+
+
+
+11.7Escreva um programa que lê uma palavra e a converte da seguinte forma:
+• Os dois primeiros caracteres são impressos. Ex: “qwerty” => imprime qw
+• O primeiro e o segundo caractere são comparados. O maior é impresso. Ex: q < w => imprime w como o terceiro caractere
+• Agora, compare o segundo e o terceiro caractere e novamente imprima o maior. Ex: w > e => imprime w como o quarto
+caractere
+• Repita até que a palavra esteja terminada
+• Após a conversão, o programa imprime também a letra alfabeticamente menor e a maior.
+A função main contém:
+• Perguntar “novamente?” e ler um 0 ou 1 como resposta
+• Imprimir a maior e a menor letra
+A função Read cuida de:
+• Ler uma palavra. Certifique-se de que apenas palavras de 2 ou mais caracteres podem ser inseridas.
+A função Print cuida de:
+• Determinar a menor e a maior letra e passá-las para o programa principal com ponteiros
+• Converter e imprimir a palavra
+Digite uma palavra ou uma série de letras:
+Qwerty
+Qwwwrty
+maior = y e menor = enovamente? (1=s, 0=n): 1
+Digite uma palavra ou uma série de letras: beverage beevvrrggmaior = v e menor = bnovamente? (1=s, 0=n): 0
+
+
+O programa imprime:
+• Uma tabela com uma linha para cada peça testada (inclusive as que não falharam em nenhum teste) contendo informações
+sobre os resultados dos testes e uma avaliação final.
+• Uma segunda tabela com uma linha por teste contendo o número de peças que não falharam, o número de peças que
+mostraram um erro pequeno e o número de peças que mostraram um erro fatal.
+
+O programa usa funções:Uma função ReadNumber que é usada duas vezes.
+• Uma para ler o número de peças testadas (N) e outra para ler o número de testes (M). Certifique-se de aceitar apenas
+números válidos.
+• Uma função para ler todos os dados dos testes.
+• Uma função para imprimir os resultados por peça.
+• Uma função para imprimir os resultados por teste.
+• Opcional: uma função para contar o número de ocorrências de um determinado valor em uma determinada coluna.
+
+Dica: Use uma matriz de 20 x 10 onde o canto superior esquerdo de N linhas e M colunas é utilizado. Coloque cada entrada no
+lugar certo nessa matriz. A primeira tabela a ser impressa é então apenas uma impressão da seção utilizada da matriz
+acompanhada de algum texto. A segunda tabela pode ser construída contando as ocorrências dos números 0, 1 e 3 em cada
+coluna da matriz.
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+// Função para ler uma palavra garantindo que tenha pelo menos 2 caracteres
+void Read(char *word, int max_length) {
+    do {
+        printf("Digite uma palavra ou uma série de letras: ");
+        fgets(word, max_length, stdin);
+        // Remove o caractere de nova linha, se presente
+        size_t len = strlen(word);
+        if (len > 0 && word[len - 1] == '\n') {
+            word[len - 1] = '\0';
+        }
+    } while (strlen(word) < 2);
+}
+
+// Função para converter e imprimir a palavra e determinar as letras min e max
+void Print(const char *word, char *min_letter, char *max_letter) {
+    int i;
+    char result[100] = {0};  // Array para armazenar o resultado da conversão
+
+    // Inicializa min_letter e max_letter
+    *min_letter = word[0];
+    *max_letter = word[0];
+
+    // Imprime os dois primeiros caracteres
+    putchar(word[0]);
+    putchar(word[1]);
+    strcat(result, (char[]){word[0], word[1], '\0'});  // Adiciona os dois primeiros caracteres ao resultado
+
+    // Converte o restante da palavra
+    for (i = 1; i < strlen(word) - 1; i++) {
+        if (word[i] > word[i + 1]) {
+            putchar(word[i]);
+            strcat(result, (char[]){word[i], '\0'});  // Adiciona o caractere ao resultado
+        } else {
+            putchar(word[i + 1]);
+            strcat(result, (char[]){word[i + 1], '\0'});  // Adiciona o caractere ao resultado
+        }
+
+        // Atualiza min_letter e max_letter
+        if (word[i + 1] < *min_letter) {
+            *min_letter = word[i + 1];
+        }
+        if (word[i + 1] > *max_letter) {
+            *max_letter = word[i + 1];
+        }
+    }
+
+    putchar('\n');  // Nova linha após a conversão
+    printf("Resultado da conversão: %s\n", result);
+}
+
+int main(void) {
+    char word[100];
+    char min_letter, max_letter;
+    int again;
+
+    do {
+        Read(word, sizeof(word));
+        Print(word, &min_letter, &max_letter);
+
+        // Imprime a letra min e max
+        printf("Maior = %c e menor = %c\n", max_letter, min_letter);
+
+        // Pergunta se deseja processar outra palavra
+        printf("Novamente? (1=s, 0=n): ");
+        scanf("%d", &again);
+        while (getchar() != '\n');  // Limpa o buffer de entrada
+    } while (again == 1);
+
+    return 0;
+}
+
+
+
+11.8Escreva um programa que imprime as tabelas de multiplicação de um número inteiro inserido pelo usuário até um limite
+que também é inserido pelo usuário. Continue repetindo o programa até que 0 0 seja inserido.
+
+Use as seguintes funções:
+• Read: lê 2 inteiros (número e limite)
+• CalcPrint: imprime a tabela de multiplicação e calcula a soma dos números ímpares e pares
+• main: chama as funções Read e CalcPrint e imprime a soma dos números ímpares e pares
+
+Não use arrays!
+
+Digite o número que você deseja usar para a tabela de multiplicação:5
+Digite o limite:
+32
+5
+10
+15
+20
+25
+
+
+A soma dos números pares é 60
+A soma dos números ímpares é 45
+Digite o número que você deseja usar para a tabela de multiplicação:
+0
+Digite o limite:
+0
+Obrigado!
+
+
+#include <stdio.h>
+
+// Função para ler o número e o limite
+void Read(int *num, int *limit) {
+    printf("Digite o número que você deseja usar para a tabela de multiplicação: ");
+    scanf("%d", num);
+    printf("Digite o limite: ");
+    scanf("%d", limit);
+}
+
+// Função para imprimir a tabela de multiplicação e calcular as somas dos números pares e ímpares
+void CalcPrint(int num, int limit, int *sum_even, int *sum_odd) {
+    int i;
+    *sum_even = 0;
+    *sum_odd = 0;
+
+    for (i = 1; i <= limit; i++) {
+        int result = num * i;
+        printf("%d\n", result);
+        
+        if (result % 2 == 0) {
+            *sum_even += result;
+        } else {
+            *sum_odd += result;
+        }
+    }
+}
+
+int main(void) {
+    int num, limit;
+    int sum_even, sum_odd;
+
+    while (1) {
+        Read(&num, &limit);
+
+        if (num == 0 && limit == 0) {
+            printf("Obrigado!\n");
+            break;
+        }
+
+        CalcPrint(num, limit, &sum_even, &sum_odd);
+
+        printf("A soma dos números pares é %d\n", sum_even);
+        printf("A soma dos números ímpares é %d\n", sum_odd);
+    }
+
+    return 0;
+}
+
+
+
+11.9Escreva um programa que realiza um cálculo matemático em 2 números inseridos pelo usuário.
+
+Os números são lidos na função Read (não use arrays!).
+
+A função principal:
+• Chama a função Read
+• Pergunta ao usuário para escolher um operador. Faça isso com um menu. Certifique-se de que apenas entradas válidas
+sejam aceitas.
+• Usa um ponteiro de função que aponta para a função correta (use uma declaração switch para selecionar a função correta)
+• Imprime o resultado
+
+Digite 2 números inteiros: 10 5
+Escolha um operador:
+0 adição
+1 subtração
+2 multiplicação
+3 divisão
+4
+
+
+Escolha um operador:
+0 adição
+1 subtração
+2 multiplicação
+3 divisão
+0
+O resultado desta operação é: 15
+
+
+#include <stdio.h>
+
+// Funções para operações matemáticas
+int add(int a, int b) {
+    return a + b;
+}
+
+int subtract(int a, int b) {
+    return a - b;
+}
+
+int multiply(int a, int b) {
+    return a * b;
+}
+
+int divide(int a, int b) {
+    if (b != 0) {
+        return a / b;
+    } else {
+        printf("Erro: Divisão por zero.\n");
+        return 0;
+    }
+}
+
+// Função para ler dois números
+void Read(int *a, int *b) {
+    printf("Digite 2 números inteiros: ");
+    scanf("%d %d", a, b);
+}
+
+int main(void) {
+    int num1, num2;
+    int choice;
+    int (*operation)(int, int) = NULL;  // Ponteiro para função
+
+    // Lê os números
+    Read(&num1, &num2);
+
+    // Exibe menu e lê a escolha do usuário
+    printf("Escolha um operador:\n");
+    printf("0 adição\n");
+    printf("1 subtração\n");
+    printf("2 multiplicação\n");
+    printf("3 divisão\n");
+    printf("4 sair\n");
+    scanf("%d", &choice);
+
+    // Seleciona a função com base na escolha do usuário
+    switch (choice) {
+        case 0:
+            operation = add;
+            break;
+        case 1:
+            operation = subtract;
+            break;
+        case 2:
+            operation = multiply;
+            break;
+        case 3:
+            operation = divide;
+            break;
+        case 4:
+            printf("Saindo...\n");
+            return 0;
+        default:
+            printf("Escolha inválida.\n");
+            return 1;
+    }
+
+    // Executa a operação selecionada e imprime o resultado
+    if (operation != NULL) {
+        int result = operation(num1, num2);
+        printf("O resultado desta operação é: %d\n", result);
+    }
+
+    return 0;
+}
+
+
+
+11.10
+Repita o exercício anterior, mas desta vez:
+• Faça uma matriz de ponteiros para funções onde o ponteiro para a função armazenado no índice 0 aponta para adição, no
+índice 1 para subtração, etc.
+• Escreva uma função separada Choose que retorna a escolha do usuário para o programa principal
+• Certifique-se de que o inteiro retornado pela função Choose seja igual ao índice correspondente ao ponteiro da função
+correta.
+
+#include <stdio.h>
+
+// Funções para operações matemáticas
+int add(int a, int b) {
+    return a + b;
+}
+
+int subtract(int a, int b) {
+    return a - b;
+}
+
+int multiply(int a, int b) {
+    return a * b;
+}
+
+int divide(int a, int b) {
+    if (b != 0) {
+        return a / b;
+    } else {
+        printf("Erro: Divisão por zero.\n");
+        return 0;
+    }
+}
+
+// Função para ler dois números
+void Read(int *a, int *b) {
+    printf("Digite 2 números inteiros: ");
+    scanf("%d %d", a, b);
+}
+
+// Função para escolher a operação
+int Choose() {
+    int choice;
+    printf("Escolha um operador:\n");
+    printf("0 adição\n");
+    printf("1 subtração\n");
+    printf("2 multiplicação\n");
+    printf("3 divisão\n");
+    printf("4 sair\n");
+    scanf("%d", &choice);
+    return choice;
+}
+
+int main(void) {
+    int num1, num2;
+    int choice;
+    
+    // Matriz de ponteiros para funções
+    int (*operations[4])(int, int) = {add, subtract, multiply, divide};
+
+    // Lê os números
+    Read(&num1, &num2);
+
+    // Escolhe a operação
+    choice = Choose();
+
+    if (choice >= 0 && choice <= 3) {
+        // Executa a operação selecionada e imprime o resultado
+        int result = operations[choice](num1, num2);
+        printf("O resultado desta operação é: %d\n", result);
+    } else if (choice == 4) {
+        printf("Saindo...\n");
+    } else {
+        printf("Escolha inválida.\n");
+    }
+
+    return 0;
+}
+GIT
