@@ -76,8 +76,47 @@ void loop() {
 }
 ---------------------------------------------------------------------------------
 
+ponteci0metro e 9 leds
 
+// Definindo os pinos para os LEDs e o potenciômetro
+const int pinLEDs[] = {2, 3, 4, 5, 6, 7, 8, 9, 10};  // Pinos para os LEDs
+const int pinPot = A0;   // Pino analógico para o potenciômetro
 
+void setup() {
+  // Configurando os pinos dos LEDs como saída
+  for (int i = 0; i < 9; i++) {
+    pinMode(pinLEDs[i], OUTPUT);
+  }
+
+  // Inicializando a comunicação serial para depuração
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Lendo o valor do potenciômetro (0 a 1023)
+  int potValue = analogRead(pinPot);
+
+  // Dividindo o valor do potenciômetro para determinar quantos LEDs acender (0 a 9 LEDs)
+  int numLEDsOn = map(potValue, 0, 1023, 0, 9);  // Mapeia o valor do potenciômetro para 0 a 9 LEDs
+
+  // Ajustando os LEDs com base no valor lido do potenciômetro
+  for (int i = 0; i < 9; i++) {
+    if (i < numLEDsOn) {
+      analogWrite(pinLEDs[i], 255);  // Acende o LED com brilho máximo
+    } else {
+      analogWrite(pinLEDs[i], 0);    // Desliga o LED
+    }
+  }
+
+  // Imprimindo o valor do potenciômetro e o número de LEDs acesos
+  Serial.print("Pot Value: ");
+  Serial.print(potValue);
+  Serial.print(" - LEDs On: ");
+  Serial.println(numLEDsOn);
+
+  // Atraso para suavizar a leitura
+  delay(100);
+}
 
 
 
