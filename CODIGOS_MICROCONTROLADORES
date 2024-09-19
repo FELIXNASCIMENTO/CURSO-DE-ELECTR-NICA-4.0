@@ -43,3 +43,44 @@ void loop() {
     digitalWrite(ledPin, LOW);
   }
 }
+-------------------------------------------------------------------------
+
+
+const int pinLED = 9;             // Pino PWM para o LED
+const int pinPotentiometer = A0;   // Pino analógico para o potenciômetro
+
+void setup() {
+  // Configurando o pino do LED como saída
+  pinMode(pinLED, OUTPUT);
+  
+  // Inicializando a comunicação serial para depuração
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Lendo o valor do potenciômetro (0 a 1023)
+  int potentiometerValue = analogRead(pinPotentiometer);
+  
+  // Mapeando o valor do potenciômetro para o intervalo de PWM (0 a 255)
+  int ledBrightness = map(potentiometerValue, 0, 1023, 0, 255);
+  
+  // Ajustando o brilho do LED com base no valor lido do potenciômetro
+  analogWrite(pinLED, ledBrightness);
+//verificar os dados recebidos
+  Serial.print("Potentiometer Value: ");
+  Serial.print(potentiometerValue);
+  Serial.print(" - LED Brightness: ");
+  Serial.println(ledBrightness);
+
+  delay(500);
+}
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
