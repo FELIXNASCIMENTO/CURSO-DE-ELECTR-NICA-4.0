@@ -164,6 +164,106 @@ Serial.print(timer);
 }
 
 --------------------------------------------------------------------------------------------
+const int BOTAO = 2;    
+const int ledVerde = 11; 
+const int ledAmarelo = 12;
+const int ledVermelho = 13;
+int ESTADOB = 0;        
+
+// Função para piscar o LED amarelo
+void piscaAmarelo() {
+  digitalWrite(ledAmarelo, HIGH);
+  delay(1000); 
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(ledAmarelo, HIGH);
+    delay(500);           
+    digitalWrite(ledAmarelo, LOW);
+    delay(500);           
+  }
+}
+
+// Função para acender o LED verde
+void piscaVerde() {
+  digitalWrite(ledVerde, HIGH);  // Liga o LED verde por 10 segundos
+  delay(5000);
+  digitalWrite(ledVerde, LOW);
+  delay(500);   // Desliga o LED verde
+}
+
+void setup() {
+  // Configurando o botão como entrada com resistor pull-up
+  pinMode(BOTAO, INPUT_PULLUP);
+  pinMode(ledVerde, OUTPUT); 
+  pinMode(ledAmarelo, OUTPUT);
+  pinMode(ledVermelho, OUTPUT);
+}
+
+void loop() {
+   piscaVerde();
+  ESTADOB = digitalRead(BOTAO);
+   
+  if (ESTADOB == HIGH) {
+    // Pisca o LED amarelo, depois acende o LED vermelho
+    digitalWrite(ledAmarelo, HIGH);
+    piscaAmarelo();  // Função para piscar o LED amarelo
+    digitalWrite(ledAmarelo, LOW);
+    digitalWrite(ledVermelho, LOW);
+  } 
+    digitalWrite(ledVermelho, HIGH); 
+    delay(1000);
+}
+----------------------------------------------------------------------
+chat 
+const int BOTAO = 2;                // Pino do botão
+const int ledAmarelo = 12;          // Pino do LED amarelo
+const int ledVermelho = 13;         // Pino do LED vermelho
+
+int estadoBotao = 0;                // Variável para armazenar o estado do botão
+int estadoAnteriorBotao = 0;        // Variável para armazenar o último estado do botão
+bool semaforoAtivo = false;         // Indica se o semáforo foi ativado
+
+void setup() {
+  pinMode(BOTAO, INPUT_PULLUP);     // Configura o botão com resistor pull-up
+  pinMode(ledAmarelo, OUTPUT);      // Configura o LED amarelo como saída
+  pinMode(ledVermelho, OUTPUT);     // Configura o LED vermelho como saída
+
+  // Inicializa os LEDs como desligados
+  digitalWrite(ledAmarelo, LOW);
+  digitalWrite(ledVermelho, LOW);
+}
+
+void loop() {
+  // Lê o estado do botão
+  estadoBotao = digitalRead(BOTAO);
+
+  // Verifica se o botão foi pressionado (transição de HIGH para LOW)
+  if (estadoBotao == LOW && estadoAnteriorBotao == HIGH) {
+    // Ativa o ciclo do semáforo
+    semaforoAtivo = true;
+  }
+
+  // Se o botão foi pressionado, ativa o semáforo
+  if (semaforoAtivo) {
+    // Pisca o LED amarelo 5 vezes
+    for (int i = 0; i < 5; i++) {
+      digitalWrite(ledAmarelo, HIGH);
+      delay(500);  // LED amarelo ligado por 500ms
+      digitalWrite(ledAmarelo, LOW);
+      delay(500);  // LED amarelo desligado por 500ms
+    }
+
+    // Liga o LED vermelho por 10 segundos
+    digitalWrite(ledVermelho, HIGH);
+    delay(10000);  // Mantém o LED vermelho aceso por 10 segundos
+    digitalWrite(ledVermelho, LOW);
+
+    // Reinicializa o semáforo
+    semaforoAtivo = false;
+  }
+
+  // Armazena o estado anterior do botão
+  estadoAnteriorBotao = estadoBotao;
+}
 
 
 
