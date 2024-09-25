@@ -265,6 +265,95 @@ void loop() {
   estadoAnteriorBotao = estadoBotao;
 }
 
+----------------------------------------------------------------------------------------
+aula 24/09
+
+
+#include <Arduino.h>
+
+// Definindo os pinos dos LEDs
+#define LED_VERDE 8
+#define LED_AMARELO 9
+#define LED_VERMELHO 10
+
+// Definindo os pinos do display de 7 segmentos (a, b, c, d, e, f, g)
+int segmentos[] = {4, 5, 6, 7, 1, 0, 3};  // O último elemento é o ponto decimal, se necessário
+
+// Tabela de segmentos para exibir números (0 a 9)
+byte numeros[] = {
+  0b00111111, // 0
+  0b00000110, // 1
+  0b01011011, // 2
+  0b01001111, // 3
+  0b01100110, // 4
+  0b01101101, // 5
+  0b01111101, // 6
+  0b00000111, // 7
+  0b01111111, // 8
+  0b01101111  // 9
+};
+
+void setup() {
+  // Configurando os pinos dos LEDs como saída
+  pinMode(LED_VERDE, OUTPUT);
+  pinMode(LED_AMARELO, OUTPUT);
+  pinMode(LED_VERMELHO, OUTPUT);
+
+  // Configurando os pinos do display de 7 segmentos como saída
+  for (int i = 0; i < 7; i++) {
+    pinMode(segmentos[i], OUTPUT);
+  }
+
+  // Inicializando os LEDs como apagados
+  digitalWrite(LED_VERDE, LOW);
+  digitalWrite(LED_AMARELO, LOW);
+  digitalWrite(LED_VERMELHO, LOW);
+}
+
+void loop() {
+  // Acionar o LED verde por 9 segundos
+  digitalWrite(LED_VERDE, HIGH);
+  mostrarTempo(9);  // Mostrar contagem regressiva de 9 a 0
+  digitalWrite(LED_VERDE, LOW);
+
+  // Piscar o LED amarelo 5 vezes e contar até 5 no display
+  piscarAmareloComContagem();
+
+  // Acionar o LED vermelho por 9 segundos
+  digitalWrite(LED_VERMELHO, HIGH);
+  mostrarTempo(9);  // Mostrar contagem regressiva de 9 a 0
+  digitalWrite(LED_VERMELHO, LOW);
+}
+
+void mostrarTempo(int tempo) {
+  for (int i = tempo; i >= 0; i--) {
+    // Mostrar número no display
+    mostrarNumero(i);
+    delay(1000);  // Esperar 1 segundo
+  }
+}
+
+void mostrarNumero(int numero) {
+  byte segmentosAtivos = numeros[numero];
+  for (int i = 0; i < 7; i++) {  // Atualiza os 7 segmentos (sem o ponto decimal)
+    digitalWrite(segmentos[i], (segmentosAtivos >> i) & 0x01);
+  }
+}
+
+// Função para piscar o LED amarelo 5 vezes e exibir contagem no display de 1 a 5
+void piscarAmareloComContagem() {
+  for (int i = 1; i <= 5; i++) {
+    // Exibir número da contagem (de 1 a 5)
+    mostrarNumero(i);
+
+    // Piscar o LED amarelo
+    digitalWrite(LED_AMARELO, HIGH);
+    delay(500);  // Esperar 500ms
+    digitalWrite(LED_AMARELO, LOW);
+    delay(500);  // Esperar 500ms
+  }
+}
+
 
 
 
