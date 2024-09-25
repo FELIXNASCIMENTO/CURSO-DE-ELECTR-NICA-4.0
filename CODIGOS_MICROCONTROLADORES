@@ -354,7 +354,87 @@ void piscarAmareloComContagem() {
   }
 }
 
+------------------------------------------------------
+#include <LiquidCrystal.h> // Adiciona a biblioteca "LiquidCrystal" ao projeto
 
+// Pinagem do LCD (RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(8, 9, 10, 11, 12, 13);
+
+// Definindo os pinos dos LEDs do semáforo para as duas direções
+#define LED_VERDE_1 2
+#define LED_AMARELO_1 3
+#define LED_VERMELHO_1 4
+#define LED_VERDE_2 5
+#define LED_AMARELO_2 6
+#define LED_VERMELHO_2 7
+
+void setup()
+{
+  // Iniciando o LCD de 16x2
+  lcd.begin(16, 2);
+
+  // Configurando os pinos dos LEDs como saída
+  pinMode(LED_VERDE_1, OUTPUT);
+  pinMode(LED_AMARELO_1, OUTPUT);
+  pinMode(LED_VERMELHO_1, OUTPUT);
+  pinMode(LED_VERDE_2, OUTPUT);
+  pinMode(LED_AMARELO_2, OUTPUT);
+  pinMode(LED_VERMELHO_2, OUTPUT);
+
+  // Inicializando todos os LEDs como apagados
+  digitalWrite(LED_VERDE_1, LOW);
+  digitalWrite(LED_AMARELO_1, LOW);
+  digitalWrite(LED_VERMELHO_1, LOW);
+  digitalWrite(LED_VERDE_2, LOW);
+  digitalWrite(LED_AMARELO_2, LOW);
+  digitalWrite(LED_VERMELHO_2, LOW);
+}
+
+void loop()
+{
+  // Ativar semáforo para direção 1 (LED verde 1, vermelho 2)
+  digitalWrite(LED_VERDE_1, HIGH);
+  digitalWrite(LED_VERMELHO_2, HIGH);
+  
+  // Mostrar setas ">>>>>>>>>>>" no LCD para a direção 1
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(">>>>>>>>>>>>>>>");
+  lcd.setCursor(0, 1);
+  lcd.print("DIRECAO 1 ATIVA");
+
+  delay(5000); // Manter direção 1 ativada por 5 segundos
+
+  // Mudar para amarelo direção 1
+  digitalWrite(LED_VERDE_1, LOW);
+  digitalWrite(LED_AMARELO_1, HIGH);
+  delay(2000); // Esperar 2 segundos com o amarelo
+
+  // Desligar direção 1 e ligar direção 2
+  digitalWrite(LED_AMARELO_1, LOW);
+  digitalWrite(LED_VERMELHO_1, HIGH);
+  digitalWrite(LED_VERDE_2, HIGH);
+  digitalWrite(LED_VERMELHO_2, LOW);
+  
+  // Mostrar setas "<<<<<<<<<<<<<" no LCD para a direção 2
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("<<<<<<<<<<<<<<<");
+  lcd.setCursor(0, 1);
+  lcd.print("DIRECAO 2 ATIVA");
+
+  delay(5000); // Manter direção 2 ativada por 5 segundos
+
+  // Mudar para amarelo direção 2
+  digitalWrite(LED_VERDE_2, LOW);
+  digitalWrite(LED_AMARELO_2, HIGH);
+  delay(2000); // Esperar 2 segundos com o amarelo
+
+  // Desligar direção 2 e repetir o ciclo
+  digitalWrite(LED_AMARELO_2, LOW);
+  digitalWrite(LED_VERMELHO_2, HIGH);
+  digitalWrite(LED_VERMELHO_1, LOW);
+}
 
 
 
