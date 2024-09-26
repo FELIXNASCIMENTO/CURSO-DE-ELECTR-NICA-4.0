@@ -477,5 +477,57 @@ void loop() {
   delay(15);
 }
 
+-------------------------------------------------------------------------------------------------------------------
+#include <DHT.h>           // Inclui a biblioteca DHT
+#include <LiquidCrystal.h>  // Inclui a biblioteca do LCD
+
+#define DHTPIN 2           // Pino digital conectado ao pino DATA do DHT11
+#define DHTTYPE DHT11      // Define o tipo de sensor como DHT11
+
+DHT dht(DHTPIN, DHTTYPE);  // Cria um objeto DHT
+
+// Configura os pinos do LCD (RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
+
+void setup() {
+  // Inicializa o LCD com 16 colunas e 2 linhas
+  lcd.begin(16, 2);
+  lcd.print("Iniciando...");  // Exibe mensagem inicial
+
+  // Inicializa o sensor DHT
+  dht.begin();
+}
+
+void loop() {
+  // Aguarde um pouco entre as leituras (o DHT11 tem uma limitação de 1 leitura a cada 2 segundos)
+  delay(2000);
+
+  // Lê a umidade
+  float umidade = dht.readHumidity();
+  // Lê a temperatura em Celsius
+  float temperatura = dht.readTemperature();
+
+  // Verifica se a leitura falhou
+  if (isnan(umidade) || isnan(temperatura)) {
+    lcd.clear();
+    lcd.print("Erro leitura DHT");
+    return;
+  }
+
+  // Limpa o LCD antes de atualizar as informações
+  lcd.clear();
+
+  // Exibe a umidade na primeira linha
+  lcd.setCursor(0, 0);
+  lcd.print("Umid: ");
+  lcd.print(umidade);
+  lcd.print("%");
+
+  // Exibe a temperatura na segunda linha
+  lcd.setCursor(0, 1);
+  lcd.print("Temp: ");
+  lcd.print(temperatura);
+  lcd.print("C");
+}
 
 
