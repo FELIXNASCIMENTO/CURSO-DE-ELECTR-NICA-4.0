@@ -529,5 +529,73 @@ void loop() {
   lcd.print(temperatura);
   lcd.print("C");
 }
+----------------------------------------------------------------------------
+#define trigPin 2     // Pino Trig do sensor HC-SR04
+#define echoPin 1     // Pino Echo do sensor HC-SR04
+
+// Definição dos LEDs
+#define ledVerde 4
+#define ledAmarelo 5
+#define ledVermelho 6
+
+// Definição do buzzer
+#define buzzer 3
+
+void setup() {
+  // Inicializa os pinos dos LEDs como saída
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledAmarelo, OUTPUT);
+  pinMode(ledVermelho, OUTPUT);
+
+  // Inicializa os pinos do sensor ultrassônico
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  // Inicializa o pino do buzzer como saída
+  pinMode(buzzer, OUTPUT);
+}
+
+void loop() {
+  // Variável para armazenar a distância medida
+  long duracao;
+  int distancia;
+
+  // Envia um pulso de 10µs para o pino Trig
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Calcula a duração do pulso de retorno no pino Echo
+  duracao = pulseIn(echoPin, HIGH);
+
+  // Converte a duração para distância em centímetros
+  distancia = duracao * 0.034 / 2;
+
+  // Controle dos LEDs e do buzzer com base na distância
+  if (distancia > 30) {
+    // Distância maior que 100 cm -> Acende LED Verde e para o som do buzzer
+    digitalWrite(ledVerde, HIGH);
+    digitalWrite(ledAmarelo, LOW);
+    digitalWrite(ledVermelho, LOW);
+    noTone(buzzer);  // Desliga o buzzer
+  } else if (distancia <= 15 && distancia > 10) {
+    // Distância entre 50 cm e 100 cm -> Acende LED Amarelo e buzzer com frequência baixa
+    digitalWrite(ledVerde, LOW);
+    digitalWrite(ledAmarelo, HIGH);
+    digitalWrite(ledVermelho, LOW);
+    tone(buzzer, 100);  // Frequência de 1000 Hz no buzzer
+  } else if (distancia <= 15) {
+    // Distância menor ou igual a 50 cm -> Acende LED Vermelho e buzzer com frequência alta
+    digitalWrite(ledVerde, LOW);
+    digitalWrite(ledAmarelo, LOW);
+    digitalWrite(ledVermelho, HIGH);
+    tone(buzzer, 200);  // Frequência de 2000 Hz no buzzer
+  }
+
+  // Aguarde um pequeno tempo antes de fazer a próxima medição
+  delay(50);
+}
 
 
