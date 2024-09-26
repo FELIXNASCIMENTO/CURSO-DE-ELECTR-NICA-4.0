@@ -435,6 +435,47 @@ void loop()
   digitalWrite(LED_VERMELHO_2, HIGH);
   digitalWrite(LED_VERMELHO_1, LOW);
 }
+---------------------------------------------------------------------------------------------
+#include <Servo.h> // Biblioteca para controlar o servo motor
+
+// Cria o objeto servo
+Servo servoMotor;
+
+// Pinos do joystick
+int pinoJoystickX = A0; // Pino analógico conectado ao eixo X do joystick
+int pinoJoystickY = A1; // Pino analógico conectado ao eixo Y do joystick
+
+// Pino do servo motor
+int pinoServo = 9;  // Pino digital onde o servo está conectado
+
+void setup() {
+  // Inicializa o servo motor no pino especificado
+  servoMotor.attach(pinoServo);
+}
+
+void loop() {
+  // Lê o valor do eixo X e Y do joystick (varia de 0 a 1023)
+  int valorJoystickX = analogRead(pinoJoystickX);
+  int valorJoystickY = analogRead(pinoJoystickY);
+
+  // Mapeia o valor do joystick X para o ângulo do servo (0 a 180 graus)
+  int anguloServoX = map(valorJoystickX, 0, 1023, 0, 180);
+
+  // Mapeia o valor do joystick Y para o ângulo do servo (0 a 180 graus, para controle reverso)
+  int anguloServoY = map(valorJoystickY, 0, 1023, 180, 0);
+
+  // Verifica qual eixo está sendo movido com mais intensidade e ajusta o servo
+  if (valorJoystickX > 512) {
+    // Se o eixo X estiver sendo movido mais, controla o servo para ir à frente
+    servoMotor.write(anguloServoX);
+  } else if (valorJoystickY > 512) {
+    // Se o eixo Y estiver sendo movido mais, controla o servo para retornar
+    servoMotor.write(anguloServoY);
+  }
+
+  // Pequena pausa para evitar leituras muito rápidas
+  delay(15);
+}
 
 
 
