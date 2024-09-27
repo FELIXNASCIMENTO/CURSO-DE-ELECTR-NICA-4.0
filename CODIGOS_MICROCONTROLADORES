@@ -597,5 +597,32 @@ void loop() {
   // Aguarde um pequeno tempo antes de fazer a próxima medição
   delay(50);
 }
+----------------------------------------------------------------------------------------------
+int sensorLuz = A0;  // Pino analógico conectado ao LDR
+int ledPin = 3;      // Pino PWM conectado ao LED
+int valorSensor = 0; // Variável para armazenar o valor lido do sensor de luz
+int brilho = 0;      // Variável para armazenar o valor do brilho do LED
+
+void setup() {
+  pinMode(ledPin, OUTPUT);   // Define o pino do LED como saída
+}
+
+void loop() {
+  valorSensor = analogRead(sensorLuz); // Lê o valor do sensor de luz (0 a 1023)
+  
+  // Verifica se o sensor está retornando valores
+  if (valorSensor < 0 || valorSensor > 1023) {
+    // Se valores inesperados são lidos, desligar o LED
+    analogWrite(ledPin, 0);
+  } else {
+    // Converte o valor do sensor (0 a 1023) para o valor de PWM (0 a 255)
+    brilho = map(valorSensor, 0, 1023, 0, 255);
+    
+    // Ajusta o brilho do LED com base na leitura do sensor
+    analogWrite(ledPin, brilho);
+  }
+  
+ 
+}
 
 
