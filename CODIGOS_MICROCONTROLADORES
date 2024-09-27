@@ -626,3 +626,68 @@ void loop() {
 }
 
 
+-----------------------------------------------------------
+#include <LiquidCrystal.h>
+
+// Definição dos pinos para o LCD
+LiquidCrystal lcd(8, 7, 3, 2, 1, 0); // Ajuste conforme necessário
+
+// Definição dos pinos para o sensor HC-SR04
+const int trigPin = 4;  // Alterado para pino 4
+const int echoPin = 5;  // Alterado para pino 5
+
+// Variáveis para armazenar a distância
+long duracao;
+int distancia;
+
+void setup() {
+  // Configuração dos pinos do sensor
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  
+  // Iniciar o LCD
+  lcd.begin(16, 2);  // LCD de 16 colunas e 2 linhas
+}
+
+void loop() {
+  // Limpar o LCD
+  lcd.clear();
+  
+  // Gera um pulso no pino TRIG
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  // Calcula a duração do eco
+  duracao = pulseIn(echoPin, HIGH);
+  
+  // Calcula a distância em cm
+  distancia = duracao * 0.034 / 2;
+
+  // Exibe as setas na primeira linha do LCD
+  lcd.setCursor(0, 0);
+  lcd.print(">>>>   **   <<<<");
+
+  // Verifica a distância e exibe a mensagem correspondente
+  if (distancia < 15) {
+    lcd.setCursor(0, 1); 
+     lcd.print(">>>>   **   <<<<");
+    lcd.setCursor(0, 1); // Segunda linha
+    lcd.print(".....PERTO.....");
+  } else if (distancia >= 15 && distancia <= 30) {
+    lcd.setCursor(0, 1); 
+     lcd.print(">>>>>>   **   <<<<<<");
+    lcd.setCursor(0, 1); // Segunda linha
+    lcd.print(".... PROXIMO ....");
+  } else {
+    lcd.setCursor(0, 1); 
+     lcd.print(">>>>>>>   **   <<<<<<<");
+    lcd.setCursor(0, 1); // Segunda linha
+    lcd.print(" .... LONGE! .... ");
+  }
+
+  delay(600);  // Pequeno atraso para leitura estável
+}
+
